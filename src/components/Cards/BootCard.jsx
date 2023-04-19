@@ -18,6 +18,24 @@ const BootCard = ({ bot }) => {
       dispatch(allChatBots(data))
   }
 
+  const types = [];
+
+// filter expertises type
+
+  bot?.expertises?.forEach((el) => {
+    if (el.expertise_type.split('.')[1] === 'FAQ') {
+      if (!types.includes('FAQ')) {
+        types.push('FAQ');
+      }
+    } else if (el.expertise_type.split('.')[1] === 'BUSINSESS_SMALL_TALK') {
+      if (!types.includes('Business small talk')) {
+        types.push('Business small talk');
+      }
+    }
+  });
+
+
+
   return (
     <>
       <div class='cards'>
@@ -39,7 +57,7 @@ const BootCard = ({ bot }) => {
         </div>
         <div>
           <h3>{bot.chatbot_title}</h3>
-          <p>FAQ, Business small talk</p>
+          <p>{types?.map((item,i) => `${item}${i === types?.length -1 ? "" : ', '}`)}</p>
         </div>
         <div className='displayflex margintop'>
           <div className='marginleft'>
