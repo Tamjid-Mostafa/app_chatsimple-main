@@ -3,12 +3,20 @@ import MessengerImage from '../../assets/images/svg/messenger.svg';
 import barIcon from '../../assets/images/svg/barIcon.svg';
 import { Switch } from '@mui/material';
 import displayimg from '../../assets/chatbotcardpic.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { allChatBots, deleteChatBot } from '../../redux/reducers/chatbotSlice';
 
 const BootCard = ({ bot }) => {
-  const handleActive = (event) => {
-    console.log(event.target.checked);
-    
-  };
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.user);
+
+  const handleDelete = () => {
+      dispatch(deleteChatBot(bot))
+      const data = {
+        userID: user?.user_id,        
+    };
+      dispatch(allChatBots(data))
+  }
 
   return (
     <>
@@ -23,7 +31,7 @@ const BootCard = ({ bot }) => {
           </div>
 
           <div className='get_chatbot_toggle_button'>
-            <Switch onChange={handleActive} />
+            <Switch  />
           </div>
         </div>
         <div className='chatbot_card_img'>
@@ -41,7 +49,9 @@ const BootCard = ({ bot }) => {
           </div>
 
           <div className='marginleft'>
-            <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'>
+            <button 
+              onClick={handleDelete}
+            className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'>
               Delete
             </button>
           </div>
