@@ -5,21 +5,32 @@ import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import Snackbar from '@mui/material/Snackbar';
 import { useDispatch, useSelector } from "react-redux";
-
+import trash from '../../assets/images/svg/trash.svg'
 import ConversationCard from './ConversationCard';
+import Cross from '../../icons/Cross';
+import Add from "../../assets/images/svg/Add.svg";
+import AddChannelButton from '../Buttons/AddChannelButton';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import { EditableElement } from '../EditableElement/EditableElement';
+
+
 const Chatbot_business_talk = ({ changeChatBotTab }) => {
 
     const [isChecked, setIsChecked] = useState(false);
-    const [businessName, setBusinessName] = useState()
-    const [businessHours, setBusinessHours] = useState()
-    const [industry, setIndustry] = useState()
-    const [history, setHistory] = useState()
-    const [supportEmail, setSupportEmail] = useState()
+    const [businessName, setBusinessName] = useState("")
+    const [businessHours, setBusinessHours] = useState("")
+    const [industry, setIndustry] = useState("")
+    const [history, setHistory] = useState("")
+    const [supportEmail, setSupportEmail] = useState("")
     const [open, setOpen] = useState(false);
-    const [data, setData] = useState()
-    console.log(data)
+    const [data, setData] = useState("")
+    const [inputs, setInputs] = useState([""]);
+    const [edit, setEdit] = useState(false)
+    const initialValue = "Custom Fields";
+    const [value, setValue] = useState(initialValue);
+
     const handleClose = () => {
-      setOpen(false);
+        setOpen(false);
     };
     const { user } = useSelector((state) => state.user);
 
@@ -28,7 +39,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
         setIsChecked(!isChecked);
     };
 
-    const handleBusinessDetails = async () =>{
+    const handleBusinessDetails = async () => {
         const data = {
             expertise_title: "Business Small Talk",
             expertise_type: "FAQ",
@@ -39,7 +50,8 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                         businessHours: businessHours,
                         industry: industry,
                         history: history,
-                        supportEmail: supportEmail
+                        supportEmail: supportEmail,
+                        custom_fields: {inputs, value}
                     }
                 ]
             },
@@ -58,9 +70,10 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             );
             setOpen(true);
             setData(response.data.message)
-           // window.alert(response.data.message);
+            console.log(response.data.message)
+            // window.alert(response.data.message);
         }
-        catch(e) {
+        catch (e) {
             setOpen(true);
             setData(e.message)
             //window.alert(e.message)
@@ -68,13 +81,17 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
     }
 
 
-    const [inputs, setInputs] = useState([""]);
+
 
     const handleInputChange = (e, index) => {
+        const { value } = e.target;
         const newInputs = [...inputs];
-        newInputs[index] = e.target.value;
+        newInputs[index] = value;
         setInputs(newInputs);
         console.log(inputs)
+    };
+    const handleChange = (value) => {
+        setValue(value);
     };
 
     const handleAddInput = () => {
@@ -83,7 +100,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
 
     const handleRemoveInput = (index) => {
         const newInputs = [...inputs];
-        newInputs.splice(index, 1);
+        newInputs.splice(index);
         setInputs(newInputs);
     };
 
@@ -92,7 +109,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
         <div className='display_flex'>
             <div>
                 <div className='chatbot_header_top'>
-                    <h2 className='bold_text'>Name your Chatboat</h2>
+                    <h2 className='bold_text'>Name your Chatbot</h2>
                     <TextField
                         label="Name"
                         variant="outlined"
@@ -118,9 +135,9 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                         </div>
                         <div className='chatbot_toggle_button2'>
                             <Switch
-                             checked={true}
-                             onClick={() => changeChatBotTab(2)}
-                             />
+                                checked={true}
+                                onClick={() => changeChatBotTab(2)}
+                            />
                         </div>
                     </div>
 
@@ -190,11 +207,53 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                             label="Support Email"
                             variant="outlined"
                             value={supportEmail}
+                            size="small"
                             onChange={(event) => setSupportEmail(event.target.value)}
                         />
                     </div>
+                    <button className='flex items-center gap-2 bg-[#66B467] text-xs text-white px-4 py-2.5 rounded-full' onClick={handleAddInput}>
+                        <img src={Add} alt="" />
+                        Add Field
+                    </button>
+
+                    {inputs.map((input, index) => (
+                        <div key={index} className="flex items-center gap-5">
+                            <div className='margintop'>
+                                <EditableElement onChange={handleChange}>
+                                    <div style={{ outline: "none" }}
+                                    className='flex items-center gap-3'
+                                    >
+                                        <p>{initialValue}</p>
+                                        <DriveFileRenameOutlineIcon className='cursor-pointer'
+                                        />
+                                    </div>
+                                </EditableElement>
+                                <TextField
+                                    variant="outlined"
+                                    value={input}
+                                    size="small"
+                                    onChange={(e) => handleInputChange(e, index)}
+                                />
+                            </div>
+                            {inputs.length >= 2 ?
+                                <button button type="button" onClick={() => handleRemoveInput(index)}>
+                                    <img src={trash} alt="" />
+                                </button> : ""}
+
+                        </div>
+                    ))
+                    }
 
                     <div className=''>
+                        <div className='margintop'>
+                            <TextField
+                                label="Comments"
+                                variant="outlined"
+                                value={supportEmail}
+                                size="normal"
+                                onChange={(event) => setSupportEmail(event.target.value)}
+                            />
+                        </div>
                         <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' onClick={handleBusinessDetails}>
                             Save
                         </button>
@@ -202,12 +261,12 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                 </div>
             </div>
             <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            message={data}
-            onClose={handleClose}
-            className="muiclass"
-          />
+                open={open}
+                autoHideDuration={6000}
+                message={data}
+                onClose={handleClose}
+                className="muiclass"
+            />
         </div>
     )
 }
