@@ -1,13 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import MessengerImage from "../../assets/images/svg/messenger.svg";
-import InstaImage from "../../assets/images/svg/instagram.png";
-import barIcon from "../../assets/images/svg/barIcon.svg";
-import addIcon from "../../assets/iconadd.png";
-import { TextField, Switch } from '@mui/material';
 
-import displayimg from "../../assets/chatbotcardpic.png";
-import { allChatBots, createChatBot } from "../../redux/reducers/chatbotSlice";
-import { useEffect, useState } from "react";
+import addIcon from "../../assets/iconadd.png";
+
+import { allChatBots } from "../../redux/reducers/chatbotSlice";
+import { useEffect } from "react";
+import BootCard from "../Cards/BootCard";
 
 // this file
 
@@ -26,6 +23,8 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
         dispatch(allChatBots(data));
     }, [user]);
 
+    console.log(chatBots)
+
     return (
         <div className="dashboard_tab chatbot_tab">
             <div>
@@ -42,42 +41,9 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
                     <main className="chat__simple__main2 margintop">
                         <div className="chat__simple__container">
                             <div className="two__box__messenger__row">
-                                <div class="cards">
-                                    <div className="header">
-                                        <div className="flex items-center gap-3">
-                                            <img src={MessengerImage} alt="" />
-                                            <h4>Messenger Chatbot</h4>
-                                        </div>
-                                        <div>
-                                            <img src={barIcon} className="cursor-pointer" alt="" />
-                                        </div>
 
-                                        <div className='get_chatbot_toggle_button'>
-                                            <Switch />
-                                        </div>
-                                    </div>
-                                    <div className="chatbot_card_img">
-                                        <img src={displayimg} alt="My Image" />
-                                    </div>
-                                    <div>
-                                        <h3>2 Expertise </h3>
-                                        <p>FAQ, Business small talk</p>
-                                    </div>
-                                    <div className="displayflex margintop">
-                                        <div className="marginleft">
-                                            <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' >
-                                                Edit
-                                            </button>
-                                        </div>
-
-                                        <div className="marginleft">
-                                            <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' >
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
+                              { chatBots.chatbot?.map((bot, i) => <BootCard key={i++} bot={bot}/>) }
+                            
                             </div>
                         </div>
                     </main> : ""}
