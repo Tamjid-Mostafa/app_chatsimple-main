@@ -15,19 +15,43 @@ import { userDetails } from "../../redux/reducers/userSlice";
 import PopUp from "../PopUp/PopUp";
 import AddChannel from "../AddChannel/AddChannel";
 import AddChannelButton from "../Buttons/AddChannelButton";
-
+import { createChannel } from "../../redux/reducers/userPlatformSlice";
+import { v4 as uuidv4 } from 'uuid';
 // this file
 
-export default function HomePageV2({ changeDashboardTab }) {
-  
+export default function HomePageV2({ changeDashboardTab, userToSend }) {
+
   const dispatch = useDispatch();
   const { fbUserID } = useSelector((state) => state.fb);
   const { user } = useSelector((state) => state.user);
-  console.log(user)
+
   useEffect(() => {
-    dispatch(userDetails(fbUserID));
-  }, [fbUserID]);
+    dispatch(userDetails(userToSend?.user_id));
+  }, [userToSend?.user_id]);
   const [isOpen, setIsOpen] = useState()
+
+
+  const channelHandler = () => {
+    setIsOpen(!isOpen)
+    // for channel creation
+    console.log(user?.user_id)
+    const data = {
+      userID: user?.user_id,
+      platform_id: uuidv4(),
+      platformDetails: {
+        platform_type: "MESSENGER",
+        access_token: "none",
+        permissions: {
+          access_to_account: "no"
+        },
+        chatbot_id: "chatbot_id2",
+      }
+    };
+    dispatch(createChannel(data));
+    alert("Channel creation")
+  };
+
+
 
   return (
     <React.StrictMode>
@@ -115,7 +139,7 @@ export default function HomePageV2({ changeDashboardTab }) {
               </div>
             </div>
             <div
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={channelHandler}
               className="cards_three cursor-pointer">
               <h5>+ Add channel</h5>
             </div>

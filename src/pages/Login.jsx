@@ -19,6 +19,7 @@ const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.user);
+  console.log(user)
   // c646927d6ea94965fde505bbae64d1ae
   // 757731156080550
 

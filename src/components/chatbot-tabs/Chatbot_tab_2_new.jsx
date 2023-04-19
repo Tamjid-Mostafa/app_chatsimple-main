@@ -16,7 +16,7 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
 
     const chatbotHandler = () => {
         // for chat bot creation
-        if (!!chatbotTitle) {
+        if (!chatbotTitle) {
             const data = {
                 userID: user?.user_id,
                 chatbotDetail: {

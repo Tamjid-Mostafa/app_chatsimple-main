@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import facebook from "../../assets/images/svg/messenger.svg";
 import instagram from "../../assets/images/svg/instagram.png";
 import whatsapp from "../../assets/images/svg/WhatsApp.svg";
 const AddChannel = () => {
+
     return (
         <div className='w-full p-[51px]'>
             {/* <!-- Modal body --> */}
@@ -20,7 +21,7 @@ const AddChannel = () => {
                         Add Channel </button>
                 </div>
                 <div className='flex items-center justify-between w-full border-b py-4'>
-                <div className='flex items-center gap-5'>
+                    <div className='flex items-center gap-5'>
                         <img src={instagram} alt="" className='w-12 h-12' />
                         <p>Instagram</p>
                     </div>
@@ -28,7 +29,7 @@ const AddChannel = () => {
                         Add Channel </button>
                 </div>
                 <div className='flex items-center justify-between w-full border-b py-4'>
-                <div className='flex items-center gap-5'>
+                    <div className='flex items-center gap-5'>
                         <img src={whatsapp} alt="" className='w-12 h-12' />
                         <p>Whats App</p>
                     </div>

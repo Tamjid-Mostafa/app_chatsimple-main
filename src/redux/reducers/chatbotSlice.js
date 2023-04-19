@@ -16,6 +16,8 @@ export const allChatBots = createAsyncThunk("chatbot/list", async (data) => {
   return response.data;
 });
 
+
+
 export const createChatBot = createAsyncThunk(
   "chatbot/create",
   async (data) => {
