@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./HomePageV2.css";
 // import AddChannelButton from '../../components/Buttons/AddChannelButton';
 import MessengerImage from "../../assets/images/svg/messenger.svg";
@@ -12,8 +12,6 @@ import ChartMapIcon from "../../assets/images/svg/ChartMap.png";
 import "react-circular-progressbar/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetails } from "../../redux/reducers/userSlice";
-import PopUp from "../PopUp/PopUp";
-import AddChannel from "../AddChannel/AddChannel";
 
 // this file
 
@@ -24,7 +22,6 @@ export default function HomePageV2({ changeDashboardTab }) {
   useEffect(() => {
     dispatch(userDetails(fbUserID));
   }, [fbUserID]);
-  const [isOpen, setIsOpen] = useState()
 
   return (
     <React.StrictMode>
@@ -111,17 +108,9 @@ export default function HomePageV2({ changeDashboardTab }) {
                 ></div>
               </div>
             </div>
-            <div
-            onClick={()=>setIsOpen(!isOpen)}
-            className="cards_three cursor-pointer">
+            <div className="cards_three">
               <h5>+ Add channel</h5>
             </div>
-            <PopUp 
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            >
-             <AddChannel />
-            </PopUp>
           </div>
 
           <div className="reports__hading">

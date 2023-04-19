@@ -4,6 +4,7 @@ import DashboardC from "../components/Dashboard"
 import Sidebar from "../components/Sidebar"
 import "../styles/dashboard.css"
 import { useSelector } from "react-redux"
+import Topbar from "../components/Topbar/Topbar"
 
 const Dashboard = () => {
     const [dashboardTab, setDashboardTab] = useState(1)
@@ -34,7 +35,13 @@ const Dashboard = () => {
             <div className="sidebar_container">
                 <Sidebar changeDashboardTab = {changeDashboardTab} />
             </div>
-            {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC user = {userToSend} /></div>}
+            {dashboardTab === 1 &&
+            <div className="dashboard_tab_container">
+              <div>
+              <Topbar />
+              <DashboardC user = {userToSend} />
+              </div>
+            </div>}
             {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user = {userToSend} /></div>}
         </div>
     )

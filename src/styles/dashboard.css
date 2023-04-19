@@ -20,21 +20,25 @@
 
 /** Sidebar **/
 .sidebar_container {
-    height: 100%;
+
     width: 250px;
     background-color: var(--background-color-1);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: fixed;
+    height: 100vh;
+    top: 0px;
 }
 
 .sidebar {
-    padding: 20px;
     height: 100%;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
 }
 
 .sidebar__header hr {
@@ -57,9 +61,11 @@
     cursor: pointer;
     height: 56px;
 }
+
 .sidebar__footer__links__combo svg {
     color: var(--text-color-gray);
 }
+
 .sidebar__header__links__combo img,
 .sidebar__footer__links__combo img {
     width: 22px;
@@ -79,8 +85,10 @@
     width: calc(100% - 250px);
     box-sizing: border-box;
     display: flex;
-    padding: 20px;
+    padding-bottom: 20px;
     background-color: var(--page-background-color);
+    margin-left: 250px;
+
 }
 
 .dashboard_tab h1 {
@@ -631,9 +639,9 @@
     margin-bottom: 50px;
 }
 
-.bold_text{
- font-weight: bold;
- margin-bottom: 10px;
+.bold_text {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .expertise_box {
@@ -652,20 +660,20 @@
     margin-top: 20px;
 }
 
-.chatbot_business-text{
+.chatbot_business-text {
     font-weight: bold;
     font-size: larger;
 }
 
-.margintoptext{
+.margintoptext {
     margin-top: 15px;
 }
 
-.muitextfield{
+.muitextfield {
     width: 280px;
 }
 
-.muitextfield_position{
+.muitextfield_position {
     width: 580px;
 }
 
@@ -674,24 +682,26 @@
     margin-top: 10px;
 }
 
-.marginleft{
+.marginleft {
     margin-left: 40px;
 }
-.displayflex{
+
+.displayflex {
     display: flex !important;
 }
-.get_chatbot_toggle_button{
+
+.get_chatbot_toggle_button {
     margin-left: 35px;
     margin-top: 3px;
 }
 
-.muiclass{
+.muiclass {
     margin-left: 1130px;
 }
 
-.chatbot_card_img{
+.chatbot_card_img {
     margin-top: 20px;
-     height: 180px;
+    height: 180px;
 
 }
 
@@ -705,30 +715,32 @@
     margin-left: 52px;
 }
 
-.display_flex{
+.display_flex {
     display: flex !important;
 }
 
-.chatbot_dsplay_column{
+.chatbot_dsplay_column {
     margin-left: 20px;
 }
 
-.chatbot_display_img_style{
+.chatbot_display_img_style {
     margin-top: 40px;
 }
-.margintop{
+
+.margintop {
     margin-top: 30px;
     margin-bottom: 30px;
 }
-.build_button{
+
+.build_button {
     margin-left: 60px;
     margin-top: 8px;
 }
 
-.font_32{
- font-size: x-large !important;
+.font_32 {
+    font-size: x-large !important;
 }
 
-.chatbot_display_text{
+.chatbot_display_text {
     margin-left: 70px;
 }

@@ -4,6 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   margin: 0;
   line-height: normal;
@@ -14,9 +15,11 @@ body {
   font-family: 'Roboto';
   font-style: normal;
 }
-input{
+
+input {
   outline: none;
 }
+
 h1,
 h2,
 h3,
@@ -41,4 +44,9 @@ a {
   --color-mediumblue: #0c31f1;
   --color-black: #000;
   --color-blueviolet: #3751fe;
+}
+
+/****************** Salem CSS **********************/
+.chat__simple__main2 {
+  margin: 0px 20px;
 }

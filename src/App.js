@@ -5,11 +5,15 @@ import {
   useLocation,
 } from "react-router-dom";
 import Login from "./pages/Login";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
-
+import PrivetOutlet from "./PrivetRoute/PrivetOutlet";
+import useAuth from "./hooks/UseAuth";
 function App() {
+
+  const auth = useAuth()
+
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
@@ -47,9 +51,11 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={auth ? <Dashboard /> : <Login />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/*" element={<PrivetOutlet/>} >
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
     </Routes>
   );
 }

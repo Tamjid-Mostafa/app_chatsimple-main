@@ -11,6 +11,7 @@ import ChatbotConnectToChannelFirst from './ChatbotConnectToChannel/ChatbotConne
 import Chatbotfinish from './Chatbotfinish/Chatbotfinish'
 import CreateChatbotLast from './CreateChatbotLast/CreateChatbotLast'
 import { useSelector } from 'react-redux'
+import Topbar from './Topbar/Topbar'
 
 const Chatbot = () => {
     const [chatbotTab, setChatbotTab] = React.useState(1)
@@ -28,7 +29,9 @@ const Chatbot = () => {
         setChatbotTab(tab)
     }
     return (
-        <div>
+        <div className='w-[100vw]'>
+          <Topbar />
+            <div className='px-5 pt-3'>
             {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user = {userData} />}
             {chatbotTab === 2 && <Chatbot_tab_2_new changeChatBotTab={changeChatBotTab} user = {userData} />}
             {chatbotTab === 3 && <Chatbot_faq_details changeChatBotTab={changeChatBotTab} user = {userData} />}
@@ -36,6 +39,7 @@ const Chatbot = () => {
             {chatbotTab === 5 && <Chatbot_business_goal changeChatBotTab={changeChatBotTab} user = {userData} />}
             {chatbotTab === 7 && <Chatbotfinish changeChatBotTab={changeChatBotTab} user = {userData} />}
             {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user = {userData} />}
+            </div>
         </div>
     )
 }
