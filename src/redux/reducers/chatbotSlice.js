@@ -8,7 +8,6 @@ const options = {
   'Content-Type': 'application/json',
 };
 
-
 export const allChatBots = createAsyncThunk('chatbot/list', async (data) => {
   const response = await axios.post(
     `https://api.chatsimple.ai/v0/users/user_0/chatbots`,
@@ -26,6 +25,18 @@ export const createChatBot = createAsyncThunk(
     const response = await axios.post(
       `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}`,
       data?.chatbotDetail,
+      { headers: options }
+    );
+    return response.data;
+  }
+);
+
+export const updateChatBot = createAsyncThunk(
+  'chatbot/create',
+  async (data) => {
+    const response = await axios.put(
+      `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=${data?.update_mask}`,
+      data?.data ,
       { headers: options }
     );
     return response.data;
@@ -72,6 +83,15 @@ const chatBotSlice = createSlice({
       state.loading = false;
     },
     [createChatBot.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    [updateChatBot.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updateChatBot.fulfilled]: (state, action) => {
+      state.loading = false;
+    },
+    [updateChatBot.rejected]: (state, action) => {
       state.loading = false;
     },
     [deleteChatBot.pending]: (state, action) => {

@@ -4,20 +4,34 @@ import barIcon from '../../assets/images/svg/barIcon.svg';
 import { Switch } from '@mui/material';
 import displayimg from '../../assets/chatbotcardpic.png';
 import { useDispatch } from 'react-redux';
-import { allChatBots, deleteChatBot } from '../../redux/reducers/chatbotSlice';
+import {
+  allChatBots,
+  deleteChatBot,
+  updateChatBot,
+} from '../../redux/reducers/chatbotSlice';
 
 const BootCard = ({ bot }) => {
   const dispatch = useDispatch();
 
   const handleActive = (event) => {
-    console.log(event.target.checked);
-    
+    // console.log();
+
+    const data = {
+      update_mask: 'chatbot_isActive',
+      data: {
+        chatbot_isActive: event.target.checked,
+      },
+      userID: bot?.user_id,
+      chatbotID: bot.chatbot_id,
+    };
+
+    dispatch(updateChatBot(data));
   };
 
   const handleDelete = () => {
-    dispatch(deleteChatBot(bot))
-    dispatch(allChatBots())
-  }
+    dispatch(deleteChatBot(bot));
+    dispatch(allChatBots());
+  };
 
   return (
     <>
@@ -50,9 +64,10 @@ const BootCard = ({ bot }) => {
           </div>
 
           <div className='marginleft'>
-            <button 
-            onClick={handleDelete}
-            className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'>
+            <button
+              onClick={handleDelete}
+              className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'
+            >
               Delete
             </button>
           </div>
