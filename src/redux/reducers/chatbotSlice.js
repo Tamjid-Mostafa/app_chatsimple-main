@@ -33,7 +33,7 @@ export const updateChatBot = createAsyncThunk(
   async (data) => {
     const response = await axios.put(
       `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=chatbot_title`,
-      data,
+      {chatbot_title: data?.chatbot_title},
       { headers: options }
     );
     return response.data;
