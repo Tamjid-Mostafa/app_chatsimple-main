@@ -14,7 +14,7 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const [data, setData] = useState("")
     const [position, setPosition] = useState("")
     const [open, setOpen] = useState(false);
-console.log(data)
+
     const handleClose = () => {
       setOpen(false);
     };
