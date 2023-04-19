@@ -13,17 +13,12 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
   const { user } = useSelector((state) => state.user);
   const { chatBots } = useSelector((state) => state.chatbot); // this has all the chat-bots list for a user that is logged in
 
-  useEffect(() => {
-    const data = {
-      userID: user?.user_id,
-      pageToken: {
-        page_token: { last_time: '2023-03-20 04:54:32.547084+00:00' },
-      },
-    };
-    dispatch(allChatBots(data));
-  }, [user]);
-
-  console.log(chatBots);
+    useEffect(() => {
+        const data = {
+            userID: user?.user_id,        
+        };
+        dispatch(allChatBots(data));
+    }, [user]);
 
   return (
     <div className='dashboard_tab chatbot_tab'>
