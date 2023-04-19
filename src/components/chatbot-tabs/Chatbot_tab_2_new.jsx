@@ -48,6 +48,8 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
     }
   }, [isTyping, chatbotTitle]);
 
+  
+
   const handleBlur = () => {
     setIsTyping(false);
   };
