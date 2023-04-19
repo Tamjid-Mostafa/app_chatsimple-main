@@ -7,26 +7,11 @@ import { useDispatch } from 'react-redux';
 import {
   allChatBots,
   deleteChatBot,
-  updateChatBot,
+
 } from '../../redux/reducers/chatbotSlice';
 
 const BootCard = ({ bot }) => {
   const dispatch = useDispatch();
-
-  const handleActive = (event) => {
-    // console.log();
-
-    const data = {
-      update_mask: 'chatbot_isActive',
-      data: {
-        chatbot_isActive: event.target.checked,
-      },
-      userID: bot?.user_id,
-      chatbotID: bot.chatbot_id,
-    };
-
-    dispatch(updateChatBot(data));
-  };
 
   const handleDelete = () => {
     dispatch(deleteChatBot(bot));
@@ -46,7 +31,7 @@ const BootCard = ({ bot }) => {
           </div>
 
           <div className='get_chatbot_toggle_button'>
-            <Switch onChange={handleActive} />
+            <Switch  />
           </div>
         </div>
         <div className='chatbot_card_img'>
