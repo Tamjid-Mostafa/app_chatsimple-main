@@ -40,7 +40,7 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
       // update here
       const data = {
         userID: user?.user_id,
-        data: { chatbot_title: chatbotTitle },
+        update: { chatbot_title: chatbotTitle },
         chatbotID: chatBotID,
         update_mask: 'chatbot_title',
       };
