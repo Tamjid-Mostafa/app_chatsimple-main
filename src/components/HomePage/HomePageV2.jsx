@@ -14,13 +14,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { userDetails } from "../../redux/reducers/userSlice";
 import PopUp from "../PopUp/PopUp";
 import AddChannel from "../AddChannel/AddChannel";
+import AddChannelButton from "../Buttons/AddChannelButton";
 
 // this file
 
 export default function HomePageV2({ changeDashboardTab }) {
+  
   const dispatch = useDispatch();
   const { fbUserID } = useSelector((state) => state.fb);
   const { user } = useSelector((state) => state.user);
+  console.log(user)
   useEffect(() => {
     dispatch(userDetails(fbUserID));
   }, [fbUserID]);
@@ -37,11 +40,11 @@ export default function HomePageV2({ changeDashboardTab }) {
           </div>
           <div className="active__channel__row">
             <h4>Active Channels</h4>
-            {/* <AddChannelButton changeDashboardTab={changeDashboardTab} dashboardTab={1} /> */}
+            <AddChannelButton changeDashboardTab={changeDashboardTab} dashboardTab={1} />
           </div>
 
           <div className="two__box__messenger__row">
-            <div class="cards">
+            <div className="cards">
               <div className="header">
                 <div className="flex items-center gap-3">
                   <img src={MessengerImage} alt="" />
@@ -56,9 +59,9 @@ export default function HomePageV2({ changeDashboardTab }) {
                 <span className="text-sm text-green-500">376/508</span>
               </div>
 
-              <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
                 <div
-                  class="bg-green-500 h-2.5 rounded-full"
+                  className="bg-green-500 h-2.5 rounded-full"
                   style={{ width: "30%" }}
                 ></div>
               </div>
@@ -69,9 +72,9 @@ export default function HomePageV2({ changeDashboardTab }) {
                 <span className="text-sm text-green-500">2,109</span>
               </div>
 
-              <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
                 <div
-                  class="bg-green-500 h-2.5 rounded-full"
+                  className="bg-green-500 h-2.5 rounded-full"
                   style={{ width: "49%" }}
                 ></div>
               </div>
@@ -91,9 +94,9 @@ export default function HomePageV2({ changeDashboardTab }) {
                 <span className="text-sm text-green-500">220/430</span>
               </div>
 
-              <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
                 <div
-                  class="bg-green-500 h-2.5 rounded-full"
+                  className="bg-green-500 h-2.5 rounded-full"
                   style={{ width: "39%" }}
                 ></div>
               </div>
@@ -112,15 +115,15 @@ export default function HomePageV2({ changeDashboardTab }) {
               </div>
             </div>
             <div
-            onClick={()=>setIsOpen(!isOpen)}
-            className="cards_three cursor-pointer">
+              onClick={() => setIsOpen(!isOpen)}
+              className="cards_three cursor-pointer">
               <h5>+ Add channel</h5>
             </div>
-            <PopUp 
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            <PopUp
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
             >
-             <AddChannel />
+              <AddChannel />
             </PopUp>
           </div>
 

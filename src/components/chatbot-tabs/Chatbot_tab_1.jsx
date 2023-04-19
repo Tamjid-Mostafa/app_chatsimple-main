@@ -42,7 +42,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
                     <main className="chat__simple__main2 margintop">
                         <div className="chat__simple__container">
                             <div className="two__box__messenger__row">
-                                <div class="cards">
+                                <div className="cards">
                                     <div className="header">
                                         <div className="flex items-center gap-3">
                                             <img src={MessengerImage} alt="" />

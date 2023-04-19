@@ -1,6 +1,4 @@
-import { TextField, InputAdornment, Icon, Button } from "@mui/material";
 import styles from "../styles/Login.module.css";
-
 import FacebookLogin from "react-facebook-login";
 import { useState } from "react";
 import Profile from "./Profile";
@@ -76,7 +74,7 @@ const Login = () => {
           fields="name,email,picture"
           callback={responseFacebook}
           onClick={componentCliked}
-          cssClass={styles.btnFacebook}
+          cssclassName={styles.btnFacebook}
           icon="fa-facebook"
           render={(renderProps) => (
             <button onClick={renderProps.onClick}>
