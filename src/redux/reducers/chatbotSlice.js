@@ -32,8 +32,19 @@ export const updateChatBot = createAsyncThunk(
   'chatbot/create',
   async (data) => {
     const response = await axios.put(
-      `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=chatbot_title`,
-      {chatbot_title: data?.chatbot_title},
+      `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=${data?.update_mask}`,
+      data?.data,
+      { headers: options }
+    );
+    return response.data;
+  }
+);
+
+export const deleteChatBot = createAsyncThunk(
+  'chatbot/create',
+  async (data) => {
+    const response = await axios.delete(
+      `https://api.chatsimple.ai/v0/users/${data?.user_id}/chatbots/${data?.chatbot_id}`,
       { headers: options }
     );
     return response.data;
@@ -78,6 +89,15 @@ const chatBotSlice = createSlice({
       state.loading = false;
     },
     [updateChatBot.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    [deleteChatBot.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [deleteChatBot.fulfilled]: (state, action) => {
+      state.loading = false;
+    },
+    [deleteChatBot.rejected]: (state, action) => {
       state.loading = false;
     },
   },
