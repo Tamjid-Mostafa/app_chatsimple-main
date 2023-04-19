@@ -30,7 +30,7 @@ export const createChatBot = createAsyncThunk(
 );
 
 export const updateChatBot = createAsyncThunk(
-  'chatbot/create',
+  'chatbot/update',
   async (data) => {
     const response = await axios.put(
       `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=${data?.update_mask}`,
@@ -42,7 +42,7 @@ export const updateChatBot = createAsyncThunk(
 );
 
 export const deleteChatBot = createAsyncThunk(
-  'chatbot/create',
+  'chatbot/delete',
   async (data) => {
     const response = await axios.delete(
       `https://api.chatsimple.ai/v0/users/${data?.user_id}/chatbots/${data?.chatbot_id}`,

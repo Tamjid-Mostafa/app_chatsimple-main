@@ -36,7 +36,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
         {chatBots ? (
           <main className='chat__simple__main2 margintop'>
             <div className='chat__simple__container'>
-              <div className='two__box__messenger__row flex-wrap'>
+              <div className='two__box__messenger__row'>
                 {chatBots.chatbot?.map((bot, i) => (
                   <BootCard key={i++} bot={bot} />
                 ))}
