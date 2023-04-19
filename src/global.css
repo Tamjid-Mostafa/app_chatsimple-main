@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  margin: 0;
+  line-height: normal;
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Roboto';
+  font-style: normal;
+}
+input{
+  outline: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* fonts */
+  --font-roboto: Roboto;
+  --font-open-sans: "Open Sans";
+
+  /* font sizes */
+  --font-size-5xl: 24px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-mediumblue: #0c31f1;
+  --color-black: #000;
+  --color-blueviolet: #3751fe;
+}
