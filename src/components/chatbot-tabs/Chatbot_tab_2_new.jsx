@@ -1,6 +1,6 @@
 import { TextField, Switch } from '@mui/material';
 import displayimg from '../../assets/chatbot_display_img.png';
-import { createChatBot } from '../../redux/reducers/chatbotSlice';
+import { createChatBot, updateChatBot } from '../../redux/reducers/chatbotSlice';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,29 +13,42 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
   const [chatbotTitle, setChatbotTitle] = useState('');
   const [prevTitle, setPrevTitle] = useState('');
 
-  const chatbotHandler = (title) => {
-    // for chat bot creation
-    const data = {
-      userID: user?.user_id,
-      chatbotDetail: {
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        platforms: null,
-        chatbot_title: title,
-      },
-      chatbotID: uuidv4(),
-    };
-    dispatch(createChatBot(data));
-  };
+
+
 
   useEffect(() => {
+    const chatbotid = uuidv4()
+
     if (!prevTitle) {
       // create new
       if (!isTyping && !!chatbotTitle) {
         setPrevTitle(chatbotTitle);
-        chatbotHandler(chatbotTitle);
+        const data = {
+            userID: user?.user_id,
+         
+          chatbotDetail: {
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            platforms: null,
+            chatbot_title: chatbotTitle,
+          },
+          chatbotID: chatbotid,
+        };
+        dispatch(createChatBot(data));
       }
     } else if (prevTitle !== chatbotTitle && !isTyping) {
+      setPrevTitle(chatbotTitle);
       // update here
+      const data = {
+          userID: user?.user_id,
+       
+        chatbotDetail: {
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          platforms: null,
+          chatbot_title: chatbotTitle,
+        },
+        chatbotID: chatbotid,
+      };
+      dispatch(updateChatBot(data));
     }
   }, [isTyping, chatbotTitle]);
 

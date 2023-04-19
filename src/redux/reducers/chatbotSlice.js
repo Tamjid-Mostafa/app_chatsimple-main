@@ -1,13 +1,13 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // this files
 
 const options = {
-  "x-access-token": "skip_validation_for_admin",
-  "Content-Type": "application/json",
+  'x-access-token': 'skip_validation_for_admin',
+  'Content-Type': 'application/json',
 };
-export const allChatBots = createAsyncThunk("chatbot/list", async (data) => {
+export const allChatBots = createAsyncThunk('chatbot/list', async (data) => {
   const response = await axios.post(
     `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots`,
     data?.pageToken,
@@ -17,11 +17,22 @@ export const allChatBots = createAsyncThunk("chatbot/list", async (data) => {
 });
 
 export const createChatBot = createAsyncThunk(
-  "chatbot/create",
+  'chatbot/create',
   async (data) => {
-    console.log("create chatbotttt", data);
     const response = await axios.post(
       `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}`,
+      data?.chatbotDetail,
+      { headers: options }
+    );
+    return response.data;
+  }
+);
+export const updateChatBot = createAsyncThunk(
+  'chatbot/create',
+  async (data) => {
+    console.log('create chatbotttt', data);
+    const response = await axios.post(
+      `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=${data?.chatbotDetail.chatbot_title}`,
       data?.chatbotDetail,
       { headers: options }
     );
@@ -37,7 +48,7 @@ const initialState = {
 };
 
 const chatBotSlice = createSlice({
-  name: "chatbot",
+  name: 'chatbot',
   initialState,
   reducers: {},
   extraReducers: {
@@ -60,6 +71,16 @@ const chatBotSlice = createSlice({
     [createChatBot.rejected]: (state, action) => {
       state.loading = false;
     },
+    [updateChatBot.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updateChatBot.fulfilled]: (state, action) => {
+      state.loading = false;
+    },
+    [updateChatBot.rejected]: (state, action) => {
+      state.loading = false;
+    },
   },
 });
+
 export default chatBotSlice.reducer;
