@@ -15,18 +15,14 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [chatbotTitle, setChatbotTitle] = useState('');
   const [prevTitle, setPrevTitle] = useState('');
-  const [chatBotID, setChatBotID] = useState('')
-  
-
-
+  const [chatBotID, setChatBotID] = useState('');
 
   useEffect(() => {
-
     if (!prevTitle) {
       // create new
       if (!isTyping && !!chatbotTitle) {
         setPrevTitle(chatbotTitle);
-     
+
         const data = {
           userID: user?.user_id,
           chatbotDetail: {
@@ -36,7 +32,7 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
           },
           chatbotID: uuidv4(),
         };
-        setChatBotID(data.chatbotID)
+        setChatBotID(data.chatbotID);
         dispatch(createChatBot(data));
       }
     } else if (prevTitle !== chatbotTitle && !isTyping) {
@@ -44,8 +40,9 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
       // update here
       const data = {
         userID: user?.user_id,
-        chatbot_title: chatbotTitle,
+        update: { chatbot_title: chatbotTitle },
         chatbotID: chatBotID,
+        update_mask: 'chatbot_title',
       };
       dispatch(updateChatBot(data));
     }

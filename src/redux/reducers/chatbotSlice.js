@@ -7,10 +7,10 @@ const options = {
   'x-access-token': 'skip_validation_for_admin',
   'Content-Type': 'application/json',
 };
+
 export const allChatBots = createAsyncThunk('chatbot/list', async (data) => {
   const response = await axios.post(
-    `https://api.chatsimple.ai/v0/users/user_0/chatbots`,
-    // `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots`,
+    `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots`,
     data?.pageToken,
     { headers: options }
   );
@@ -30,17 +30,32 @@ export const createChatBot = createAsyncThunk(
     return response.data;
   }
 );
+
+
 export const updateChatBot = createAsyncThunk(
-  'chatbot/create',
+  'chatbot/update',
   async (data) => {
     const response = await axios.put(
-      `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=chatbot_title`,
-      {chatbot_title: data?.chatbot_title},
+      `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=${data?.update_mask}`,
+      data?.update,
       { headers: options }
     );
     return response.data;
   }
 );
+
+
+export const deleteChatBot = createAsyncThunk(
+  'chatbot/delete',
+  async (data) => {
+    const response = await axios.delete(
+      `https://api.chatsimple.ai/v0/users/${data?.user_id}/chatbots/${data?.chatbot_id}`,
+      { headers: options }
+    );
+    return response.data;
+  }
+);
+
 
 const initialState = {
   loading: false,
@@ -80,6 +95,15 @@ const chatBotSlice = createSlice({
       state.loading = false;
     },
     [updateChatBot.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    [deleteChatBot.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [deleteChatBot.fulfilled]: (state, action) => {
+      state.loading = false;
+    },
+    [deleteChatBot.rejected]: (state, action) => {
       state.loading = false;
     },
   },
