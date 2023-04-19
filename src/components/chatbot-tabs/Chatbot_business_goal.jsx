@@ -14,7 +14,7 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const [data, setData] = useState("")
     const [position, setPosition] = useState("")
     const [open, setOpen] = useState(false);
-
+console.log(data)
     const handleClose = () => {
       setOpen(false);
     };
@@ -64,7 +64,7 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
         <div className='display_flex'>
             <div>
                 <div className='chatbot_header_top'>
-                    <h2 className='bold_text'>Name your Chatboat</h2>
+                    <h2 className='bold_text'>Name your Chatbot</h2>
                     <TextField
                         label="Name"
                         variant="outlined"
