@@ -1,13 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // this files
 
 const options = {
-  "x-access-token": "skip_validation_for_admin",
-  "Content-Type": "application/json",
+  'x-access-token': 'skip_validation_for_admin',
+  'Content-Type': 'application/json',
 };
-export const allChatBots = createAsyncThunk("chatbot/list", async (data) => {
+
+
+export const allChatBots = createAsyncThunk('chatbot/list', async (data) => {
   const response = await axios.post(
     `https://api.chatsimple.ai/v0/users/user_0/chatbots`,
     // `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots`,
@@ -18,12 +20,23 @@ export const allChatBots = createAsyncThunk("chatbot/list", async (data) => {
 });
 
 export const createChatBot = createAsyncThunk(
-  "chatbot/create",
+  'chatbot/create',
   async (data) => {
-    console.log("create chatbotttt", data);
+    console.log('create chatbotttt', data);
     const response = await axios.post(
       `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}`,
       data?.chatbotDetail,
+      { headers: options }
+    );
+    return response.data;
+  }
+);
+
+export const deleteChatBot = createAsyncThunk(
+  'chatbot/create',
+  async (data) => {
+    const response = await axios.delete(
+      `https://api.chatsimple.ai/v0/users/${data?.user_id}/chatbots/${data?.chatbot_id}`,
       { headers: options }
     );
     return response.data;
@@ -38,7 +51,7 @@ const initialState = {
 };
 
 const chatBotSlice = createSlice({
-  name: "chatbot",
+  name: 'chatbot',
   initialState,
   reducers: {},
   extraReducers: {
@@ -59,6 +72,15 @@ const chatBotSlice = createSlice({
       state.loading = false;
     },
     [createChatBot.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    [deleteChatBot.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [deleteChatBot.fulfilled]: (state, action) => {
+      state.loading = false;
+    },
+    [deleteChatBot.rejected]: (state, action) => {
       state.loading = false;
     },
   },
