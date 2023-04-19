@@ -1,8 +1,26 @@
 import React, { useState } from 'react'
 import facebook from "../../assets/images/svg/messenger.svg";
 import instagram from "../../assets/images/svg/instagram.png";
-import whatsapp from "../../assets/images/svg/WhatsApp.svg";
-const AddChannel = () => {
+import whatsapp from "../../assets/images/svg/WhatsApp.svg"
+const AddChannel = ({channelHandler}) => {
+
+const channelData = [
+    {
+        name: 'Messenger',
+        icon: facebook,
+        slug: 'MESSENGER'
+    },
+    {
+        name: 'Instagram',
+        icon: instagram,
+        slug: 'INSTAGRAM'
+    },
+    {
+        name: 'Whats App',
+        icon: whatsapp,
+        slug: 'WHATS APP'
+    },
+]
 
     return (
         <div className='w-full p-[51px]'>
@@ -12,30 +30,21 @@ const AddChannel = () => {
                 <p>Deploy your chatbot to where your customers are.</p>
             </div>
             <div>
-                <div className='flex items-center justify-between w-full border-b py-4'>
+                
+                {
+                    channelData.map((item, i)=> 
+                    <div key={i} className='flex items-center justify-between w-full border-b py-4'>
                     <div className='flex items-center gap-5'>
-                        <img src={facebook} alt="" className='w-12 h-12' />
-                        <p>Messenger</p>
+                        <img src={item.icon} alt="" className='w-12 h-12' />
+                        <p>{item.name}</p>
                     </div>
-                    <button className='flex items-center gap-2 bg-[#66B467] text-xs text-white px-4 py-2.5 rounded-full'>
+                    <button
+                    onClick={() =>channelHandler(item.slug)}
+                    className='flex items-center gap-2 bg-[#66B467] text-xs text-white px-4 py-2.5 rounded-full'>
                         Add Channel </button>
                 </div>
-                <div className='flex items-center justify-between w-full border-b py-4'>
-                    <div className='flex items-center gap-5'>
-                        <img src={instagram} alt="" className='w-12 h-12' />
-                        <p>Instagram</p>
-                    </div>
-                    <button className='flex items-center gap-2 bg-[#66B467] text-xs text-white px-4 py-2.5 rounded-full'>
-                        Add Channel </button>
-                </div>
-                <div className='flex items-center justify-between w-full border-b py-4'>
-                    <div className='flex items-center gap-5'>
-                        <img src={whatsapp} alt="" className='w-12 h-12' />
-                        <p>Whats App</p>
-                    </div>
-                    <button className='flex items-center gap-2 bg-[#66B467] text-xs text-white px-4 py-2.5 rounded-full'>
-                        Add Channel </button>
-                </div>
+                    )
+                }
             </div>
         </div>
     )

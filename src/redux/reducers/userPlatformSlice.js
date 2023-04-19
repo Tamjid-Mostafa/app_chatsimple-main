@@ -13,7 +13,7 @@ export const allChannels = createAsyncThunk("channel/list", async (data) => {
     data?.pageToken,
     { headers: options }
   );
-  return console.log(response.data);
+  return response.data
 });
 
 
@@ -21,7 +21,7 @@ export const allChannels = createAsyncThunk("channel/list", async (data) => {
 export const createChannel = createAsyncThunk(
   "channel/create",
   async (data) => {
-    console.log("create channellll", data);
+    console.log("create channellll", data?.platformDetails);
     const response = await axios.post(
       `https://api.chatsimple.ai/v0/users/${data?.userID}/user_platforms/${data?.platform_id}`,
       data?.platformDetails,
@@ -48,7 +48,7 @@ const userPlatformSlice = createSlice({
     },
     [allChannels.fulfilled]: (state, action) => {
       state.loading = false;
-      state.chatBots = action.payload;
+      state.channels = action.payload;
     },
     [allChannels.rejected]: (state, action) => {
       state.loading = false;
