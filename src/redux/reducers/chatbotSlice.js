@@ -9,7 +9,8 @@ const options = {
 };
 export const allChatBots = createAsyncThunk('chatbot/list', async (data) => {
   const response = await axios.post(
-    `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots`,
+    `https://api.chatsimple.ai/v0/users/user_0/chatbots`,
+    // `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots`,
     data?.pageToken,
     { headers: options }
   );
@@ -31,9 +32,9 @@ export const updateChatBot = createAsyncThunk(
   'chatbot/create',
   async (data) => {
     console.log('create chatbotttt', data);
-    const response = await axios.post(
-      `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=${data?.chatbotDetail.chatbot_title}`,
-      data?.chatbotDetail,
+    const response = await axios.put(
+      `https://api.chatsimple.ai/v0/users/${data?.userID}/chatbots/${data?.chatbotID}?update_mask=chatbot_title`,
+      data,
       { headers: options }
     );
     return response.data;

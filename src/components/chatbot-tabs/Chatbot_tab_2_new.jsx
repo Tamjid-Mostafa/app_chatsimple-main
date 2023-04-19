@@ -1,6 +1,9 @@
 import { TextField, Switch } from '@mui/material';
 import displayimg from '../../assets/chatbot_display_img.png';
-import { createChatBot, updateChatBot } from '../../redux/reducers/chatbotSlice';
+import {
+  createChatBot,
+  updateChatBot,
+} from '../../redux/reducers/chatbotSlice';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,41 +15,35 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [chatbotTitle, setChatbotTitle] = useState('');
   const [prevTitle, setPrevTitle] = useState('');
-
-
-
+  const [chatBotID, setChatBotID] = useState('')
+  
 
   useEffect(() => {
-    const chatbotid = uuidv4()
 
     if (!prevTitle) {
       // create new
       if (!isTyping && !!chatbotTitle) {
         setPrevTitle(chatbotTitle);
+     
         const data = {
-            userID: user?.user_id,
-         
+          userID: user?.user_id,
           chatbotDetail: {
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             platforms: null,
             chatbot_title: chatbotTitle,
           },
-          chatbotID: chatbotid,
+          chatbotID: uuidv4(),
         };
+        setChatBotID(data.chatbotID)
         dispatch(createChatBot(data));
       }
     } else if (prevTitle !== chatbotTitle && !isTyping) {
       setPrevTitle(chatbotTitle);
       // update here
       const data = {
-          userID: user?.user_id,
-       
-        chatbotDetail: {
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          platforms: null,
-          chatbot_title: chatbotTitle,
-        },
-        chatbotID: chatbotid,
+        userID: user?.user_id,
+        chatbot_title: chatbotTitle,
+        chatbotID: chatBotID,
       };
       dispatch(updateChatBot(data));
     }
