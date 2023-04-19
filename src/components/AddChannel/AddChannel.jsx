@@ -1,16 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
+import facebook from "../../assets/images/svg/messenger.svg";
+import instagram from "../../assets/images/svg/instagram.png";
+import whatsapp from "../../assets/images/svg/WhatsApp.svg"
+const AddChannel = ({channelHandler}) => {
 
-const AddChannel = () => {
+const channelData = [
+    {
+        name: 'Messenger',
+        icon: facebook,
+        slug: 'MESSENGER'
+    },
+    {
+        name: 'Instagram',
+        icon: instagram,
+        slug: 'INSTAGRAM'
+    },
+    {
+        name: 'Whats App',
+        icon: whatsapp,
+        slug: 'WHATS APP'
+    },
+]
+
     return (
-        <div>
+        <div className='w-full p-[51px]'>
             {/* <!-- Modal body --> */}
-            <div class="p-6 space-y-6">
-                <h3>Add Channel</h3>
+            <div className="p-6 space-y-6 text-center">
+                <h3 className='text-xl font-bold'>Add Channel</h3>
+                <p>Deploy your chatbot to where your customers are.</p>
             </div>
-            {/* <!-- Modal footer --> */}
-            <div class="flex items-center p-6 space-x-2  border-gray-200">
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                <button type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            <div>
+                
+                {
+                    channelData.map((item, i)=> 
+                    <div key={i} className='flex items-center justify-between w-full border-b py-4'>
+                    <div className='flex items-center gap-5'>
+                        <img src={item.icon} alt="" className='w-12 h-12' />
+                        <p>{item.name}</p>
+                    </div>
+                    <button
+                    onClick={() =>channelHandler(item.slug)}
+                    className='flex items-center gap-2 bg-[#66B467] text-xs text-white px-4 py-2.5 rounded-full'>
+                        Add Channel </button>
+                </div>
+                    )
+                }
             </div>
         </div>
     )

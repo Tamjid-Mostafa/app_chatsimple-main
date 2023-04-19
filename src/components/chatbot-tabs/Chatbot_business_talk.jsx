@@ -10,14 +10,14 @@ import ConversationCard from './ConversationCard';
 const Chatbot_business_talk = ({ changeChatBotTab }) => {
 
     const [isChecked, setIsChecked] = useState(false);
-    const [businessName, setbusinessName] = useState("")
-    const [businessHours, setBusinnessHours] = useState("")
-    const [industry, setIndustry] = useState("")
-    const [history, setHistory] = useState("")
-    const [supportEmail, setSupportEmail] = useState("")
+    const [businessName, setBusinessName] = useState()
+    const [businessHours, setBusinessHours] = useState()
+    const [industry, setIndustry] = useState()
+    const [history, setHistory] = useState()
+    const [supportEmail, setSupportEmail] = useState()
     const [open, setOpen] = useState(false);
-    const [data, setData] = useState("")
-    
+    const [data, setData] = useState()
+    console.log(data)
     const handleClose = () => {
       setOpen(false);
     };
@@ -29,7 +29,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
     };
 
     const handleBusinessDetails = async () =>{
-        let data = {
+        const data = {
             expertise_title: "Business Small Talk",
             expertise_type: "FAQ",
             form_information: {
@@ -66,6 +66,28 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             //window.alert(e.message)
         }
     }
+
+
+    const [inputs, setInputs] = useState([""]);
+
+    const handleInputChange = (e, index) => {
+        const newInputs = [...inputs];
+        newInputs[index] = e.target.value;
+        setInputs(newInputs);
+        console.log(inputs)
+    };
+
+    const handleAddInput = () => {
+        setInputs([...inputs, ""]);
+    };
+
+    const handleRemoveInput = (index) => {
+        const newInputs = [...inputs];
+        newInputs.splice(index, 1);
+        setInputs(newInputs);
+    };
+
+
     return (
         <div className='display_flex'>
             <div>
@@ -128,7 +150,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                                 label="Business Name"
                                 variant="outlined"
                                 value={businessName}
-                                onChange={(event) => setbusinessName(event.target.value)}
+                                onChange={(event) => setBusinessName(event.target.value)}
                             />
                         </div>
                     </div>
@@ -144,7 +166,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                             label="Business Hours"
                             variant="outlined"
                             value={businessHours}
-                            onChange={(event) => setBusinnessHours(event.target.value)}
+                            onChange={(event) => setBusinessHours(event.target.value)}
                         />
                     </div>
                     <div className='margintop'>

@@ -14,18 +14,59 @@ import { useDispatch, useSelector } from "react-redux";
 import { userDetails } from "../../redux/reducers/userSlice";
 import PopUp from "../PopUp/PopUp";
 import AddChannel from "../AddChannel/AddChannel";
-
+import AddChannelButton from "../Buttons/AddChannelButton";
+import { allChannels, createChannel } from "../../redux/reducers/userPlatformSlice";
+import { v4 as uuidv4 } from 'uuid';
+import facebook from "../../assets/images/svg/messenger.svg";
+import instagram from "../../assets/images/svg/instagram.png";
+import whatsapp from "../../assets/images/svg/WhatsApp.svg"
 // this file
 
-export default function HomePageV2({ changeDashboardTab }) {
+export default function HomePageV2({ changeDashboardTab, userToSend }) {
+
   const dispatch = useDispatch();
   const { fbUserID } = useSelector((state) => state.fb);
   const { user } = useSelector((state) => state.user);
-  useEffect(() => {
-    dispatch(userDetails(fbUserID));
-  }, [fbUserID]);
-  const [isOpen, setIsOpen] = useState()
 
+  useEffect(() => {
+    dispatch(userDetails(userToSend?.user_id));
+  }, [userToSend?.user_id]);
+
+  const [isOpen, setIsOpen] = useState()
+  const [channelName, setChannelName] = useState('')
+
+
+  const channelHandler = (name) => {
+    console.log(name)
+
+    // for channel creation
+    console.log(user?.user_id)
+    const data = {
+      userID: user?.user_id,
+      platform_id: uuidv4(),
+      platformDetails: {
+        platform_type: name,
+        access_token: "none",
+        permissions: {
+          access_to_account: "no"
+        },
+        chatbot_id: "chatbot_id2",
+      }
+    };
+    dispatch(createChannel(data));
+  };
+  useEffect(() => {
+    const data = {
+      userID: user?.user_id,
+      pageToken: {
+        page_token: { last_time: new Date().toISOString().split('T')[0] },
+      },
+    };
+    dispatch(allChannels(data));
+  }, [user]);
+
+  const { channels } = useSelector((state) => state.channel);
+console.log(channels);
   return (
     <React.StrictMode>
       <main className="chat__simple__main2">
@@ -35,92 +76,65 @@ export default function HomePageV2({ changeDashboardTab }) {
             <span>2 connected channels</span>
             <span>838 contacts</span>
           </div>
-          <div className="active__channel__row">
+          <div className="active__channel__row mb-8">
             <h4>Active Channels</h4>
-            {/* <AddChannelButton changeDashboardTab={changeDashboardTab} dashboardTab={1} /> */}
+            <AddChannelButton changeDashboardTab={changeDashboardTab} dashboardTab={1} />
           </div>
 
-          <div className="two__box__messenger__row">
-            <div class="cards">
-              <div className="header">
-                <div className="flex items-center gap-3">
-                  <img src={MessengerImage} alt="" />
-                  <h4>Messenger</h4>
-                </div>
-                <div>
-                  <img src={barIcon} className="cursor-pointer" alt="" />
-                </div>
-              </div>
-              <div className="bars__text">
-                <span className="text-sm font-medium">Active contact</span>
-                <span className="text-sm text-green-500">376/508</span>
-              </div>
+          <div className="grid lg:grid-cols-4 grid-cols-3 gap-10">
+            {
+              channels?.user_platforms?.map((item, i) => {
+                return (
+                  <div key={i} className="border p-5 rounded-lg">
+                    <div className="header flex justify-between items-center mb-5">
+                      <div className="flex items-center gap-3">
+                        <img src={item.platform_type === 'PlatformType.MESSENGER' ?facebook : instagram} alt="" className="w-12 h-12"/>
+                        <h4>Messenger</h4>
+                      </div>
+                      <div>
+                        <img src={barIcon} className="cursor-pointer" alt="" />
+                      </div>
+                    </div>
+                    <div className="bars__text">
+                      <span className="text-sm font-medium">Active contact</span>
+                      <span className="text-sm text-green-500">376/508</span>
+                    </div>
 
-              <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                <div
-                  class="bg-green-500 h-2.5 rounded-full"
-                  style={{ width: "30%" }}
-                ></div>
-              </div>
-              <div className="bars__texts">
-                <span className="text-sm font-medium">
-                  Total number of message
-                </span>
-                <span className="text-sm text-green-500">2,109</span>
-              </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                      <div
+                        className="bg-green-500 h-2.5 rounded-full"
+                        style={{ width: "30%" }}
+                      ></div>
+                    </div>
+                    <div className="bars__texts">
+                      <span className="text-sm font-medium">
+                        Total number of message
+                      </span>
+                      <span className="text-sm text-green-500">2,109</span>
+                    </div>
 
-              <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                <div
-                  class="bg-green-500 h-2.5 rounded-full"
-                  style={{ width: "49%" }}
-                ></div>
-              </div>
-            </div>
-            <div className="cards">
-              <div className="header">
-                <div className="flex items-center gap-3">
-                  <img src={InstaImage} alt="" className="w-12 h-12" />
-                  <h4>Instagram</h4>
-                </div>
-                <div>
-                  <img src={barIcon} className="cursor-pointer" alt="" />
-                </div>
-              </div>
-              <div className="bars__text">
-                <span className="text-sm font-medium">Active contact</span>
-                <span className="text-sm text-green-500">220/430</span>
-              </div>
-
-              <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                <div
-                  class="bg-green-500 h-2.5 rounded-full"
-                  style={{ width: "39%" }}
-                ></div>
-              </div>
-              <div className="bars__texts">
-                <span className="text-sm font-medium">
-                  Total number of message
-                </span>
-                <span className="text-sm text-green-500">1,580</span>
-              </div>
-
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                <div
-                  className="bg-green-500 h-2.5 rounded-full"
-                  style={{ width: "45%" }}
-                ></div>
-              </div>
-            </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                      <div
+                        className="bg-green-500 h-2.5 rounded-full"
+                        style={{ width: "49%" }}
+                      ></div>
+                    </div>
+                  </div>
+                )
+              })
+            }
             <div
-            onClick={()=>setIsOpen(!isOpen)}
-            className="cards_three cursor-pointer">
+              onClick={() => setIsOpen(!isOpen)}
+              className="cards_three cursor-pointer border rounded-lg p-5 flex justify-center items-center">
               <h5>+ Add channel</h5>
             </div>
-            <PopUp 
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            <PopUp
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
             >
-             <AddChannel />
+              <AddChannel
+                channelHandler={channelHandler}
+              />
             </PopUp>
           </div>
 
