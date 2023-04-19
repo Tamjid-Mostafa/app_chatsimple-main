@@ -13,17 +13,13 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
   const [chatbotTitle, setChatbotTitle] = useState('');
   const [prevTitle, setPrevTitle] = useState('');
 
-  console.log({ chatBots });
-
   const chatbotHandler = (title) => {
     // for chat bot creation
-
     const data = {
-      userID: 1671593203311000,
-      //   userID: user?.user_id,
+      userID: user?.user_id,
       chatbotDetail: {
         timezone: 'UTC',
-        platforms: { first: 'messenger' },
+        platforms: null,
         chatbot_title: title,
       },
       chatbotID: uuidv4(),
@@ -33,13 +29,13 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
 
   useEffect(() => {
     if (!prevTitle) {
+      // create new
       if (!isTyping && !!chatbotTitle) {
         setPrevTitle(chatbotTitle);
         chatbotHandler(chatbotTitle);
-        console.log('create');
       }
     } else if (prevTitle !== chatbotTitle && !isTyping) {
-      console.log('update');
+      // update here
     }
   }, [isTyping, chatbotTitle]);
 
