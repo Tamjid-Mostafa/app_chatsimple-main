@@ -17,7 +17,6 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
     const { chatBots } = useSelector((state) => state.chatbot); // this has all the chat-bots list for a user that is logged in
 
 
-    console.log(user)
     useEffect(() => {
         const data = {
             userID: user?.user_id,

@@ -18,7 +18,7 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
     const data = {
       userID: user?.user_id,
       chatbotDetail: {
-        timezone: 'UTC',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         platforms: null,
         chatbot_title: title,
       },
