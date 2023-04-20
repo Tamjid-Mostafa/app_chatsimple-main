@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Snackbar from '@mui/material/Snackbar';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 
 import ConversationCard from './ConversationCard';
 const Chatbot_faq_details = ({ changeChatBotTab }) => {
@@ -22,7 +22,6 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
   const [url, setUrl] = useState('');
   const [faqs, setFaqs] = useState(null);
 
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -31,13 +30,18 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
     setIsChecked(!isChecked);
   };
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     // handleFAQSubmit(data)
-    console.log({data})
+    console.log({ data });
   };
-  
+
   const handleFAQSubmit = async () => {
     let data = {
       expertise_title: 'FAQ',
@@ -102,6 +106,25 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
   //   const result = Array.from(Object.keys(faqs?.question), (item, index) => {
   //     return [question1: item.key[]];
   //   });
+
+  const faqArray = [];
+
+  // faqs &&
+  //   Object.keys(faqs?.question).forEach((qKey) => {
+  //     Object.keys(faqs?.answer).forEach((aKey) => {
+
+  //       if (faqArray.some(ele => ele.question !== faqs?.question[qKey] && ele.answer !== faqs?.answer[aKey])) {
+  //         faqArray.push({
+  //           question: faqs.question[qKey],
+  //           answer: faqs.answer[aKey],
+  //         });
+  //         console.log('Hello')
+  //       }
+  //       console.log(faqArray.some(ele => ele.question !== faqs?.question[qKey] && ele.answer !== faqs?.answer[aKey]))
+      
+  //     });
+  //   });
+  // console.log(faqArray);
 
   return (
     <div className='display_flex'>
@@ -195,16 +218,10 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                             1
                           </td>
                           <td className=' border-r text-left px-6 py-4 border-gray-300'>
-                            <input
-                              type='text'
-                              {...register("question1")}
-                            />
+                            <input type='text' {...register('question1')} />
                           </td>
                           <td className='whitespace-nowrap border-r text-left px-6 py-4 border-gray-300'>
-                            <input
-                              type='text'
-                              {...register("answer1")}
-                            />
+                            <input type='text' {...register('answer1')} />
                           </td>
                         </tr>
                         <tr className='border-b border-gray-300'>
@@ -212,16 +229,10 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                             2
                           </td>
                           <td className=' border-r text-left px-6 py-4 border-gray-300'>
-                            <input
-                              type='text'
-                                {...register("question2")}
-                            />
+                            <input type='text' {...register('question2')} />
                           </td>
                           <td className='whitespace-nowrap border-r text-left px-6 py-4 border-gray-300'>
-                            <input
-                              type='text'
-                              {...register("answer2")}
-                            />
+                            <input type='text' {...register('answer2')} />
                           </td>
                         </tr>
                       </>
@@ -230,7 +241,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                     {faqs &&
                       Object.keys(faqs?.question).map((key, i) => (
                         <tr
-                          key={i}
+                          key={i++}
                           className='border-b border-gray-300'
                           colspan='2'
                         >
@@ -239,18 +250,18 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                           </td>
                           <td className='whitespace-nowrap text-left border-r px-6 py-4 border-gray-300'>
                             <input
-                             
                               defaultValue={faqs.question[key]}
                               type='text'
-                              {...register(`question${++i}`)}
+                              name={++i}
+                              {...register(`question${i++}`)}
                             />
                           </td>
                           <td className='whitespace-nowrap text-left border-r px-6 py-4 border-gray-300'>
                             <input
                               defaultValue={faqs.answer[key]}
-                             
+                              name={++i}
                               type='text'
-                              {...register(`answer${++i}`)}
+                              // {...register(`answer${i++}`)}
                             />
                           </td>
                         </tr>
@@ -261,9 +272,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
             </div>
           </div>
           <div className='flex items-center gap-3 mt-6'>
-            <button
-              className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'
-            >
+            <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'>
               Save
             </button>
           </div>
