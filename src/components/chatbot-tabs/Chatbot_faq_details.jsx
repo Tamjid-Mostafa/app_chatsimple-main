@@ -5,6 +5,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { async } from 'q';
 
 const Chatbot_faq_details = ({ changeChatBotTab }) => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
   } = useForm();
 
   const onSubmit = async (values) => {
+    console.log(values);
     let questions = [];
     let answers = [];
     let newarr = [];
@@ -69,17 +71,23 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
     };
 
     try {
-      const response = await axios.post(
-        `https://api.chatsimple.ai/v0/users/${
-          user.user_id
-        }/chatbot_expertises/${uuidv4()}`,
-        fields,
-        { headers }
-      );
-      setOpen(true);
-      setData(response.data.message);
+      const request = async () => {
+        const response = await axios.post(
+          `https://api.chatsimple.ai/v0/users/${
+            user.user_id
+          }/chatbot_expertises/${uuidv4()}`,
+          fields,
+          { headers }
+        );
+        setOpen(true);
+        setData(response.data.message);
+        clearTimeout(timeout);
+      };
+      const timeout = setTimeout(request, 60000);
+
       // window.alert(response.data.message);
     } catch (e) {
+
       setOpen(true);
       setData(e.message);
       //window.alert(e.message)
@@ -92,11 +100,13 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
         'x-access-token': 'skip_validation_for_admin',
         'Content-Type': 'application/json',
       };
+
       const response = await axios.post(
         `https://api.chatsimple.ai/v0/users/${user.user_id}/chatbot_expertises/extractfaq`,
         { url: url },
         { headers }
       );
+
       setFaqs(response.data);
       setIsTrue(true);
     } catch (error) {
@@ -127,47 +137,8 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
     }
   }
 
-
   return (
     <div className='display_flex'>
-      <div>
-        <div className='chatbot_header_top'>
-          <h2 className='bold_text'>Name your Chatboat</h2>
-          <TextField label='Name' variant='outlined' value={''} />
-        </div>
-
-        <div>
-          <h2 className='bold_text'>Select Chatbot Expertise</h2>
-
-          <div className='expertise_box display_flex'>
-            <div className='faq_text'>
-              <p> FAQ</p>
-            </div>
-            <div className='chatbot_toggle_button'>
-              <Switch checked={true} onClick={() => changeChatBotTab(2)} />
-            </div>
-          </div>
-
-          <div className='expertise_box display_flex'>
-            <div className='faq_text'>
-              <p> Business small talk</p>
-            </div>
-            <div className='chatbot_toggle_button2'>
-              <Switch />
-            </div>
-          </div>
-
-          <div className='expertise_box display_flex'>
-            <div className='faq_text'>
-              <p>Business Goal</p>
-            </div>
-            <div className='chatbot_toggle_button3'>
-              <Switch />
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className='chatbot_dsplay_column'>
         <div className='chatbot_display_text'>
           <h1 className='bold_text font_32 margintop'>FAQ</h1>
