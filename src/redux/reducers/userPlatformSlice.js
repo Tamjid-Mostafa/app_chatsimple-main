@@ -21,7 +21,6 @@ export const allChannels = createAsyncThunk("channel/list", async (data) => {
 export const createChannel = createAsyncThunk(
   "channel/create",
   async (data) => {
-    console.log("create channellll", data?.platformDetails);
     const response = await axios.post(
       `https://api.chatsimple.ai/v0/users/${data?.userID}/user_platforms/${data?.platform_id}`,
       data?.platformDetails,

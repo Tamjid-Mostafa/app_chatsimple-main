@@ -11,7 +11,6 @@ const BuildChatBot = () => {
         if(!loading && !userData) {
           // window.alert("Please login to continue")
         } else{
-          console.log(userData)
         }
       }, [userData, loading])
     const changeChatBotTab = (tab) => {

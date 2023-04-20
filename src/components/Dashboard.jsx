@@ -13,7 +13,6 @@ const DashboardC = ({userToSend}) => {
     if(!loading && !userData) {
       // window.alert("Please login to continue")
     } else{
-      console.log(userData)
     }
   }, [userData, loading])
   const changeDashboardTab = (tab) => {
