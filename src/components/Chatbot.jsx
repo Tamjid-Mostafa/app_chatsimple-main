@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Switch, TextField } from '@mui/material'
 import { createChatBot, updateChatBot } from '../redux/reducers/chatbotSlice'
 import { v4 as uuidv4 } from 'uuid';
+import Topbar from './Topbar/Topbar'
 
 const Chatbot = () => {
   const [chatbotTab, setChatbotTab] = React.useState(1)
@@ -68,7 +69,7 @@ const Chatbot = () => {
     }
   }, [isTyping, chatbotTitle]);
 
-  
+
 
   const handleBlur = () => {
     setIsTyping(false);
@@ -79,9 +80,13 @@ const Chatbot = () => {
   };
 
   return (
-    <div className='display_flex'>
+    <>
+    <div className='w-full'>
+
+    <Topbar />
       {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />}
       <div className={`bg-[#f1efef] h-[100vh] ${chatbotTab !== 1 ? "" : "hidden"}`}>
+
         <div className='p-5'>
           <div className='chatbot_header_top'>
             <h2 className='bold_text'>Name your Chatbot</h2>
@@ -136,6 +141,7 @@ const Chatbot = () => {
         {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
       </div>
     </div>
+    </>
   )
 }
 
