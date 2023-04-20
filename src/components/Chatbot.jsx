@@ -81,14 +81,11 @@ const Chatbot = () => {
 
   return (
     <>
-    <div className='w-full overflow-hidden'>
-
-
+    <div className='w-full flex'>
       {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />}
-      <div className={`w-full bg-[#f1efef] h-[100vh] ${chatbotTab !== 1 ? "" : "hidden"}`}>
-      <Topbar />
+      <div className={`${chatbotTab !== 1 ? "" : "hidden"}`}>
 
-        <div className='p-5'>
+        <div className='p-5 h-[calc(100vh)] bg-[#eeeeee]'>
           <div className='chatbot_header_top'>
             <h2 className='bold_text'>Name your Chatbot</h2>
             <TextField

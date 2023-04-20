@@ -22,8 +22,8 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
     }, [user]);
 
   return (
-    <div className='dashboard_tab chatbot_tab p-6'>
-      <div>
+    <div className='dashboard_tab chatbot_tab p-5'>
+      <div className=''>
         <h1>Chatbot</h1>
         <p className='smaller__heading'>{chatBots.chatbot?.length || '0'} custom chatbots</p>
         <div
@@ -34,7 +34,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
           <p>Build</p>
         </div>
         {chatBots ? (
-          <main className='chat__simple__main2 margintop'>
+          <div className='chat__simple__main2 pt-10 mt-10'>
             <div className='chat__simple__container'>
               <div style={{ width: '90%' }} className='two__box__messenger__row flex flex-wrap'>
                 {chatBots.chatbot?.map((bot, i) => (
@@ -42,7 +42,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
                 ))}
               </div>
             </div>
-          </main>
+          </div>
         ) : (
           <div className='chatbot__tab1__info'>
           <div className='chatbot__tab1__elevations'>

@@ -72,7 +72,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
 
   return (
     <React.StrictMode>
-      <main className="chat__simple__main2">
+      <main className="chat__simple__main2 p-5">
         <div className="chat__simple__container">
           <h1>{user?.first_name && `${user?.first_name}!`}</h1>
           <div className="small__two__connextios__row">
