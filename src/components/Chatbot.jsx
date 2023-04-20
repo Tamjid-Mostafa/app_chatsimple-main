@@ -79,7 +79,7 @@ const Chatbot = () => {
   };
 
   return (
-    <div className='display_flex p-10'>
+    <div className='display_flex p-5'>
       {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />}
       <div className={`bg-[#f1efef] h-[100vh] ${chatbotTab !== 1 ? "" : "hidden"}`}>
         <div className='p-5'>
