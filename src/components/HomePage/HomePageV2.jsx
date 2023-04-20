@@ -76,8 +76,8 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
         <div className="chat__simple__container">
           <h1>{user?.first_name && `${user?.first_name}!`}</h1>
           <div className="small__two__connextios__row">
-            <span>2 connected channels</span>
-            <span>838 contacts</span>
+            <span>{channels?.length} connected channels</span>
+            {/* <span>838 contacts</span> */}
           </div>
           <div className="active__channel__row mb-8">
             <h4>Active Channels</h4>
