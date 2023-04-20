@@ -76,7 +76,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
         <div className="chat__simple__container">
           <h1>{user?.first_name && `${user?.first_name}!`}</h1>
           <div className="small__two__connextios__row">
-            <span>{channels?.length ? channels?.length:'0'} connected channels</span>
+            <span>{channels?.length || '0'} connected channels</span>
             {/* <span>838 contacts</span> */}
           </div>
           <div className="active__channel__row mb-8">
@@ -96,7 +96,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
             {
               channels?.user_platforms?.map((item, i) => {
                 return (
-                  <div key={i} className="border p-5 rounded-lg">
+                  <div style={{ width: '262px' , height:'229px' }} key={i} className="border p-5 rounded-lg mb-2">
                     <div className="header flex justify-between items-center mb-5">
                       <div className="flex items-center gap-3">
                         <img src={item.platform_type === 'PlatformType.MESSENGER' ? facebook : instagram} alt="" className="w-12 h-12" />
@@ -107,7 +107,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
                         <img src={barIcon} className="cursor-pointer" alt="" />
                       </div>
                     </div>
-                    <div className="bars__text">
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }} className="bars__text">
                       <span className="text-sm font-medium">Active contact</span>
                       <span className="text-sm text-green-500">376/508</span>
                     </div>
@@ -118,7 +118,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
                         style={{ width: "30%" }}
                       ></div>
                     </div>
-                    <div className="bars__texts">
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }} className="bars__texts">
                       <span className="text-sm font-medium">
                         Total number of message
                       </span>
@@ -135,7 +135,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
                 )
               })
             }
-            <div
+            <div style={{ width: '262px' , height:'229px' }}
               onClick={() => setIsOpen(!isOpen)}
               className="cards_three cursor-pointer border rounded-lg p-5 flex justify-center items-center">
               <h5>+ Add channel</h5>

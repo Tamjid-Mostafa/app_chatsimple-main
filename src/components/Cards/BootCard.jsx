@@ -42,9 +42,9 @@ const BootCard = ({ bot }) => {
 
   return (
     <>
-      <div className='cards'>
+      <div className='cards' style={{ width: '360px', height:'480px', marginRight: '20px', marginBottom: '20px' }}>
         <div className='header'>
-          <div className='flex items-center gap-3'>
+          <div className='flex  gap-3'>
             <img src={MessengerImage} alt='' />
             <h4>Messenger Chatbot</h4>
           </div>

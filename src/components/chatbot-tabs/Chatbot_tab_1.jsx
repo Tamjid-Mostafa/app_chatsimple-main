@@ -25,7 +25,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
     <div className='dashboard_tab chatbot_tab p-6'>
       <div>
         <h1>Chatbot</h1>
-        <p className='smaller__heading'>0 custom chatbots</p>
+        <p className='smaller__heading'>{chatBots.chatbot?.length || '0'} custom chatbots</p>
         <div
           className='chatbot__tab__info__btn add_button'
           onClick={() => changeChatBotTab(2)}
@@ -36,7 +36,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
         {chatBots ? (
           <main className='chat__simple__main2 margintop'>
             <div className='chat__simple__container'>
-              <div className='two__box__messenger__row flex-wrap'>
+              <div style={{ width: '90%' }} className='two__box__messenger__row flex flex-wrap'>
                 {chatBots.chatbot?.map((bot, i) => (
                   <BootCard key={i++} bot={bot} />
                 ))}
@@ -44,10 +44,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
             </div>
           </main>
         ) : (
-          ''
-        )}
-
-        <div className='chatbot__tab1__info'>
+          <div className='chatbot__tab1__info'>
           <div className='chatbot__tab1__elevations'>
             <div className='chatbot__tab1__elevations__card'>
               <div className='elevation__card__ellipse_combo'>
@@ -63,6 +60,9 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
           </div>
           <p className='no_activity'>no activity yet</p>
         </div>
+        )}
+
+      
       </div>
     </div>
   );

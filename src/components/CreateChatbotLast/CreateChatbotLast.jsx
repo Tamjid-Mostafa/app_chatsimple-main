@@ -24,9 +24,9 @@ export default function CreateChatbotLast({ changeChatBotTab }) {
                     <h1>
                         Chatbot
                     </h1>
-                    <h6>
+                    {/* <h6>
                         0 custom chatbots
-                    </h6>
+                    </h6> */}
 
                     <div className='chat__create__Last__box'>
                         {/* <header className='flex justify-between items-center'>
