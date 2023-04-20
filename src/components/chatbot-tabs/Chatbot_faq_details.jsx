@@ -70,28 +70,28 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
       'Content-Type': 'application/json',
     };
 
-    try {
-      const request = async () => {
+    async function postDataWithIncreasedTimeout() {
+      try {
         const response = await axios.post(
           `https://api.chatsimple.ai/v0/users/${
             user.user_id
           }/chatbot_expertises/${uuidv4()}`,
           fields,
-          { headers }
+          {
+            headers,
+            timeout: 30000, // Set the timeout to 30000 milliseconds (30 seconds)
+          }
         );
         setOpen(true);
         setData(response.data.message);
-        clearTimeout(timeout);
-      };
-      const timeout = setTimeout(request, 60000);
-
-      // window.alert(response.data.message);
-    } catch (e) {
-
-      setOpen(true);
-      setData(e.message);
-      //window.alert(e.message)
+        
+      } catch (error) {
+        setOpen(true);
+        setData(e.message);
+      }
     }
+
+    postDataWithIncreasedTimeout();
   };
 
   const buildFaq = async () => {
