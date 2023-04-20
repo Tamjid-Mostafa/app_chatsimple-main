@@ -18,7 +18,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
             userID: user?.user_id, 
             page_token: {last_time: new Date().toISOString().split('T')[0]}
         };
-        // dispatch(allChatBots(data));
+        dispatch(allChatBots(data));
     }, [user]);
 
   return (
