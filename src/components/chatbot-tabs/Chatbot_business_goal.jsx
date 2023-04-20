@@ -1,4 +1,4 @@
-import { TextField, Switch } from '@mui/material';
+import { TextField, Switch, Alert } from '@mui/material';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useState } from 'react';
 import axios from "axios";
@@ -7,15 +7,17 @@ import Snackbar from '@mui/material/Snackbar';
 import { useDispatch, useSelector } from "react-redux";
 
 import ConversationCard from './ConversationCard';
+import ActionAlert from '../Alert/ActionAlert';
 const Chatbot_business_goal = ({ changeChatBotTab }) => {
 
     const [isChecked, setIsChecked] = useState(false);
     const [name, setName] = useState("")
     const [data, setData] = useState("")
+    const [dirty, setDirty] = useState("")
     const [position, setPosition] = useState("")
     const [open, setOpen] = useState(false);
     const handleClose = () => {
-      setOpen(false);
+        setOpen(false);
     };
     const { user } = useSelector((state) => state.user);
 
@@ -47,11 +49,12 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
             setOpen(true);
             setData(response.data.message)
             //window.alert(response.data.message);
+
         }
-        catch(e) {
+        catch (e) {
             setOpen(true);
-            setData(e.message)
-           // window.alert(e.message)
+            setDirty(e.message)
+            // window.alert(e.message)
         }
     }
 
@@ -59,58 +62,83 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const handleToggle = () => {
         setIsChecked(!isChecked);
     };
+
     return (
-        <div className='display_flex'>
-            
+        <>
+            {data &&
+                < >
+                    <ActionAlert
+                        variant="filled"
+                        severity="success"
+                        message={data}
+                        setData={setData}
+                    />
+                </>
+            }
+            {dirty &&
+                < >
+                    <ActionAlert
+                        variant="filled"
+                        severity="error"
+                        message={dirty}
+                        setData={setData}
+                    />
+                </>
+            }
+            <div className='display_flex'>
 
-            <div className='chatbot_dsplay_column'>
-                <div className='chatbot_display_text'>
-                    <h1 className='bold_text font_32 margintop'>Business Goal</h1>
-                    <p >
-                        Design a chatbot that knows your goal and acts like a brand ambassador! depending on the position <br /> you assigns, the bot will model itself after the corporate
-                        identity in appearance, demanour and values. <br /> <br /> 
-                        Name Your chatbot and tell us what position you wish your bot to taken on.
-                    </p>
 
-                    <div className='display_flex margintop'>
-                        <div>
-                            <TextField
-                                label="Name"
-                                className='muitextfield'
-                                variant="outlined"
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
-                            />
+                <div className='chatbot_dsplay_column'>
+                    <div className='chatbot_display_text'>
+                        <h1 className='bold_text font_32 margintop'>Business Goal</h1>
+                        <p >
+                            Design a chatbot that knows your goal and acts like a brand ambassador! depending on the position <br /> you assigns, the bot will model itself after the corporate
+                            identity in appearance, demanour and values. <br /> <br />
+                            Name Your chatbot and tell us what position you wish your bot to taken on.
+                        </p>
+
+                        <div className='display_flex margintop'>
+                            <div>
+                                <TextField
+                                    label="Name"
+                                    className='muitextfield'
+                                    variant="outlined"
+                                    value={name}
+                                    onChange={(event) => setName(event.target.value)}
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className='display_flex margintop'>
-                        <div>
-                            <TextField
-                                label="Position"
-                                className='muitextfield_position'
-                                variant="outlined"
-                                value={position}
-                                onChange={(event) => setPosition(event.target.value)}
-                            />
+                        <div className='display_flex margintop'>
+                            <div>
+                                <TextField
+                                    label="Position"
+                                    className='muitextfield_position'
+                                    variant="outlined"
+                                    value={position}
+                                    onChange={(event) => setPosition(event.target.value)}
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className=''>
-                        <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' onClick={handleCreate}>
-                            Create
-                        </button>
+                        <div className=''>
+                            <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' onClick={handleCreate}>
+                                Create
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Snackbar
+                {/* <Snackbar
             open={open}
             autoHideDuration={6000}
             message={data}
             onClose={handleClose}
             className="muiclass"
-          />
-        </div>
+          /> */}
+                {data && <Alert severity="success">{data}</Alert>}
+                {dirty && <Alert variant="filled" severity="error">{dirty}</Alert>}
+            </div>
+        </>
     )
 }
 

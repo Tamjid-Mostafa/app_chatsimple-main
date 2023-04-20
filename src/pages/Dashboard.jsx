@@ -32,12 +32,12 @@ const Dashboard = () => {
   }
   return (
     <div className="flex w-full">
-      <div className="fixed sidebar_container">
+      <div className="fixed sidebar_container z-50">
         <Sidebar changeDashboardTab={changeDashboardTab} />
       </div>
-      <div className="ml-64 w-full ">
-        {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC userToSend={userToSend} /></div>}
-        {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user={userToSend} /></div>}
+      <div className="pl-64 w-full bg-[#f1efef] ">
+        {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC user={user} /></div>}
+        {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user={user} /></div>}
       </div>
     </div>
   )
