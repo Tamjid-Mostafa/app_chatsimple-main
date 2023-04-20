@@ -7,7 +7,7 @@ export default function ActionAlert({ message, severity, variant, setData }) {
       <Alert
       variant={variant}
       severity={severity}
-      onClose={() => setData("")}>{message}</Alert>
+      onClose={() => {}}>{message}</Alert>
     </div>
   );
 }

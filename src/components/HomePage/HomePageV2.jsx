@@ -20,6 +20,7 @@ import { v4 as uuidv4 } from 'uuid';
 import facebook from "../../assets/images/svg/messenger.svg";
 import instagram from "../../assets/images/svg/instagram.png";
 import whatsapp from "../../assets/images/svg/WhatsApp.svg"
+import ActionAlert from '../Alert/ActionAlert';
 // this file
 
 export default function HomePageV2({ changeDashboardTab, userToSend }) {
@@ -28,7 +29,8 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
   const { fbUserID } = useSelector((state) => state.fb);
   const { user } = useSelector((state) => state.user);
   const { channels, loading } = useSelector((state) => state.channel);
-  
+  const [showAlert, setShowAlert] = useState(false);
+
 
   useEffect(() => {
     dispatch(userDetails(fbUserID));
@@ -49,10 +51,11 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
         permissions: {
           access_to_account: "no"
         },
-        chatbot_id: "chatbot_id2",
+        chatbot_id: "none",
       }
     };
     dispatch(createChannel(data));
+   setShowAlert(true)
   };
   useEffect(() => {
     const data = {
@@ -64,7 +67,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
     dispatch(allChannels(data));
   }, [user]);
 
- 
+
 
 
   return (
@@ -142,6 +145,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
             >
               <AddChannel
                 channelHandler={channelHandler}
+                setIsOpen={setIsOpen}
               />
             </PopUp>
           </div>
@@ -261,6 +265,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
             </div>
           </div>
         </div>
+        {showAlert && <ActionAlert severity="success" message={"Channel Created"}></ActionAlert>}
       </main>
     </React.StrictMode >
   );
