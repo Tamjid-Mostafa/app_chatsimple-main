@@ -22,7 +22,7 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const handleCreate = async () => {
         let data = {
             expertise_title: "Business Goal",
-            expertise_type: "FAQ",
+            expertise_type: "FREE_FORM",
             form_information: {
                 business_small_talk: [
                     {
