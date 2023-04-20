@@ -81,11 +81,12 @@ const Chatbot = () => {
 
   return (
     <>
-    <div className='w-full'>
+    <div className='w-full overflow-hidden'>
 
-    <Topbar />
+
       {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />}
-      <div className={`bg-[#f1efef] h-[100vh] ${chatbotTab !== 1 ? "" : "hidden"}`}>
+      <div className={`w-full bg-[#f1efef] h-[100vh] ${chatbotTab !== 1 ? "" : "hidden"}`}>
+      <Topbar />
 
         <div className='p-5'>
           <div className='chatbot_header_top'>
