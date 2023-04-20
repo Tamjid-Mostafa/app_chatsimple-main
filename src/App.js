@@ -49,13 +49,12 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/profile" element={<Profile />} />
       <Route
         path="/dashboard"
         element={
-          <>
+          <PrivateRoute>
             <Dashboard />
-          </>
+          </PrivateRoute>
         }
       />
     </Routes>
