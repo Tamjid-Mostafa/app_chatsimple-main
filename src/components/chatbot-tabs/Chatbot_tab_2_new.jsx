@@ -64,10 +64,10 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
     setIsChecked(!isChecked);
   };
   return (
-    <div className='display_flex'>
-      <div>
+    <>
+      {/* <div>
         <div className='chatbot_header_top'>
-          <h2 className='bold_text'>Name your Chatboat</h2>
+          <h2 className='bold_text'>Name your Chatbot</h2>
           <TextField
             label='Name'
             variant='outlined'
@@ -82,7 +82,7 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
           <h2 className='bold_text'>Select Chatbot Expertise</h2>
 
           <div className='expertise_box display_flex'>
-            <div className='faq_text'>
+            <div onClick={() => changeChatBotTab(3)} className='faq_text cursor-pointer'>
               <p> FAQ</p>
             </div>
             <div className='chatbot_toggle_button'>
@@ -91,7 +91,7 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
           </div>
 
           <div className='expertise_box display_flex'>
-            <div className='faq_text'>
+            <div onClick={() => changeChatBotTab(4)} className='faq_text cursor-pointer'>
               <p> Business small talk</p>
             </div>
             <div className='chatbot_toggle_button2'>
@@ -108,7 +108,7 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className='chatbot_dsplay_column'>
         <div className='chatbot_display_text'>
           <h1 className='bold_text font_32'>
@@ -123,7 +123,7 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
           <img src={displayimg} alt='My Image' />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

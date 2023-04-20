@@ -123,7 +123,7 @@ export default function CreateChatbotLast({ changeChatBotTab }) {
                                                     </td>
 
                                                 </tr>
-                                                <tr className="border-b border-gray-300" colspan="2">
+                                                <tr className="border-b border-gray-300" colSpan="2">
                                                     <td
                                                         className="whitespace-nowrap border-r px-6 py-4 font-medium border-gray-300">
                                                         2

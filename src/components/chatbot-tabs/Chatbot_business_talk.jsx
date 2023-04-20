@@ -51,7 +51,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                         industry: industry,
                         history: history,
                         supportEmail: supportEmail,
-                        custom_fields: {inputs, value}
+                        custom_fields: { inputs, value }
                     }
                 ]
             },
@@ -106,8 +106,8 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
 
 
     return (
-        <div className='display_flex'>
-            <div>
+        <>
+            {/* <div>
                 <div className='chatbot_header_top'>
                     <h2 className='bold_text'>Name your Chatbot</h2>
                     <TextField
@@ -121,23 +121,24 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                     <h2 className='bold_text'>Select Chatbot Expertise</h2>
 
                     <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
+                        <div onClick={() => changeChatBotTab(3)} className='faq_text cursor-pointer'>
                             <p> FAQ</p>
                         </div>
                         <div className='chatbot_toggle_button'>
-                            <Switch />
+                            <Switch
+                            checked
+                            onClick={() => changeChatBotTab(3)} />
                         </div>
                     </div>
 
                     <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
+                        <div onClick={() => changeChatBotTab(4)} className='faq_text cursor-pointer'>
                             <p> Business small talk</p>
                         </div>
                         <div className='chatbot_toggle_button2'>
-                            <Switch
-                                checked={true}
-                                onClick={() => changeChatBotTab(2)}
-                            />
+                            <Switch 
+                            checked
+                            onClick={() => changeChatBotTab(4)} />
                         </div>
                     </div>
 
@@ -152,7 +153,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
 
                 </div>
 
-            </div >
+            </div > */}
 
             <div className='chatbot_dsplay_column'>
                 <div className='chatbot_display_text'>
@@ -221,7 +222,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                             <div className='margintop'>
                                 <EditableElement onChange={handleChange}>
                                     <div style={{ outline: "none" }}
-                                    className='flex items-center gap-3'
+                                        className='flex items-center gap-3'
                                     >
                                         <p>{initialValue}</p>
                                         <DriveFileRenameOutlineIcon className='cursor-pointer'
@@ -267,7 +268,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                 onClose={handleClose}
                 className="muiclass"
             />
-        </div>
+        </>
     )
 }
 

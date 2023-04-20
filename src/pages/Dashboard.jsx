@@ -32,12 +32,14 @@ const Dashboard = () => {
     user_type: "UserType.ADMIN"
   }
   return (
-    <div className="dashboard_page">
-      <div className="sidebar_container">
+    <div className="flex w-full">
+      <div className="fixed sidebar_container">
         <Sidebar changeDashboardTab={changeDashboardTab} />
       </div>
-      {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC userToSend={userToSend} /></div>}
-      {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user={userToSend} /></div>}
+      <div className="ml-64 w-full ">
+        {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC userToSend={userToSend} /></div>}
+        {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user={userToSend} /></div>}
+      </div>
     </div>
   )
 }

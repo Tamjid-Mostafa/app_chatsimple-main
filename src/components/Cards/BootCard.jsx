@@ -20,7 +20,7 @@ const BootCard = ({ bot }) => {
 
   return (
     <>
-      <div class='cards'>
+      <div className='cards'>
         <div className='header'>
           <div className='flex items-center gap-3'>
             <img src={MessengerImage} alt='' />
