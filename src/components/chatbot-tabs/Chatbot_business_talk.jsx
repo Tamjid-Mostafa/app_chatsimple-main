@@ -1,4 +1,4 @@
-import { TextField, Switch } from '@mui/material';
+import { TextField, Switch, Alert } from '@mui/material';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useState } from 'react';
 import axios from "axios";
@@ -12,6 +12,7 @@ import Add from "../../assets/images/svg/Add.svg";
 import AddChannelButton from '../Buttons/AddChannelButton';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import { EditableElement } from '../EditableElement/EditableElement';
+import { toast } from 'react-hot-toast';
 
 
 const Chatbot_business_talk = ({ changeChatBotTab }) => {
@@ -24,10 +25,14 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
     const [supportEmail, setSupportEmail] = useState("")
     const [open, setOpen] = useState(false);
     const [data, setData] = useState("")
+    const [dirty, setDirty] = useState("")
     const [inputs, setInputs] = useState([""]);
     const [edit, setEdit] = useState(false)
     const initialValue = "Custom Fields";
     const [value, setValue] = useState(initialValue);
+
+
+
 
     const handleClose = () => {
         setOpen(false);
@@ -70,11 +75,19 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             );
             setOpen(true);
             setData(response.data.message)
+            toast.success(response.data.message)
+            setInputs([""])
+            setData("")
+            setIndustry("")
+            setBusinessHours("")
+            setBusinessName("")
+            setSupportEmail("")
+
             // window.alert(response.data.message);
         }
         catch (e) {
             setOpen(true);
-            setData(e.message)
+            setDirty(e.message)
             //window.alert(e.message)
         }
     }
@@ -244,7 +257,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                     }
 
                     <div className=''>
-                        <div className='margintop'>
+                        {/* <div className='margintop'>
                             <TextField
                                 label="Comments"
                                 variant="outlined"
@@ -252,20 +265,22 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                                 size="normal"
                                 onChange={(event) => setSupportEmail(event.target.value)}
                             />
-                        </div>
+                        </div> */}
                         <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' onClick={handleBusinessDetails}>
                             Save
                         </button>
                     </div>
                 </div>
             </div>
-            <Snackbar
+            {/* <Snackbar
                 open={open}
                 autoHideDuration={6000}
                 message={data}
                 onClose={handleClose}
                 className="muiclass"
-            />
+            /> */}
+            {/* {data && <Alert severity="success">{data}</Alert>}
+            {dirty && <Alert variant="filled" severity="error">{dirty}</Alert>} */}
         </>
     )
 }

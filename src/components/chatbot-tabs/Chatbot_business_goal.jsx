@@ -1,4 +1,4 @@
-import { TextField, Switch } from '@mui/material';
+import { TextField, Switch, Alert } from '@mui/material';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useState } from 'react';
 import axios from "axios";
@@ -12,6 +12,7 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [name, setName] = useState("")
     const [data, setData] = useState("")
+    const [dirty, setDirty] = useState("")
     const [position, setPosition] = useState("")
     const [open, setOpen] = useState(false);
     const handleClose = () => {
@@ -47,10 +48,11 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
             setOpen(true);
             setData(response.data.message)
             //window.alert(response.data.message);
+            
         }
         catch(e) {
             setOpen(true);
-            setData(e.message)
+            setDirty(e.message)
            // window.alert(e.message)
         }
     }
@@ -59,6 +61,7 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const handleToggle = () => {
         setIsChecked(!isChecked);
     };
+
     return (
         <div className='display_flex'>
             
@@ -103,13 +106,15 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
                     </div>
                 </div>
             </div>
-            <Snackbar
+            {/* <Snackbar
             open={open}
             autoHideDuration={6000}
             message={data}
             onClose={handleClose}
             className="muiclass"
-          />
+          /> */}
+          {data && <Alert severity="success">{data}</Alert>}
+          {dirty && <Alert variant="filled" severity="error">{dirty}</Alert>}
         </div>
     )
 }

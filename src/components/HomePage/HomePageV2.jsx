@@ -27,13 +27,14 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
   const dispatch = useDispatch();
   const { fbUserID } = useSelector((state) => state.fb);
   const { user } = useSelector((state) => state.user);
+  const { channels, loading } = useSelector((state) => state.channel);
+  
 
   useEffect(() => {
-    dispatch(userDetails(userToSend?.user_id));
-  }, [userToSend?.user_id]);
+    dispatch(userDetails(fbUserID));
+  }, [fbUserID]);
 
   const [isOpen, setIsOpen] = useState()
-  const [channelName, setChannelName] = useState('')
 
 
   const channelHandler = (name) => {
@@ -63,7 +64,9 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
     dispatch(allChannels(data));
   }, [user]);
 
-  const { channels } = useSelector((state) => state.channel);
+ 
+
+
   return (
     <React.StrictMode>
       <main className="chat__simple__main2">
@@ -80,7 +83,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
 
           <div className="grid lg:grid-cols-4 grid-cols-3 gap-10">
             {
-              channels.length === 0 && <>
+              channels?.length === 0 && <>
                 <div
                   className="cards_three p-5 flex justify-center items-center">
                   <h5>No data available for now!</h5>

@@ -36,8 +36,8 @@ const Dashboard = () => {
         <Sidebar changeDashboardTab={changeDashboardTab} />
       </div>
       <div className="ml-64 w-full ">
-        {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC userToSend={userToSend} /></div>}
-        {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user={userToSend} /></div>}
+        {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC user={user} /></div>}
+        {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user={user} /></div>}
       </div>
     </div>
   )
