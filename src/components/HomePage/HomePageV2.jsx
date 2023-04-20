@@ -76,7 +76,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
         <div className="chat__simple__container">
           <h1>{user?.first_name && `${user?.first_name}!`}</h1>
           <div className="small__two__connextios__row">
-            <span>{channels?.length} connected channels</span>
+            <span>{channels?.length ? channels?.length:'0'} connected channels</span>
             {/* <span>838 contacts</span> */}
           </div>
           <div className="active__channel__row mb-8">
@@ -100,7 +100,8 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
                     <div className="header flex justify-between items-center mb-5">
                       <div className="flex items-center gap-3">
                         <img src={item.platform_type === 'PlatformType.MESSENGER' ? facebook : instagram} alt="" className="w-12 h-12" />
-                        <h4>Messenger</h4>
+                        <h4>{item.platform_type === 'PlatformType.MESSENGER' ? "Facebook" : 'Instagram'}</h4>
+
                       </div>
                       <div>
                         <img src={barIcon} className="cursor-pointer" alt="" />
