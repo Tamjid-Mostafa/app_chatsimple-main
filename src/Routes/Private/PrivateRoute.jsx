@@ -4,7 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom'
 
 const PrivateRoute = ({ children }) => {
     const { user } = useSelector((state) => {
-        return state.auth
+        return state.user
       })
     const location = useLocation()
 
