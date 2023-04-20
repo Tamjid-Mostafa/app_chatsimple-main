@@ -16,7 +16,7 @@
 .chatSimple {
   left: 86px;
   font-size: 32px;
-  color: #ACFF00;
+  color: #acff00;
   /* -webkit-text-stroke: 2px #000; */
 }
 
@@ -25,7 +25,7 @@
   top: 366px;
   left: 86px;
   font-size: 18px;
-  color: #ACFF00;
+  color: #acff00;
 }
 
 .artificialIntelligenceDrivin {
@@ -44,7 +44,7 @@
   left: 86px;
   font-size: 36px;
   font-family: var(--font-open-sans);
-  color: #AFFF00;
+  color: #afff00;
 }
 
 .blog {
@@ -66,8 +66,8 @@
 .desktop1Child {
   top: 120.5px;
   left: 800.5px;
-  background-color: #ACFF00;
-  border-top: 3px solid #ACFF00;
+  background-color: #acff00;
+  border-top: 3px solid #acff00;
   box-sizing: border-box;
   width: 72px;
   height: 3px;
@@ -124,13 +124,13 @@
 
 .desktop1 {
   position: relative;
-  background-color: #2E2E2E;
+  background-color: #2e2e2e;
   width: 100%;
   height: 1024px;
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-5xl);
-  color: #ACFF00;
+  color: #acff00;
   font-family: var(--font-roboto);
 }
 
@@ -151,8 +151,63 @@
   cursor: pointer;
 }
 
-.btnFacebook i{
+.btnFacebook i {
   margin-right: 10px;
   font-weight: 700;
   font-size: larger;
+}
+
+.root {
+  @apply relative;
+  background: linear-gradient(
+    197.71deg,
+    rgba(250, 252, 250, 0.8045) 13.22%,
+    rgba(234, 241, 228, 0.872892) 44.26%,
+    #dae7dd 71.04%
+  );
+}
+.vector {
+  position: absolute;
+  left: -3.23px;
+  top: 495.54px;
+}
+
+.heading_content {
+  position: absolute;
+  left: 156px;
+  top: 148px;
+}
+.heading {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 45px;
+  line-height: 52px;
+  /* identical to box height, or 116% */
+
+  /* primary */
+
+  color: #66b467;
+}
+.login_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 40px 40px;
+  gap: 18px;
+
+  position: absolute;
+  width: 368px;
+  height: 210px;
+  left: 959px;
+  top: 272px;
+
+  /* backgroud */
+
+  background: #fdfdfd;
+  /* M3/Elevation Light/3 */
+
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
 }

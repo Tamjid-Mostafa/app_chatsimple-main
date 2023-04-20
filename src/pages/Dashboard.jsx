@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar"
 import "../styles/dashboard.css"
 import { useSelector } from "react-redux"
 import Topbar from "../components/Topbar/Topbar"
+import { useNavigate } from "react-router-dom"
 
 const Dashboard = () => {
   const [dashboardTab, setDashboardTab] = useState(1)
@@ -12,25 +13,28 @@ const Dashboard = () => {
     setDashboardTab(tab)
   }
   const { loading, user } = useSelector((state) => {
-    return state.auth
+    return state.user
   })
+  console.log(user)
+  const navigate = useNavigate()
   useEffect(() => {
     if (!loading && !user) {
-      // window.alert("Please login to continue")
+      window.alert("Please login to continue")
+      navigate('/')
     } else {
     }
   }, [user, loading])
-  let userToSend = {
-    email: "admin@local.host",
-    first_name: "Lillian",
-    last_name: "Ye",
-    login_type: "LoginType.EMAIL",
-    plan: "none",
-    timezone: "UTC",
-    user_fb_id: "131383809861123",
-    user_id: "user_0",
-    user_type: "UserType.ADMIN"
-  }
+  // let userToSend = {
+  //   email: "admin@local.host",
+  //   first_name: "Lillian",
+  //   last_name: "Ye",
+  //   login_type: "LoginType.EMAIL",
+  //   plan: "none",
+  //   timezone: "UTC",
+  //   user_fb_id: "131383809861123",
+  //   user_id: "user_0",
+  //   user_type: "UserType.ADMIN"
+  // }
   return (
     <div className="flex w-[100vw]">
       <div className="fixed sidebar_container z-50">
