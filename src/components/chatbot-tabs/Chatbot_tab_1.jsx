@@ -23,7 +23,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
 
   return (
     <div className='dashboard_tab chatbot_tab p-5'>
-      <div>
+      <div className=''>
         <h1>Chatbot</h1>
         <p className='smaller__heading'>0 custom chatbots</p>
         <div
@@ -34,7 +34,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
           <p>Build</p>
         </div>
         {chatBots ? (
-          <main className='chat__simple__main2 pt-10'>
+          <div className='chat__simple__main2 pt-10 mt-10'>
             <div className='chat__simple__container'>
               <div className='two__box__messenger__row flex-wrap'>
                 {chatBots.chatbot?.map((bot, i) => (
@@ -42,7 +42,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
                 ))}
               </div>
             </div>
-          </main>
+          </div>
         ) : (
           ''
         )}

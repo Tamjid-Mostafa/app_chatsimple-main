@@ -85,7 +85,7 @@ const Chatbot = () => {
       {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />}
       <div className={`${chatbotTab !== 1 ? "" : "hidden"}`}>
 
-        <div className='p-5 h-[calc(100vh-50px)]'>
+        <div className='p-5 h-[calc(100vh)] bg-[#eeeeee]'>
           <div className='chatbot_header_top'>
             <h2 className='bold_text'>Name your Chatbot</h2>
             <TextField
