@@ -13,6 +13,7 @@ function App() {
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
+  console.log('testing')
 
   useEffect(() => {
     if (action !== "POP") {
