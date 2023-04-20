@@ -16,7 +16,7 @@ export const login = createAsyncThunk('auth/login', async (userData) => {
 })
 const initialState = {
     loading: false,
-    user: "Salem",
+    user: null,
     error: null,
     status: null,
 }

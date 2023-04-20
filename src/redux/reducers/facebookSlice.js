@@ -32,7 +32,7 @@ export const facebookSignIn = createAsyncThunk(
 );
 const initialState = {
   loading: false,
-  fbUserID: 23435463413,
+  fbUserID: null,
   fbToken: null,
   error: null,
   status: null,
