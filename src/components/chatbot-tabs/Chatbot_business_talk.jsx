@@ -70,7 +70,6 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             );
             setOpen(true);
             setData(response.data.message)
-            console.log(response.data.message)
             // window.alert(response.data.message);
         }
         catch (e) {
@@ -88,7 +87,6 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
         const newInputs = [...inputs];
         newInputs[index] = value;
         setInputs(newInputs);
-        console.log(inputs)
     };
     const handleChange = (value) => {
         setValue(value);

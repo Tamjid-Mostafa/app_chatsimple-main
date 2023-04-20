@@ -17,7 +17,6 @@ const Dashboard = () => {
     if (!loading && !user) {
       // window.alert("Please login to continue")
     } else {
-      console.log(user)
     }
   }, [user, loading])
   let userToSend = {

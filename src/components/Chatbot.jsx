@@ -24,7 +24,6 @@ const Chatbot = () => {
     if (!loading && !userData) {
       // window.alert("Please login to continue")
     } else {
-      console.log(userData)
     }
   }, [userData, loading])
   const changeChatBotTab = (tab) => {
@@ -118,7 +117,7 @@ const Chatbot = () => {
             </div>
 
             <div className='expertise_box display_flex'>
-              <div className='faq_text'>
+            <div onClick={() => changeChatBotTab(5)} className='faq_text cursor-pointer'>
                 <p>Business Goal</p>
               </div>
               <div className='chatbot_toggle_button3'>

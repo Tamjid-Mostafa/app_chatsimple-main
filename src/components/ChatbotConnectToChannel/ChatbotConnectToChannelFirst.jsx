@@ -16,12 +16,10 @@ export default function ChatbotConnectToChannelFirst({ changeChatBotTab }) {
     }
 
     const deployBot = () => {
-        console.log("deploying")
         setDeploying(true)
         setTimeout(() => {
             setDeploying(false)
             setDeployed(true)
-            console.log("deployed")
         }, 3000);
         setTimeout(() => {
             setDeployed(false)

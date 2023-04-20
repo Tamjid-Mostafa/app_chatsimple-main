@@ -14,7 +14,6 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const [data, setData] = useState("")
     const [position, setPosition] = useState("")
     const [open, setOpen] = useState(false);
-console.log(data)
     const handleClose = () => {
       setOpen(false);
     };
@@ -62,53 +61,7 @@ console.log(data)
     };
     return (
         <div className='display_flex'>
-            <div>
-                <div className='chatbot_header_top'>
-                    <h2 className='bold_text'>Name your Chatbot</h2>
-                    <TextField
-                        label="Name"
-                        variant="outlined"
-                        value={''}
-                    />
-                </div>
-
-                <div>
-                    <h2 className='bold_text'>Select Chatbot Expertise</h2>
-
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p>FAQ</p>
-                        </div>
-                        <div className='chatbot_toggle_button'>
-                            <Switch />
-                        </div>
-                    </div>
-
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p> Business small talk</p>
-                        </div>
-                        <div className='chatbot_toggle_button2'>
-                            <Switch
-                             />
-                        </div>
-                    </div>
-
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p>Business Goal</p>
-                        </div>
-                        <div className='chatbot_toggle_button3'>
-                            <Switch
-                             checked={true}
-                             onClick={() => changeChatBotTab(2)}
-                            />
-                        </div>
-                    </div>
-
-                </div>
-
-            </div >
+            
 
             <div className='chatbot_dsplay_column'>
                 <div className='chatbot_display_text'>

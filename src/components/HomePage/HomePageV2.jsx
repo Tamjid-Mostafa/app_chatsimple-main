@@ -37,10 +37,8 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
 
 
   const channelHandler = (name) => {
-    console.log(name)
 
     // for channel creation
-    console.log(user?.user_id)
     const data = {
       userID: user?.user_id,
       platform_id: uuidv4(),
@@ -66,7 +64,6 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
   }, [user]);
 
   const { channels } = useSelector((state) => state.channel);
-console.log(channels);
   return (
     <React.StrictMode>
       <main className="chat__simple__main2">
@@ -83,12 +80,20 @@ console.log(channels);
 
           <div className="grid lg:grid-cols-4 grid-cols-3 gap-10">
             {
+              channels.length === 0 && <>
+                <div
+                  className="cards_three p-5 flex justify-center items-center">
+                  <h5>No data available for now!</h5>
+                </div>
+              </>
+            }
+            {
               channels?.user_platforms?.map((item, i) => {
                 return (
                   <div key={i} className="border p-5 rounded-lg">
                     <div className="header flex justify-between items-center mb-5">
                       <div className="flex items-center gap-3">
-                        <img src={item.platform_type === 'PlatformType.MESSENGER' ?facebook : instagram} alt="" className="w-12 h-12"/>
+                        <img src={item.platform_type === 'PlatformType.MESSENGER' ? facebook : instagram} alt="" className="w-12 h-12" />
                         <h4>Messenger</h4>
                       </div>
                       <div>
@@ -254,6 +259,6 @@ console.log(channels);
           </div>
         </div>
       </main>
-    </React.StrictMode>
+    </React.StrictMode >
   );
 }
