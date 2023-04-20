@@ -31,7 +31,7 @@ const Dashboard = () => {
     user_type: "UserType.ADMIN"
   }
   return (
-    <div className="flex w-full">
+    <div className="flex w-[100vw]">
       <div className="fixed sidebar_container z-50">
         <Sidebar changeDashboardTab={changeDashboardTab} />
       </div>

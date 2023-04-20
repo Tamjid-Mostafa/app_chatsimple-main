@@ -22,7 +22,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
     }, [user]);
 
   return (
-    <div className='dashboard_tab chatbot_tab'>
+    <div className='dashboard_tab chatbot_tab p-5'>
       <div>
         <h1>Chatbot</h1>
         <p className='smaller__heading'>0 custom chatbots</p>
