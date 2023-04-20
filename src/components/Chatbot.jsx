@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Switch, TextField } from '@mui/material'
 import { createChatBot, updateChatBot } from '../redux/reducers/chatbotSlice'
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-hot-toast';
+
 import Topbar from './Topbar/Topbar'
 
 const Chatbot = () => {
@@ -37,6 +39,7 @@ const Chatbot = () => {
   const [chatbotTitle, setChatbotTitle] = useState('');
   const [prevTitle, setPrevTitle] = useState('');
   const [chatBotID, setChatBotID] = useState('');
+  const [platforms, setPlatforms] = useState([]);
 
   useEffect(() => {
     if (!prevTitle) {
@@ -55,6 +58,7 @@ const Chatbot = () => {
         };
         setChatBotID(data.chatbotID);
         dispatch(createChatBot(data));
+        toast.success('Chatbot name created')
       }
     } else if (prevTitle !== chatbotTitle && !isTyping) {
       setPrevTitle(chatbotTitle);
@@ -66,9 +70,51 @@ const Chatbot = () => {
         update_mask: 'chatbot_title',
       };
       dispatch(updateChatBot(data));
+      toast.success('Chatbot name updated')
     }
   }, [isTyping, chatbotTitle]);
 
+
+
+  const handlePlatform = (value) => {
+    let copyPlatform = platforms;
+
+    if(!chatBotID){
+
+      toast.error('Create chatbot name')
+      return
+    }
+
+    if (value === 'messanger') {
+      if (platforms.includes(value)) {
+        copyPlatform = copyPlatform.filter((pf) => pf !== value);
+        setPlatforms(copyPlatform);
+      } else {
+        copyPlatform = [...platforms, value];
+        setPlatforms([...platforms, value]);
+      }
+    }
+    if (value === 'instagram') {
+      if (platforms.includes(value)) {
+        copyPlatform = copyPlatform.filter((pf) => pf !== value);
+
+        setPlatforms(copyPlatform);
+      } else {
+        copyPlatform = [...platforms, value];
+        setPlatforms([...platforms, value]);
+      }
+    }
+
+    const data = {
+      userID: user?.user_id,
+      update: { platforms: copyPlatform?.length === 0 ? null :  { first: copyPlatform[0], scond: copyPlatform[1] } },
+      chatbotID: chatBotID,
+      update_mask: 'platforms',
+    };
+
+    dispatch(updateChatBot(data));
+
+  };
 
 
   const handleBlur = () => {
@@ -98,7 +144,44 @@ const Chatbot = () => {
             />
           </div>
 
+
           <div>
+              <h2 className='bold_text'>Display to connect channel(s)</h2>
+
+              <div className=' expertise_box display_flex justify-between'>
+                <div
+                  onClick={() => handlePlatform('messanger')}
+                  className='faq_text cursor-pointer'
+                >
+                  <p>Messanger</p>
+                </div>
+                <div className='chatbot_toggle_button2'>
+                  <Switch
+                    checked={platforms?.includes('messanger')}
+                    onClick={() => handlePlatform('messanger')}
+                  />
+                </div>
+              </div>
+
+              <div  className=' expertise_box display_flex justify-between'>
+                <div
+                  onClick={() => handlePlatform('instagram')}
+                  className='faq_text cursor-pointer'
+                >
+                  <p>Instagram</p>
+                </div>
+                <div className='chatbot_toggle_button2'>
+                  <Switch
+                    checked={platforms?.includes('instagram')}
+                    onClick={() => handlePlatform('instagram')}
+                  />
+                </div>
+              </div>
+
+
+            </div>
+
+          <div className='mt-5'>
             <h2 className='bold_text'>Select Chatbot Expertise</h2>
 
             <div className='expertise_box display_flex'>
