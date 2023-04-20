@@ -4,6 +4,7 @@ import DashboardC from "../components/Dashboard"
 import Sidebar from "../components/Sidebar"
 import "../styles/dashboard.css"
 import { useSelector } from "react-redux"
+import Topbar from "../components/Topbar/Topbar"
 
 const Dashboard = () => {
   const [dashboardTab, setDashboardTab] = useState(1)
@@ -31,11 +32,14 @@ const Dashboard = () => {
     user_type: "UserType.ADMIN"
   }
   return (
-    <div className="flex w-full">
+    <div className="flex w-[100vw]">
       <div className="fixed sidebar_container z-50">
         <Sidebar changeDashboardTab={changeDashboardTab} />
       </div>
-      <div className="pl-[250px] w-full bg-[#f1efef] ">
+      <div className="pl-[248px] w-full relative">
+        <div className="sticky top-0 z-50">
+          <Topbar />
+        </div>
         {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC user={user} /></div>}
         {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user={user} /></div>}
       </div>
