@@ -246,6 +246,16 @@ const Chatbot = () => {
               </div>
             </div>
           </div>
+
+          <div className='bg-white w-[100vw] mt-10'>
+
+            {chatbotTab === 2 && <Chatbot_tab_2_new changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 3 && <Chatbot_faq_details changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 4 && <Chatbot_business_talk changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 5 && <Chatbot_business_goal changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 7 && <Chatbotfinish changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
+          </div>
         </div>
         <div className='bg-white w-[100vw]'>
           {chatbotTab === 2 && (
