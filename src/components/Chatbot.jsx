@@ -81,64 +81,72 @@ const Chatbot = () => {
 
   return (
     <>
-    <div className='w-full flex'>
-      {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />}
-      <div className={`${chatbotTab !== 1 ? "" : "hidden"}`}>
+      <div className='w-full  relative'>
 
-        <div className='p-5 h-[calc(100vh)] bg-[#eeeeee]'>
-          <div className='chatbot_header_top'>
-            <h2 className='bold_text'>Name your Chatbot</h2>
-            <TextField
-              label='Name'
-              variant='outlined'
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onChange={(e) => setChatbotTitle(e.target.value)}
-              value={chatbotTitle}
-            />
+        <div className={`${chatbotTab !== 1 ? "sticky top-0 z-50 w-full" : "hidden"}`}>
+          <Topbar />
+        </div>
+        {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />}
+        <div className='flex'>
+          <div className={`${chatbotTab !== 1 ? "" : "hidden"}`}>
+
+            <div className='p-5 h-[calc(100vh)] bg-[#eeeeee]'>
+              <div className='chatbot_header_top'>
+                <h2 className='bold_text'>Name your Chatbot</h2>
+                <TextField
+                  label='Name'
+                  variant='outlined'
+                  onBlur={handleBlur}
+                  onFocus={handleFocus}
+                  onChange={(e) => setChatbotTitle(e.target.value)}
+                  value={chatbotTitle}
+                />
+              </div>
+
+              <div>
+                <h2 className='bold_text'>Select Chatbot Expertise</h2>
+
+                <div className='expertise_box display_flex'>
+                  <div onClick={() => changeChatBotTab(3)} className='faq_text cursor-pointer'>
+                    <p> FAQ</p>
+                  </div>
+                  <div className='chatbot_toggle_button'>
+                    <Switch onClick={() => changeChatBotTab(3)} />
+                  </div>
+                </div>
+
+                <div className='expertise_box display_flex'>
+                  <div onClick={() => changeChatBotTab(4)} className='faq_text cursor-pointer'>
+                    <p> Business small talk</p>
+                  </div>
+                  <div className='chatbot_toggle_button2'>
+                    <Switch onClick={() => changeChatBotTab(4)} />
+                  </div>
+                </div>
+
+                <div className='expertise_box display_flex'>
+                  <div onClick={() => changeChatBotTab(5)} className='faq_text cursor-pointer'>
+                    <p>Business Goal</p>
+                  </div>
+                  <div className='chatbot_toggle_button3'>
+                    <Switch onClick={() => changeChatBotTab(5)} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <h2 className='bold_text'>Select Chatbot Expertise</h2>
+          <div className='bg-white w-[100vw] mt-10'>
 
-            <div className='expertise_box display_flex'>
-              <div onClick={() => changeChatBotTab(3)} className='faq_text cursor-pointer'>
-                <p> FAQ</p>
-              </div>
-              <div className='chatbot_toggle_button'>
-                <Switch onClick={() => changeChatBotTab(3)} />
-              </div>
-            </div>
-
-            <div className='expertise_box display_flex'>
-              <div onClick={() => changeChatBotTab(4)} className='faq_text cursor-pointer'>
-                <p> Business small talk</p>
-              </div>
-              <div className='chatbot_toggle_button2'>
-                <Switch onClick={() => changeChatBotTab(4)} />
-              </div>
-            </div>
-
-            <div className='expertise_box display_flex'>
-            <div onClick={() => changeChatBotTab(5)} className='faq_text cursor-pointer'>
-                <p>Business Goal</p>
-              </div>
-              <div className='chatbot_toggle_button3'>
-                <Switch onClick={() => changeChatBotTab(5)} />
-              </div>
-            </div>
+            {chatbotTab === 2 && <Chatbot_tab_2_new changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 3 && <Chatbot_faq_details changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 4 && <Chatbot_business_talk changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 5 && <Chatbot_business_goal changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 7 && <Chatbotfinish changeChatBotTab={changeChatBotTab} user={userData} />}
+            {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
           </div>
         </div>
       </div>
-      <div className='bg-white w-[100vw]'>
-        {chatbotTab === 2 && <Chatbot_tab_2_new changeChatBotTab={changeChatBotTab} user={userData} />}
-        {chatbotTab === 3 && <Chatbot_faq_details changeChatBotTab={changeChatBotTab} user={userData} />}
-        {chatbotTab === 4 && <Chatbot_business_talk changeChatBotTab={changeChatBotTab} user={userData} />}
-        {chatbotTab === 5 && <Chatbot_business_goal changeChatBotTab={changeChatBotTab} user={userData} />}
-        {chatbotTab === 7 && <Chatbotfinish changeChatBotTab={changeChatBotTab} user={userData} />}
-        {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
-      </div>
-    </div>
     </>
   )
 }

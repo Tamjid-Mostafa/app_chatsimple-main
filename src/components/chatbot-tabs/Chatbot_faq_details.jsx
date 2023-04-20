@@ -1,4 +1,4 @@
-import { TextField, Switch } from '@mui/material';
+import { TextField, Switch, CircularProgress } from '@mui/material';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Snackbar from '@mui/material/Snackbar';
@@ -16,7 +16,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
   const [url, setUrl] = useState('');
   const [faqs, setFaqs] = useState(null);
   const [isTrue, setIsTrue] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const handleClose = () => {
     setOpen(false);
   };
@@ -56,6 +56,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
   };
 
   const handleFAQSubmit = async (values) => {
+    setLoading(true)
     let fields = {
       expertise_title: 'FAQ',
       expertise_type: 'FAQ',
@@ -84,6 +85,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
         );
         setOpen(true);
         setData(response.data.message);
+        setLoading(false)
         
       } catch (error) {
         setOpen(true);
@@ -95,6 +97,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
   };
 
   const buildFaq = async () => {
+    setLoading(true)
     try {
       let headers = {
         'x-access-token': 'skip_validation_for_admin',
@@ -109,8 +112,9 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
 
       setFaqs(response.data);
       setIsTrue(true);
+      setLoading(false)
     } catch (error) {
-      setData(e.message);
+      setData(error.message);
     }
   };
 
@@ -158,12 +162,13 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
               />
             </div>
             <div className='build_button'>
-              <button
-                onClick={buildFaq}
-                className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'
-              >
-                Build
-              </button>
+            <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200'
+                            disabled={loading}
+                            onClick={buildFaq}>
+                               {loading ? <CircularProgress
+                               size={16}
+                               /> : "Build"}
+                            </button>
             </div>
           </div>
         </div>

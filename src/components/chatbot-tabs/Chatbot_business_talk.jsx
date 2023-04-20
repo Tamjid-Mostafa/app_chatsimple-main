@@ -1,4 +1,4 @@
-import { TextField, Switch, Alert } from '@mui/material';
+import { TextField, Switch, Alert, CircularProgress } from '@mui/material';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useState } from 'react';
 import axios from "axios";
@@ -28,7 +28,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
     const [data, setData] = useState("")
     const [dirty, setDirty] = useState("")
     const [inputs, setInputs] = useState([""]);
-    const [edit, setEdit] = useState(false)
+    const [loading, setLoading] = useState(false)
     const initialValue = "Custom Fields";
     const [value, setValue] = useState(initialValue);
 
@@ -46,6 +46,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
     };
 
     const handleBusinessDetails = async () => {
+        setLoading(true)
         const data = {
             expertise_title: "Business Small Talk",
             expertise_type: "FAQ",
@@ -82,6 +83,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             setBusinessHours("")
             setBusinessName("")
             setSupportEmail("")
+            setLoading(false)
 
             // window.alert(response.data.message);
         }
@@ -121,7 +123,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             {data &&
                 < >
                     <ActionAlert
-                        variant="filled" 
+                        variant="filled"
                         severity="success"
                         message={data}
                         setData={setData}
@@ -131,7 +133,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             {dirty &&
                 < >
                     <ActionAlert
-                        variant="filled" 
+                        variant="filled"
                         severity="error"
                         message={dirty}
                         setData={setData}
@@ -286,8 +288,12 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                                 onChange={(event) => setSupportEmail(event.target.value)}
                             />
                         </div> */}
-                        <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' onClick={handleBusinessDetails}>
-                            Save
+                        <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200'
+                            disabled={loading}
+                            onClick={handleBusinessDetails}>
+                            {loading ? <CircularProgress
+                                size={16}
+                            /> : "Create"}
                         </button>
                     </div>
                 </div>
