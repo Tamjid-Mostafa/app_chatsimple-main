@@ -16,7 +16,7 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
     useEffect(() => {
         const data = {
             userID: user?.user_id, 
-            page_token: {last_time: new Date().toISOString().split('T')[0]}
+            pageToken: {last_time: new Date().toISOString().split('T')[0]}
         };
         dispatch(allChatBots(data));
     }, [user]);
