@@ -15,15 +15,14 @@ const Dashboard = () => {
   const { loading, user } = useSelector((state) => {
     return state.user
   })
-  console.log(user)
   const navigate = useNavigate()
-  useEffect(() => {
-    if (!loading && !user) {
-      window.alert("Please login to continue")
-      navigate('/')
-    } else {
-    }
-  }, [user, loading])
+  // useEffect(() => {
+  //   if (!loading && !user) {
+  //     window.alert("Please login to continue")
+  //     navigate('/')
+  //   } else {
+  //   }
+  // }, [user, loading])
   // let userToSend = {
   //   email: "admin@local.host",
   //   first_name: "Lillian",
