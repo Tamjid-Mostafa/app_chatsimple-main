@@ -12,22 +12,14 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
-  const [isChecked, setIsChecked] = useState(false);
-  const [question1, setQuestion1] = useState('');
-  const [question2, setQuestion2] = useState('');
-  const [answer1, setAnswer1] = useState('');
-  const [answer2, setAnswer2] = useState('');
   const [open, setOpen] = useState(false);
   const [data, setData] = useState('');
   const [url, setUrl] = useState('');
   const [faqs, setFaqs] = useState(null);
+  const [isTrue, setIsTrue] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
   };
 
   const {
@@ -37,26 +29,38 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // handleFAQSubmit(data)
-    console.log({ data });
+  const onSubmit = async (values) => {
+    let questions = [];
+    let answers = [];
+    let newarr = [];
+
+    // create array seperate question and answer
+    for (let i = 0; i < Object.keys(values).length; i++) {
+      const field = Object.keys(values)[i];
+      if ('question' === field.slice(0, field.length - 1)) {
+        questions.push(Object.values(values)[i]);
+      } else if ('answer' === field.slice(0, field.length - 1)) {
+        answers.push(Object.values(values)[i]);
+      }
+    }
+
+    // crate array oj object
+
+    for (let i = 0; i < questions.length; i++) {
+      for (let j = 0; j < answers.length; j++) {
+        newarr.push({ question: questions[i], answer: answers[j] });
+      }
+    }
+
+    await handleFAQSubmit(newarr);
   };
 
-  const handleFAQSubmit = async () => {
-    let data = {
+  const handleFAQSubmit = async (values) => {
+    let fields = {
       expertise_title: 'FAQ',
       expertise_type: 'FAQ',
       form_information: {
-        faqs: [
-          {
-            question: question1,
-            answer: answer1,
-          },
-          {
-            question: question2,
-            answer: answer2,
-          },
-        ],
+        faqs: values,
       },
       is_active: 'True',
       chatbot_id: uuidv4(),
@@ -71,7 +75,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
         `https://api.chatsimple.ai/v0/users/${
           user.user_id
         }/chatbot_expertises/${uuidv4()}`,
-        data,
+        fields,
         { headers }
       );
       setOpen(true);
@@ -96,35 +100,35 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
         { headers }
       );
       setFaqs(response.data);
+      setIsTrue(true);
     } catch (error) {
       setData(e.message);
     }
   };
 
-  //   console.log(faqs?.question[0]);
+  // creating arrray  of object faqs
 
-  //   const result = Array.from(Object.keys(faqs?.question), (item, index) => {
-  //     return [question1: item.key[]];
-  //   });
+  let faqArray = [];
 
-  const faqArray = [];
+  if (faqs) {
+    for (let i = 0; i < Object.keys(faqs.answer).length; i++) {
+      for (let j = 0; j < Object.keys(faqs.answer).length; j++) {
+        if (
+          !faqArray.some(
+            (ele) =>
+              ele.answer !== Object.values(faqs.answer)[i] &&
+              ele.question !== Object.values(faqs.question)[j]
+          )
+        ) {
+          faqArray.push({
+            answer: Object.values(faqs.answer)[i],
+            question: Object.values(faqs.question)[j],
+          });
+        }
+      }
+    }
+  }
 
-  // faqs &&
-  //   Object.keys(faqs?.question).forEach((qKey) => {
-  //     Object.keys(faqs?.answer).forEach((aKey) => {
-
-  //       if (faqArray.some(ele => ele.question !== faqs?.question[qKey] && ele.answer !== faqs?.answer[aKey])) {
-  //         faqArray.push({
-  //           question: faqs.question[qKey],
-  //           answer: faqs.answer[aKey],
-  //         });
-  //         console.log('Hello')
-  //       }
-  //       console.log(faqArray.some(ele => ele.question !== faqs?.question[qKey] && ele.answer !== faqs?.answer[aKey]))
-      
-  //     });
-  //   });
-  // console.log(faqArray);
 
   return (
     <div className='display_flex'>
@@ -211,7 +215,8 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                         Answer
                       </td>
                     </tr>
-                    {!faqs && (
+
+                    {faqArray?.length === 0 && !isTrue && (
                       <>
                         <tr className='border-b border-gray-300'>
                           <td className='whitespace-nowrap border-r px-6 py-4 font-medium border-gray-300'>
@@ -239,7 +244,8 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                     )}
 
                     {faqs &&
-                      Object.keys(faqs?.question).map((key, i) => (
+                      isTrue &&
+                      faqArray?.map((faq, i) => (
                         <tr
                           key={i++}
                           className='border-b border-gray-300'
@@ -250,18 +256,16 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                           </td>
                           <td className='whitespace-nowrap text-left border-r px-6 py-4 border-gray-300'>
                             <input
-                              defaultValue={faqs.question[key]}
+                              defaultValue={faq.question}
                               type='text'
-                              name={++i}
-                              {...register(`question${i++}`)}
+                              {...register(`question${i + 2}`)}
                             />
                           </td>
                           <td className='whitespace-nowrap text-left border-r px-6 py-4 border-gray-300'>
                             <input
-                              defaultValue={faqs.answer[key]}
-                              name={++i}
+                              defaultValue={faq.answer}
                               type='text'
-                              // {...register(`answer${i++}`)}
+                              {...register(`answer${i + 2}`)}
                             />
                           </td>
                         </tr>
