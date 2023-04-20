@@ -28,6 +28,7 @@ export const createChatBot = createAsyncThunk(
       { headers: options }
     );
     return response.data;
+    
   }
 );
 

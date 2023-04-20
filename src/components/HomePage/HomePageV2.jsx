@@ -78,7 +78,7 @@ console.log(channels);
           </div>
           <div className="active__channel__row mb-8">
             <h4>Active Channels</h4>
-            <AddChannelButton changeDashboardTab={changeDashboardTab} dashboardTab={1} />
+            {/* <AddChannelButton changeDashboardTab={changeDashboardTab} dashboardTab={1} /> */}
           </div>
 
           <div className="grid lg:grid-cols-4 grid-cols-3 gap-10">

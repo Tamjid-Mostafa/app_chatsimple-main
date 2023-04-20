@@ -11,7 +11,7 @@ import ConversationCard from './ConversationCard';
 const Chatbot_faq_details = ({ changeChatBotTab }) => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user);
-    
+
     const [isChecked, setIsChecked] = useState(false);
     const [question1, setQuestion1] = useState("")
     const [question2, setQuestion2] = useState("")
@@ -70,53 +70,8 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
     };
 
     return (
-        <div className='display_flex'>
-            <div>
-                <div className='chatbot_header_top'>
-                    <h2 className='bold_text'>Name your Chatboat</h2>
-                    <TextField
-                        label="Name"
-                        variant="outlined"
-                        value={''}
-                    />
-                </div>
-
-                <div>
-                    <h2 className='bold_text'>Select Chatbot Expertise</h2>
-
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p> FAQ</p>
-                        </div>
-                        <div className='chatbot_toggle_button'>
-                            <Switch
-                                checked={true}
-                                onClick={() => changeChatBotTab(2)}
-                            />
-                        </div>
-                    </div>
-
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p> Business small talk</p>
-                        </div>
-                        <div className='chatbot_toggle_button2'>
-                            <Switch />
-                        </div>
-                    </div>
-
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p>Business Goal</p>
-                        </div>
-                        <div className='chatbot_toggle_button3'>
-                            <Switch />
-                        </div>
-                    </div>
-
-                </div>
-
-            </div >
+        <div className=''>
+           
 
             <div className='chatbot_dsplay_column'>
                 <div className='chatbot_display_text'>
@@ -148,7 +103,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                                 <table
                                     className="min-w-full border-t-4 border-solid mt-4 border-green-400 rounded-md text-center text-sm font-light border-l border-r border-l-gray-200 shadow border-r-black">
                                     <thead className="border-b font-medium border-gray-300">
-                                        
+
                                     </thead>
                                     <tbody>
                                         <tr className="border-b border-gray-300 bg-gray-100">
@@ -182,7 +137,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                                             </td>
 
                                         </tr>
-                                        <tr className="border-b border-gray-300" colspan="2">
+                                        <tr className="border-b border-gray-300" colSpan="2">
                                             <td
                                                 className="whitespace-nowrap border-r px-6 py-4 font-medium border-gray-300">
                                                 2
