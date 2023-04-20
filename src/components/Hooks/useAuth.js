@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 
 export default function useAuth(){
 
-    const isUser = useSelector(state => state.auth);
+     const fbUserID = useSelector((state) => state.fb.fbUserID);
 
+     if (fbUserID === null) {
+           return false ;
+     }else{
+          return true ;
+     }
 
-    if(isUser.user !== null){
-         return false;
-    }else{
-         return true;
-    }
 
 }
