@@ -3,18 +3,10 @@ import { useSelector } from 'react-redux'
 import { Navigate, useLocation } from 'react-router-dom'
 
 const PrivateRoute = ({ children }) => {
-    const { loading, user } = useSelector((state) => {
-        return state.user
+    const { user } = useSelector((state) => {
+        return state.auth
       })
-      console.log(user)
     const location = useLocation()
-    if (loading) {
-        return (
-            <div className='text-center'>
-                Loading...
-            </div>
-        )
-    }
 
     if (user) {
         return children
