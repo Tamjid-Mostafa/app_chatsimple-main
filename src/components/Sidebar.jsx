@@ -9,7 +9,7 @@ import Logo from '../assets/white_transparent.svg'
 
 const Sidebar = ({changeDashboardTab}) => {
   return (
-    <div className='sidebar'>
+    <div className='sidebar w-full'>
       <div className='sidebar__header'>
         <div className='sidebar__header__logo'>
           <img src={Logo} alt="logo" />

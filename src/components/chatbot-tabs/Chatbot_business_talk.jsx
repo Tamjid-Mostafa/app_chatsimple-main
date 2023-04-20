@@ -111,7 +111,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
 
     const handleRemoveInput = (index) => {
         const newInputs = [...inputs];
-        newInputs.splice(index);
+        newInputs.splice(index, 1);
         setInputs(newInputs);
     };
 
@@ -187,7 +187,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             </div > */}
 
             <div className='chatbot_dsplay_column'>
-                <div className='chatbot_display_text'>
+                <div className='chatbot_display_text '>
                     <h1 className='bold_text font_32 margintop'>Business Small Talk</h1>
                     <p className='text-sm'>
                         Tell us somethings about your business so that ChatSimple will chat with your customers and provide appropriate <br /> human like responses to help you handle general inquiries

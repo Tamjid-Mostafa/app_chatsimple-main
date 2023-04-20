@@ -128,15 +128,6 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
                         </div>
                     </div>
                 </div>
-                {/* <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            message={data}
-            onClose={handleClose}
-            className="muiclass"
-          /> */}
-                {data && <Alert severity="success">{data}</Alert>}
-                {dirty && <Alert variant="filled" severity="error">{dirty}</Alert>}
             </div>
         </>
     )
