@@ -105,34 +105,36 @@ const Login = () => {
     //   {loggedIn && <Profile user={user} />}
     // </div>
     <>
-      <div className={cn(s.root, 'min-h-screen overflow-hidden')}>
+      <div className={cn(s.root, 'min-h-screen')}>
 
-        <div className={cn(s.heading_content, '')}>
-          <h1 className={cn(s.heading)}>
-            ChatSimple
-          </h1>
-          <p className='text-[28px] font-[400] w-[457px] h-[72px]'>
-            Equip your business with ChatGPT under 10 minutes
-          </p>
-        </div>
+        <div className="container mx-auto lg:px-48 sm:px-24 px-16 flex sm:flex-row flex-col  items-center justify-between h-screen">
+          <div className={cn(s.heading_content, 'sm:-mt-64 mt-auto mb-8')}>
+            <h1 className={cn(s.heading)}>
+              ChatSimple
+            </h1>
+            <p className='text-[28px] font-[400] w-[457px] h-[72px]'>
+              Equip your business with ChatGPT under 10 minutes
+            </p>
+          </div>
 
-        <div className={cn(s.login_card)}>
-          <h4 className='font-bold text-[28px]'>Welcome</h4>
-          <p>Log in to Facebook to continue</p>
+          <div className={cn(s.login_card, 'z-10')}>
+            <h4 className='font-bold text-[28px]'>Welcome</h4>
+            <p>Log in to Facebook to continue</p>
 
-          {/* <button className='py-3 px-2 flex items-center gap-3 font-normal text-[18px] shadow border rounded-lg'>
+            {/* <button className='py-3 px-2 flex items-center gap-3 font-normal text-[18px] shadow border rounded-lg'>
             <img src={facebook} alt="" />
             <span>Continue with Facebook</span>
           </button> */}
-          <FacebookLogin
-            appId="139596095408301"
-            autoLoad={false}
-            fields="name,email,picture"
-            onClick={componentCliked}
-            callback={responseFacebook}
-            cssClass={"py-3 px-6 flex items-center gap-3 font-normal text-[18px] shadow border rounded-lg text-[#0073ff]"}
-            icon={<img src={facebook} alt="" />}
-          />
+            <FacebookLogin
+              appId="139596095408301"
+              autoLoad={false}
+              fields="name,email,picture"
+              onClick={componentCliked}
+              callback={responseFacebook}
+              cssClass={"py-3 px-6 flex items-center gap-3 font-normal text-[18px] shadow border rounded-lg text-[#0073ff]"}
+              icon={<img src={facebook} alt="" />}
+            />
+          </div>
         </div>
 
         <img src={vector} alt="" className={cn(s.vector)} />
