@@ -13,6 +13,7 @@ import AddChannelButton from '../Buttons/AddChannelButton';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import { EditableElement } from '../EditableElement/EditableElement';
 import { toast } from 'react-hot-toast';
+import ActionAlert from '../Alert/ActionAlert';
 
 
 const Chatbot_business_talk = ({ changeChatBotTab }) => {
@@ -75,9 +76,8 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             );
             setOpen(true);
             setData(response.data.message)
-            toast.success(response.data.message)
+            // toast.success(response.data.message)
             setInputs([""])
-            setData("")
             setIndustry("")
             setBusinessHours("")
             setBusinessName("")
@@ -118,6 +118,26 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
 
     return (
         <>
+            {data &&
+                < >
+                    <ActionAlert
+                        variant="filled" 
+                        severity="success"
+                        message={data}
+                        setData={setData}
+                    />
+                </>
+            }
+            {dirty &&
+                < >
+                    <ActionAlert
+                        variant="filled" 
+                        severity="error"
+                        message={dirty}
+                        setData={setData}
+                    />
+                </>
+            }
             {/* <div>
                 <div className='chatbot_header_top'>
                     <h2 className='bold_text'>Name your Chatbot</h2>

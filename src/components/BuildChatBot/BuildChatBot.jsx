@@ -18,7 +18,7 @@ const BuildChatBot = () => {
     }
   return (
     <div className='display_flex'>
-        <div>
+        <div className=''>
                 <div className='chatbot_header_top'>
                     <h2 className='bold_text'>Name your Chatbot</h2>
                     <TextField

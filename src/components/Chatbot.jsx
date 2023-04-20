@@ -81,8 +81,8 @@ const Chatbot = () => {
   return (
     <div className='display_flex'>
       {chatbotTab === 1 && <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />}
-      <div className={`${chatbotTab !== 1 ? "" : "hidden"}`}>
-        <div>
+      <div className={`bg-[#f1efef] h-[100vh] ${chatbotTab !== 1 ? "" : "hidden"}`}>
+        <div className='p-5'>
           <div className='chatbot_header_top'>
             <h2 className='bold_text'>Name your Chatbot</h2>
             <TextField
@@ -127,7 +127,7 @@ const Chatbot = () => {
           </div>
         </div>
       </div>
-      <div className=''>
+      <div className='bg-white w-[100vw]'>
         {chatbotTab === 2 && <Chatbot_tab_2_new changeChatBotTab={changeChatBotTab} user={userData} />}
         {chatbotTab === 3 && <Chatbot_faq_details changeChatBotTab={changeChatBotTab} user={userData} />}
         {chatbotTab === 4 && <Chatbot_business_talk changeChatBotTab={changeChatBotTab} user={userData} />}

@@ -79,7 +79,6 @@
     width: calc(100%);
     box-sizing: border-box;
     display: flex;
-    padding: 20px;
     background-color: var(--page-background-color);
 }
 
