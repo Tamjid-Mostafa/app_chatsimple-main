@@ -37,9 +37,7 @@ const Dashboard = () => {
         <Sidebar changeDashboardTab={changeDashboardTab} />
       </div>
       <div className="pl-[248px] w-full relative">
-        <div className="sticky top-0 z-50">
-          <Topbar />
-        </div>
+        
         {dashboardTab === 1 && <div className="dashboard_tab_container"><DashboardC user={user} /></div>}
         {dashboardTab === 2 && <div className="dashboard_tab_container"><Chatbot user={user} /></div>}
       </div>
