@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import { useEffect } from "react";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
+import PvRoutes from "./components/PvRoutes/PvRoutes";
 
 function App() {
   const action = useNavigationType();
@@ -45,11 +46,16 @@ function App() {
     }
   }, [pathname]);
 
+
+
+
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element= {<Login /> }/>
       <Route path="/profile" element={<Profile />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/*" element={<PvRoutes />}>
+      <Route path="dashboard" element={<Dashboard />} />
+      </Route>
     </Routes>
   );
 }
