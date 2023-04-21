@@ -32,16 +32,18 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
   }
 
   return (
-    <div className='dashboard_tab chatbot_tab p-5'>
+    <div className='dashboard_tab chatbot_tab w-full p-5'>
       <div className=''>
-        <h1>Chatbot</h1>
-        <p className='smaller__heading'>{chatBots?.chatbot?.length || '0'} custom chatbots</p>
-        <div
-          className='chatbot__tab__info__btn add_button'
-          onClick={() => changeChatBotTab(2)}
-        >
-          <img src={addIcon} alt='add' />
-          <p>Build</p>
+        <div className=''>
+          <h1>Chatbot</h1>
+          <p className='smaller__heading'>{chatBots?.chatbot?.length || '0'} custom chatbots</p>
+          <div
+            className='chatbot__tab__info__btn add_button'
+            onClick={() => changeChatBotTab(2)}
+          >
+            <img src={addIcon} alt='add' />
+            <p>Build</p>
+          </div>
         </div>
         {chatBots ? (
           <div className='chat__simple__main2 pt-10 mt-10'>
