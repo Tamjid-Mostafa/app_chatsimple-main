@@ -74,8 +74,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
     async function postDataWithIncreasedTimeout() {
       try {
         const response = await axios.post(
-          `https://api.chatsimple.ai/v0/users/${
-            user.user_id
+          `https://api.chatsimple.ai/v0/users/${user.user_id
           }/chatbot_expertises/${uuidv4()}`,
           fields,
           {
@@ -86,7 +85,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
         setOpen(true);
         setData(response.data.message);
         setLoading(false)
-        
+
       } catch (error) {
         setOpen(true);
         setData(e.message);
@@ -142,10 +141,10 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
   }
 
   return (
-    <div className='display_flex'>
-      <div className='chatbot_dsplay_column'>
+    <div className='display_flex' style={{ width: '100%' }}>
+      <div className='chatbot_dsplay_column' style={{ width: '100%' }}>
         <div className='chatbot_display_text'>
-          <h1 className='bold_text font_32 margintop'>FAQ</h1>
+        <h1 className='bold_text font_32 margintop'>FAQ</h1>
           <p className='text-sm'>
             ChatSimple uses technology to create FAQ automatically. Start
             generating a list of FAQ by inputing an <br /> URL where you would
@@ -173,11 +172,11 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
-          <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
-            <div className='inline-block min-w-full py-2 sm:px-6 lg:px-8'>
-              <div className='overflow-hidden'>
-                <table className='min-w-full border-t-4 border-solid mt-4 border-green-400 rounded-md text-center text-sm font-light border-l border-r border-l-gray-200 shadow border-r-black'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col' style={{ width: '100%' }}>
+          <div className='overflow-x-auto sm:-mx-6 lg:-mx-8' style={{ width: '100%' }}>
+            <div className='inline-block w-full py-2 sm:px-6 lg:px-8'>
+              <div className='overflow-hidden' style={{ width: '100%' }}>
+                <table className='border-t-4 border-solid mt-4 border-green-400 rounded-md text-center text-sm font-light border-l border-r border-l-gray-200 shadow border-r-black' style={{ width: '100%' }}>
                   <thead className='border-b font-medium border-gray-300'></thead>
                   <tbody>
                     <tr className='border-b border-gray-300 bg-gray-100'>
@@ -189,7 +188,6 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                         Answer
                       </td>
                     </tr>
-
                     {faqArray?.length === 0 && !isTrue && (
                       <>
                         <tr className='border-b border-gray-300'>
