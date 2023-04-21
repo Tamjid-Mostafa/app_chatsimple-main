@@ -8,6 +8,8 @@ import Login from "./pages/Login";
 import { useEffect } from "react";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
+import useAuth from "./components/Hooks/useAuth";
+import PrivateAllRoutes from "./components/PrivateAllRoutes/PrivateAllRoutes";
 
 function App() {
   const action = useNavigationType();
@@ -45,11 +47,16 @@ function App() {
     }
   }, [pathname]);
 
+  const auth = useAuth()
+
+
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={auth ? <Dashboard /> : <Login />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/dashboard" element={<Dashboard />}/>
+      <Route path="/*" element={<PrivateAllRoutes />} >
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
     </Routes>
   );
 }
