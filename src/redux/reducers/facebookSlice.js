@@ -11,7 +11,7 @@ export const facebookSignUp = createAsyncThunk(
   async (userData) => {
     //https://f8dd-184-147-26-46.ngrok.io
     const response = await axios.post(
-      `https://api.chatsimple.ai/v0/users/${userData?.user_fb_id}/facebook-signup`,
+      `https://api.chatsimple.ai/v0/users/${userData?.uuid}/facebook-signin-signup`,
       userData,
       options
     );

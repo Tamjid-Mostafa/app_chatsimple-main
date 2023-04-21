@@ -15,6 +15,7 @@ import {
   facebookToken,
 } from "../redux/reducers/facebookSlice";
 import { userDetails } from "../redux/reducers/userSlice";
+import uuid from 'react-uuid';
 
 // this file
 
@@ -27,33 +28,22 @@ const Login = () => {
   // 757731156080550
 
   const responseFacebook = async (response) => {
-    dispatch(facebookToken(response?.accessToken));
-    dispatch(userDetails(response?.userID));
-    if (status !== "success") {
-      dispatch(
-        facebookSignUp({
-          facebook_access_token: response?.accessToken,
-          first_name: response?.name,
-          last_name: "",
-          user_fb_id: response?.userID,
-          user_type: "USER",
-          email: response?.email,
-          password: "",
-          timezone: "UTC",
-        })
-      );
-    } else {
-      dispatch(
-        facebookSignIn({
-          facebook_access_token: response?.accessToken,
-          user_fb_id: response?.userID,
-          user_type: "USER",
-          timezone: "UTC",
-        })
-      );
-    }
-    if (response.status !== "unknown")
-      navigate("/dashboard");
+    const res = await dispatch(
+      facebookSignUp({
+        facebook_access_token: response?.accessToken,
+        first_name: response?.name,
+        last_name: "",
+        user_fb_id: response?.userID,
+        user_type: "USER",
+        email: response?.email,
+        password: "",
+        timezone: "UTC",
+        uuid: uuid()
+      })
+    );
+    let user_id_return = res.payload.user_id;
+    dispatch(userDetails(user_id_return));
+    navigate("/dashboard");
   };
   const componentCliked = (response) => {
     console.warn(response);

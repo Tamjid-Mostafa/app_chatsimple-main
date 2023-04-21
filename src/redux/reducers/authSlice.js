@@ -12,7 +12,7 @@ const options = {
 export const login = createAsyncThunk('auth/login', async (userData) => {
     //https://f8dd-184-147-26-46.ngrok.io
     const response = await axios.post("https://f8dd-184-147-26-46.ngrok.io/v0/users/facebook-login", userData, options);
-    return console.log(response.data);
+    return response.data;
 })
 const initialState = {
     loading: false,
