@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Chatbot_tab_1 from './chatbot-tabs/Chatbot_tab_1';
-import Chatbot_tab_2 from './chatbot-tabs/Chatbot_tab_2';
 import Chatbot_tab_2_new from './chatbot-tabs/Chatbot_tab_2_new';
 import Chatbot_faq_details from './chatbot-tabs/Chatbot_faq_details';
 import Chatbot_business_talk from './chatbot-tabs/Chatbot_business_talk';
 import Chatbot_business_goal from './chatbot-tabs/Chatbot_business_goal';
-import Chatbot_tab_3 from './chatbot-tabs/Chatbot_tab_3';
-import ChatbotConnectToChannel from './ChatbotConnectToChannel/ChatbotConnectToChannel';
-import ChatbotConnectToChannelFirst from './ChatbotConnectToChannel/ChatbotConnectToChannelFirst';
 import Chatbotfinish from './Chatbotfinish/Chatbotfinish';
 import CreateChatbotLast from './CreateChatbotLast/CreateChatbotLast';
 import { useDispatch, useSelector } from 'react-redux';
@@ -91,7 +87,7 @@ const Chatbot = () => {
       return;
     }
 
-    if (value === 'messanger') {
+    if (value === 'messenger') {
       if (platforms.includes(value)) {
         copyPlatform = copyPlatform.filter((pf) => pf !== value);
         setPlatforms(copyPlatform);
@@ -159,7 +155,7 @@ const Chatbot = () => {
           <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />
         )}
         <div className={`${chatbotTab !== 1 ? '' : 'hidden'}`}>
-          <div className='p-5 h-[calc(100vh)] bg-[#eeeeee]'>
+          <div className='p-5 h-[calc(100vh)] w-[calc(300px)] bg-[#eeefee]'>
             <div className='chatbot_header_top'>
               <h2 className='bold_text'>Name your Chatbot</h2>
               <TextField
@@ -177,15 +173,15 @@ const Chatbot = () => {
 
               <div className=' expertise_box display_flex justify-between'>
                 <div
-                  onClick={() => handlePlatform('messanger')}
+                  onClick={() => handlePlatform('messenger')}
                   className='faq_text cursor-pointer'
                 >
-                  <p>Messanger</p>
+                  <p>Messenger</p>
                 </div>
                 <div className='chatbot_toggle_button2'>
                   <Switch
-                    checked={platforms?.includes('messanger')}
-                    onClick={() => handlePlatform('messanger')}
+                    checked={platforms?.includes('messenger')}
+                    onClick={() => handlePlatform('messenger')}
                   />
                 </div>
               </div>
@@ -247,7 +243,7 @@ const Chatbot = () => {
             </div>
           </div>
 
-          <div className='bg-white w-[100vw] mt-10'>
+          {/* <div className='bg-white w-[100vw] mt-10'>
 
             {chatbotTab === 2 && <Chatbot_tab_2_new changeChatBotTab={changeChatBotTab} user={userData} />}
             {chatbotTab === 3 && <Chatbot_faq_details changeChatBotTab={changeChatBotTab} user={userData} />}
@@ -255,7 +251,7 @@ const Chatbot = () => {
             {chatbotTab === 5 && <Chatbot_business_goal changeChatBotTab={changeChatBotTab} user={userData} />}
             {chatbotTab === 7 && <Chatbotfinish changeChatBotTab={changeChatBotTab} user={userData} />}
             {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
-          </div>
+          </div> */}
         </div>
         <div className='bg-white w-[100vw]'>
           {chatbotTab === 2 && (
