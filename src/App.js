@@ -8,10 +8,9 @@ import Login from "./pages/Login";
 import { useEffect } from "react";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
-import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import { useSelector } from "react-redux";
 import useAuth from "./components/Hooks/useAuth";
-
+import PrivateRoutes from "./components/Private/PrivateRoutes";
 function App() {
   const action = useNavigationType();
   const location = useLocation();
@@ -48,8 +47,8 @@ function App() {
     }
   }, [pathname]);
 
-  const auth = useAuth()
 
+  const auth = useAuth()
 
 
 
@@ -57,7 +56,7 @@ function App() {
     <Routes>
       <Route path="/" element={auth ? <Dashboard />  : <Login /> } />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/*" element={<ProtectedRoutes />} >
+      <Route path="/*" element={<PrivateRoutes />} >
         <Route path="dashboard" element={<Dashboard />} />
       </Route>
     </Routes>

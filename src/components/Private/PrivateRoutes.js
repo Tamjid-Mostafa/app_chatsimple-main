@@ -1,8 +1,9 @@
+
 import React from 'react'
 import useAuth from '../Hooks/useAuth'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const ProtectedRoutes = () => {
+const PrivateRoutes = () => {
     const auth = useAuth()
 
 
@@ -10,4 +11,4 @@ const ProtectedRoutes = () => {
 
 }
 
-export default ProtectedRoutes
+export default PrivateRoutes
