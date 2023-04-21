@@ -22,7 +22,6 @@ const DashboardC = () => {
   return (
     <div>
       <div className=''>
-        {/* {dashboardTab === 1 && <HomePage changeDashboardTab = {changeDashboardTab} />} */}
       {dashboardTab === 2 && <HomePageV2 changeDashboardTab = {changeDashboardTab} user = {userData} />}
       </div>
     </div>

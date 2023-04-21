@@ -91,7 +91,7 @@ const Chatbot = () => {
       return;
     }
 
-    if (value === 'messanger') {
+    if (value === 'messenger') {
       if (platforms.includes(value)) {
         copyPlatform = copyPlatform.filter((pf) => pf !== value);
         setPlatforms(copyPlatform);
@@ -177,15 +177,15 @@ const Chatbot = () => {
 
               <div className=' expertise_box display_flex justify-between'>
                 <div
-                  onClick={() => handlePlatform('messanger')}
+                  onClick={() => handlePlatform('messenger')}
                   className='faq_text cursor-pointer'
                 >
-                  <p>Messanger</p>
+                  <p>Messenger</p>
                 </div>
                 <div className='chatbot_toggle_button2'>
                   <Switch
-                    checked={platforms?.includes('messanger')}
-                    onClick={() => handlePlatform('messanger')}
+                    checked={platforms?.includes('messenger')}
+                    onClick={() => handlePlatform('messenger')}
                   />
                 </div>
               </div>
