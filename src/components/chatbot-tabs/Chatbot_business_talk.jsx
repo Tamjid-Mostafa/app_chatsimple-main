@@ -25,7 +25,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
     const [history, setHistory] = useState("")
     const [supportEmail, setSupportEmail] = useState("")
     const [open, setOpen] = useState(false);
-    const [data, setData] = useState("")
+    const [data, setData] = useState()
     const [dirty, setDirty] = useState("")
     const [inputs, setInputs] = useState([""]);
     const [loading, setLoading] = useState(false)
@@ -77,12 +77,6 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
             );
             setOpen(true);
             setData(response.data.message)
-            // toast.success(response.data.message)
-            setInputs([""])
-            setIndustry("")
-            setBusinessHours("")
-            setBusinessName("")
-            setSupportEmail("")
             setLoading(false)
 
             // window.alert(response.data.message);
@@ -241,7 +235,7 @@ const Chatbot_business_talk = ({ changeChatBotTab }) => {
                                 onChange={(event) => setSupportEmail(event.target.value)}
                             />
                         </div> */}
-                        <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200'
+                        <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200 mb-10'
                             disabled={loading}
                             onClick={handleBusinessDetails}>
                             {loading ? <CircularProgress
