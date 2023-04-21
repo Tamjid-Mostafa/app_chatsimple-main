@@ -3,6 +3,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import {Link, NavLink} from "react-router-dom"
 import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory';
 import { useNavigate } from 'react-router-dom';
+import { allChatBots } from '../../redux/reducers/chatbotSlice';
 
 const Topbar = () => {
     const [showModal, setShowModal] = React.useState(false);
@@ -10,7 +11,7 @@ const Topbar = () => {
     const navigate = useNavigate();
 
     function handleBackRoute() {
-      navigate(-1); // Go back one step in history
+      navigate("/dashboard");
     }
 
   return (
@@ -20,7 +21,7 @@ const Topbar = () => {
       <div>
         <div className="left_top flex justify-between items-center h-[50px] px-[20px] text-white bg-[#454545] ">
           <div>
-          <Link onClick={handleBackRoute} to="/" className='duration-100 hover:opacity-80'>
+          <Link onClick={handleBackRoute} className='duration-100 hover:opacity-80'>
             <ChevronLeftIcon /> Back
           </Link>
           </div>
