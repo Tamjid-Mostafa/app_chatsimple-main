@@ -1,4 +1,4 @@
-import { TextField, Switch, Alert } from '@mui/material';
+import { TextField, Switch, Alert, CircularProgress } from '@mui/material';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useState } from 'react';
 import axios from "axios";
@@ -16,12 +16,14 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const [dirty, setDirty] = useState("")
     const [position, setPosition] = useState("")
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const handleClose = () => {
         setOpen(false);
     };
     const { user } = useSelector((state) => state.user);
 
     const handleCreate = async () => {
+        setLoading(true);
         let data = {
             expertise_title: "Business Goal",
             expertise_type: "FREE_FORM",
@@ -47,6 +49,7 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
                 { headers }
             );
             setOpen(true);
+            setLoading(false);
             setData(response.data.message)
             //window.alert(response.data.message);
 
@@ -122,21 +125,16 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
                         </div>
 
                         <div className=''>
-                            <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' onClick={handleCreate}>
-                                Create
+                            <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200'
+                            disabled={loading}
+                            onClick={handleCreate}>
+                               {loading ? <CircularProgress
+                               size={16}
+                               /> : "Create"}
                             </button>
                         </div>
                     </div>
                 </div>
-                {/* <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            message={data}
-            onClose={handleClose}
-            className="muiclass"
-          /> */}
-                {data && <Alert severity="success">{data}</Alert>}
-                {dirty && <Alert variant="filled" severity="error">{dirty}</Alert>}
             </div>
         </>
     )

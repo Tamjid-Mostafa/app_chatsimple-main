@@ -32,9 +32,9 @@ export default function ChatbotConnectToChannelFirst({ changeChatBotTab }) {
                     <h1>
                         Chatbot
                     </h1>
-                    <p>
+                    {/* <p>
                         0 custom chatbots
-                    </p>
+                    </p> */}
 
                     <div className="chat_bot_first_channel__box mt-4">
                         <div className='flex justify-between items-center'>

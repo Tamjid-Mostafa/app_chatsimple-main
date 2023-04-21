@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import facebook from "../../assets/images/svg/messenger.svg";
 import instagram from "../../assets/images/svg/instagram.png";
-import whatsapp from "../../assets/images/svg/WhatsApp.svg"
-const AddChannel = ({channelHandler}) => {
+import whatsapp from "../../assets/images/svg/WhatsApp.svg";
+
+
+const AddChannel = ({channelHandler,setIsOpen}) => {
 
 const channelData = [
     {
@@ -20,7 +22,11 @@ const channelData = [
         icon: whatsapp,
         slug: 'WHATS APP'
     },
-]
+];
+const AddChannelButton = (slug) => {
+    channelHandler(slug);
+    setIsOpen(false);
+}
 
     return (
         <div className='w-full p-[51px]'>
@@ -39,7 +45,7 @@ const channelData = [
                         <p>{item.name}</p>
                     </div>
                     <button
-                    onClick={() =>channelHandler(item.slug)}
+                    onClick={() =>AddChannelButton(item.slug)}
                     className='flex items-center gap-2 bg-[#66B467] text-xs text-white px-4 py-2.5 rounded-full'>
                         Add Channel </button>
                 </div>

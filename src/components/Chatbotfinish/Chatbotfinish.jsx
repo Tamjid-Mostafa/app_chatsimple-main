@@ -19,9 +19,9 @@ export default function Chatbotfinish({changeChatBotTab}) {
                     <h1>
                         Chatbot
                     </h1>
-                    <p>
-                        0 custom chatbots
-                    </p>
+                    {/* <p>
+                    0 custom chatbots
+                    </p> */}
                     <BuildButton onClick = {()=>changeChatBotTab(6)} />
 
                     <div className="max-w-sm bg-white border border-gray-200 rounded-lg mt-10 relative">

@@ -12,9 +12,9 @@ export default function ChatbotConnectToChannel({changeChatBotTab}) {
                     <h1>
                         Chatbot
                     </h1>
-                    <p>
-                        0 custom chatbots
-                    </p>
+                    {/* <p>
+                    0 custom chatbots
+                    </p> */}
 
                     <div className='chat__bot__contect__message'>
                         <div className='flex flex-row w-full'>
