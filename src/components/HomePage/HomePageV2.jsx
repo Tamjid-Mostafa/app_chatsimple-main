@@ -73,17 +73,21 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
     dispatch(allChannels(data));
   }, [user]);
 
-  console.log(channels?.user_platforms)
   return (
     <>
       {
-        loading ? <div className='flex items-center justify-center min-h-screen w-screen'>
+        loading ? <div className='flex items-center justify-center min-h-screen w-[70vh]'>
           <CircularProgress />
         </div>
           :
           <main className="chat__simple__main2 p-5">
             <div className="chat__simple__container">
-              <h1>{user?.first_name && `${user?.first_name}!`}</h1>
+              <h1>{user?.first_name 
+              ?
+               `${user?.first_name}!`
+              :
+              'Anonymous'
+              }</h1>
               <div className="small__two__connextios__row">
                 <span>{channels?.length || '0'} connected channels</span>
                 {/* <span>838 contacts</span> */}
@@ -94,15 +98,6 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
               </div>
 
               <div className="grid lg:grid-cols-4 grid-cols-3 gap-10">
-                {
-                  channels?.user_platforms?.length === undefined && <>
-                    <div
-                      className="cards_three p-5 flex flex-col justify-center items-start">
-                      <h5>You didn't make any channel!</h5>
-                      <p>Please Add one</p>
-                    </div>
-                  </>
-                }
                 
                 {
                   channels?.user_platforms?.map((item, i) => {
@@ -114,7 +109,7 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
 
                 <div style={{ width: '262px', height: '229px' }}
                   onClick={() => setIsOpen(!isOpen)}
-                  className="cards_three cursor-pointer border rounded-lg p-5 flex justify-center items-center">
+                  className="cards_three cursor-pointer border-2 border-dashed rounded-lg p-5 flex justify-center items-center">
                   <h5>+ Add channel</h5>
                 </div>
                 <PopUp
