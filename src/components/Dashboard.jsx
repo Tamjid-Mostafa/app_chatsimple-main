@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react'
-import DB_Tab_1 from './dashboard-tabs/DB_Tab_1'
-import HomePage from './HomePage/HomePage'
 import HomePageV2 from './HomePage/HomePageV2'
 import { useSelector } from 'react-redux'
 
