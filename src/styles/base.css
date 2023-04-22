@@ -73,6 +73,7 @@
 
   /* font sizes */
   --font-size-5xl: 24px;
+  --font-size-md: 16px;
 }
 
 /* [data-theme="dark"] {

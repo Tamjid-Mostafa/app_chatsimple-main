@@ -15,6 +15,8 @@ import messenger from '../assets/images/svg/messenger.svg'
 import instagram from '../assets/images/svg/instagram.png'
 import Topbar from './Topbar/Topbar';
 import CustomSwitch from './ui/IOSSwitch/IOSSwitch';
+import ListItem from './ui/ListItem';
+import LogoListItem from './ui/LogoListItem/LogoListItem';
 
 const Chatbot = () => {
   const [chatbotTab, setChatbotTab] = React.useState(1);
@@ -44,6 +46,37 @@ const Chatbot = () => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
 
+
+  const listItemsData =
+  {
+    channels: [
+      {
+        name: 'Messenger',
+        img: messenger,
+        slug: 'messenger'
+      },
+      {
+        name: 'Instagram',
+        img: instagram,
+        slug: 'instagram'
+      },
+    ],
+    chatBotExpertise: [
+      {
+        id: 3,
+        name: 'FAQ',
+      },
+      {
+        id: 4,
+        name: 'Business small talk',
+      },
+      {
+        id: 5,
+        name: 'Business goal',
+      },
+    ],
+
+  }
 
   useEffect(() => {
     if (!prevTitle) {
@@ -164,7 +197,7 @@ const Chatbot = () => {
         <div className='flex'>
           <div className={`${chatbotTab !== 1 ? 'relative' : 'hidden'}`}>
 
-            <div className='p-5 w-[calc(300px)] min-h-screen bg-[#eeefee] fixed'>
+            <div className='p-5 min-h-screen bg-[#eeefee] fixed'>
               <div className='chatbot_header_top'>
                 <h2 className='bold_text'>Name your Chatbot</h2>
                 <TextField
@@ -177,88 +210,38 @@ const Chatbot = () => {
                 />
               </div>
 
-              <div>
+              <>
                 <h2 className='bold_text'>Display to connect channel(s)</h2>
+                {
+                  listItemsData?.channels?.map((ch) =>
+                    <LogoListItem
+                      checked={platforms?.includes(ch.slug)}
+                      handleClick={() => handlePlatform(ch.slug)}
+                    >
+                      <img
+                        className='w-8'
+                        src={ch.img} alt={ch.name} />
+                      <p>{ch.name}</p>
+                    </LogoListItem>
 
-                <div className=' expertise_box display_flex justify-between'>
-                  <div
-                    onClick={() => handlePlatform('messenger')}
-                    className='flex items-center gap-2 ml-5 cursor-pointer'
-                  >
-                    <img
-                      className='w-8'
-                      src={messenger} alt="" />
-                    <p>Messenger</p>
-                  </div>
-                  <div className='chatbot_toggle_button2'>
-                    <CustomSwitch
-                      checked={platforms?.includes('messenger')}
-                      onClick={() => handlePlatform('messenger')}
-                    />
-                  </div>
-                </div>
-
-                <div className=' expertise_box display_flex justify-between'>
-                  <div
-                    onClick={() => handlePlatform('messenger')}
-                    className='flex items-center gap-2 ml-5 cursor-pointer'
-                  >
-                    <img
-                      className='w-8'
-                      src={instagram} alt="" />
-                    <p>Instagram</p>
-                  </div>
-                  <div className='chatbot_toggle_button2'>
-                    <CustomSwitch
-                      checked={platforms?.includes('instagram')}
-                      onClick={() => handlePlatform('instagram')}
-                    />
-                  </div>
-                </div>
-              </div>
+                  )
+                }
+              </>
 
               <div className='mt-5'>
                 <h2 className='bold_text'>Select Chatbot Expertise</h2>
 
-                <div
-               
-                className='flex items-center justify-between px-5 hover:bg-[#F7FEF8] hover:border-l-4 border-l-primary transition-all duration-100'>
-                  <div
-                    onClick={() => changeChatBotTab(3)}
-                    className='flex items-center gap-2 cursor-pointer'
-                  >
-                    <p> FAQ</p>
-                  </div>
-                  <div className=''>
-                    <CustomSwitch
-                    onClick={() => changeChatBotTab(3)} 
-                    />
-                  </div>
-                </div>
+                {
+                  listItemsData?.chatBotExpertise?.map((item, i) =>
+                    <ListItem
+                      key={item.id}
+                      id={item.id}
+                      handleClick={changeChatBotTab}
 
-                <div className='expertise_box display_flex'>
-                  <div
-                    onClick={() => changeChatBotTab(4)}
-                    className='flex items-center gap-2 ml-5 cursor-pointer'
-                  >
-                    <p> Business small talk</p>
-                  </div>
-                  <div className='chatbot_toggle_button2'>
-                    <CustomSwitch onClick={() => changeChatBotTab(4)} />
-                  </div>
-                </div>
-
-                <div className='expertise_box display_flex'>
-                  <div
-                    onClick={() => changeChatBotTab(5)}
-                    className='flex items-center gap-2 ml-5 cursor-pointer'
-                  >
-                    <p>Business Goal</p>
-                  </div>
-                  <div className='chatbot_toggle_button3'>
-                    <CustomSwitch onClick={() => changeChatBotTab(5)} />
-                  </div>
-                </div>
+                    >
+                      {item.name}
+                    </ListItem>)
+                }
               </div>
             </div>
 
