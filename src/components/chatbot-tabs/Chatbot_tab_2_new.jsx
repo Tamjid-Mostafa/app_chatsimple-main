@@ -115,9 +115,6 @@ const Chatbot_tab_2_new = ({ changeChatBotTab }) => {
             Discover the world of chat simple
           </h1>
         </div>
-        <div className='chatbot_display_img_style'>
-          <img src={displayimg} alt='My Image' />
-        </div>
 
         <div className='chatbot_display_img_style'>
           <img src={displayimg} alt='My Image' />

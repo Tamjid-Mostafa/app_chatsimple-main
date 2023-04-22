@@ -13,7 +13,7 @@ export default function Chatbotfinish({changeChatBotTab}) {
         setshowhide(!showhide);
     }
     return (
-        <React.StrictMode>
+        <>
             <main className='chat__box__finish__main'>
                 <div className="chat__box_container">
                     <h1>
@@ -65,6 +65,6 @@ export default function Chatbotfinish({changeChatBotTab}) {
 
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }
