@@ -11,7 +11,7 @@ import ChartMapIcon from "../../assets/images/svg/ChartMap.svg";
 import 'react-circular-progressbar/dist/styles.css';
 export default function HomePage() {
     return (
-        <React.StrictMode>
+        <>
             <main className='chat__simple__main'>
                 <div className='chat__simple__container'>
                     <h1>
@@ -193,6 +193,6 @@ export default function HomePage() {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }

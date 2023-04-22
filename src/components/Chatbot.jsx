@@ -7,12 +7,14 @@ import Chatbot_business_goal from './chatbot-tabs/Chatbot_business_goal';
 import Chatbotfinish from './Chatbotfinish/Chatbotfinish';
 import CreateChatbotLast from './CreateChatbotLast/CreateChatbotLast';
 import { useDispatch, useSelector } from 'react-redux';
-import { Switch, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { createChatBot, updateChatBot } from '../redux/reducers/chatbotSlice';
 import { v4 as uuidv4 } from 'uuid';
 import ActionAlert from './Alert/ActionAlert';
 import messenger from '../assets/images/svg/messenger.svg'
 import instagram from '../assets/images/svg/instagram.png'
+import Topbar from './Topbar/Topbar';
+import CustomSwitch from './ui/IOSSwitch/IOSSwitch';
 
 const Chatbot = () => {
   const [chatbotTab, setChatbotTab] = React.useState(1);
@@ -135,168 +137,179 @@ const Chatbot = () => {
 
   return (
     <>
-        {success && (
+      {success && (
         <ActionAlert
           variant='filled'
           severity='success'
           message={message}
           setData={setMessage}
         />)
-        }
-        {error && (
+      }
+      {error && (
         <ActionAlert
           variant='filled'
           severity='error'
           message={message}
           setData={setMessage}
         />)
-        }
-      <div className='w-full flex'>
+      }
+
+      <div className='w-full relative'>
         {chatbotTab === 1 && (
           <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />
         )}
-        <div className={`${chatbotTab !== 1 ? 'relative' : 'hidden'}`}>
-          <div className='p-5 w-[calc(300px)] min-h-screen bg-[#eeefee] fixed'>
-            <div className='chatbot_header_top'>
-              <h2 className='bold_text'>Name your Chatbot</h2>
-              <TextField
-                label='Name'
-                variant='outlined'
-                onBlur={handleBlur}
-                onFocus={handleFocus}
-                onChange={(e) => setChatbotTitle(e.target.value)}
-                value={chatbotTitle}
-              />
-            </div>
-
-            <div>
-              <h2 className='bold_text'>Display to connect channel(s)</h2>
-
-              <div className=' expertise_box display_flex justify-between'>
-                <div
-                  onClick={() => handlePlatform('messenger')}
-                  className='flex items-center gap-2 ml-5 cursor-pointer'
-                >
-                  <img 
-                  className='w-8'
-                  src={messenger} alt="" />
-                  <p>Messenger</p>
-                </div>
-                <div className='chatbot_toggle_button2'>
-                  <Switch
-                    checked={platforms?.includes('messenger')}
-                    onClick={() => handlePlatform('messenger')}
-                  />
-                </div>
-              </div>
-
-              <div className=' expertise_box display_flex justify-between'>
-              <div
-                  onClick={() => handlePlatform('messenger')}
-                  className='flex items-center gap-2 ml-5 cursor-pointer'
-                >
-                  <img 
-                  className='w-8'
-                  src={instagram} alt="" />
-                  <p>Instagram</p>
-                </div>
-                <div className='chatbot_toggle_button2'>
-                  <Switch
-                    checked={platforms?.includes('instagram')}
-                    onClick={() => handlePlatform('instagram')}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className='mt-5'>
-              <h2 className='bold_text'>Select Chatbot Expertise</h2>
-
-              <div className='expertise_box display_flex'>
-                <div
-                  onClick={() => changeChatBotTab(3)}
-                  className='flex items-center gap-2 ml-5 cursor-pointer'
-                >
-                  <p> FAQ</p>
-                </div>
-                <div className='chatbot_toggle_button'>
-                  <Switch onClick={() => changeChatBotTab(3)} />
-                </div>
-              </div>
-
-              <div className='expertise_box display_flex'>
-                <div
-                  onClick={() => changeChatBotTab(4)}
-                  className='flex items-center gap-2 ml-5 cursor-pointer'
-                >
-                  <p> Business small talk</p>
-                </div>
-                <div className='chatbot_toggle_button2'>
-                  <Switch onClick={() => changeChatBotTab(4)} />
-                </div>
-              </div>
-
-              <div className='expertise_box display_flex'>
-                <div
-                  onClick={() => changeChatBotTab(5)}
-                  className='flex items-center gap-2 ml-5 cursor-pointer'
-                >
-                  <p>Business Goal</p>
-                </div>
-                <div className='chatbot_toggle_button3'>
-                  <Switch onClick={() => changeChatBotTab(5)} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* <div className='bg-white w-[100vw] mt-10'>
-
-            {chatbotTab === 2 && <Chatbot_tab_2_new changeChatBotTab={changeChatBotTab} user={userData} />}
-            {chatbotTab === 3 && <Chatbot_faq_details changeChatBotTab={changeChatBotTab} user={userData} />}
-            {chatbotTab === 4 && <Chatbot_business_talk changeChatBotTab={changeChatBotTab} user={userData} />}
-            {chatbotTab === 5 && <Chatbot_business_goal changeChatBotTab={changeChatBotTab} user={userData} />}
-            {chatbotTab === 7 && <Chatbotfinish changeChatBotTab={changeChatBotTab} user={userData} />}
-            {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
-          </div> */}
+        <div className={`w-full sticky top-0 z-10 ${chatbotTab !== 1 ? '' : 'hidden'}`}>
+          <Topbar />
         </div>
-        <div className='bg-white w-[100vw] ml-[300px] mt-10'>
-          {chatbotTab === 2 && (
-            <Chatbot_tab_2_new
-              changeChatBotTab={changeChatBotTab}
-              user={userData}
-            />
-          )}
-          {chatbotTab === 3 && (
-            <Chatbot_faq_details
-              changeChatBotTab={changeChatBotTab}
-              user={userData}
-            />
-          )}
-          {chatbotTab === 4 && (
-            <Chatbot_business_talk
-              changeChatBotTab={changeChatBotTab}
-              user={userData}
-            />
-          )}
-          {chatbotTab === 5 && (
-            <Chatbot_business_goal
-              changeChatBotTab={changeChatBotTab}
-              user={userData}
-            />
-          )}
-          {chatbotTab === 7 && (
-            <Chatbotfinish
-              changeChatBotTab={changeChatBotTab}
-              user={userData}
-            />
-          )}
-          {chatbotTab === 8 && (
-            <CreateChatbotLast
-              changeChatBotTab={changeChatBotTab}
-              user={userData}
-            />
-          )}
+        <div className='flex'>
+          <div className={`${chatbotTab !== 1 ? 'relative' : 'hidden'}`}>
+
+            <div className='p-5 w-[calc(300px)] min-h-screen bg-[#eeefee] fixed'>
+              <div className='chatbot_header_top'>
+                <h2 className='bold_text'>Name your Chatbot</h2>
+                <TextField
+                  label='Name'
+                  variant='outlined'
+                  onBlur={handleBlur}
+                  onFocus={handleFocus}
+                  onChange={(e) => setChatbotTitle(e.target.value)}
+                  value={chatbotTitle}
+                />
+              </div>
+
+              <div>
+                <h2 className='bold_text'>Display to connect channel(s)</h2>
+
+                <div className=' expertise_box display_flex justify-between'>
+                  <div
+                    onClick={() => handlePlatform('messenger')}
+                    className='flex items-center gap-2 ml-5 cursor-pointer'
+                  >
+                    <img
+                      className='w-8'
+                      src={messenger} alt="" />
+                    <p>Messenger</p>
+                  </div>
+                  <div className='chatbot_toggle_button2'>
+                    <CustomSwitch
+                      checked={platforms?.includes('messenger')}
+                      onClick={() => handlePlatform('messenger')}
+                    />
+                  </div>
+                </div>
+
+                <div className=' expertise_box display_flex justify-between'>
+                  <div
+                    onClick={() => handlePlatform('messenger')}
+                    className='flex items-center gap-2 ml-5 cursor-pointer'
+                  >
+                    <img
+                      className='w-8'
+                      src={instagram} alt="" />
+                    <p>Instagram</p>
+                  </div>
+                  <div className='chatbot_toggle_button2'>
+                    <CustomSwitch
+                      checked={platforms?.includes('instagram')}
+                      onClick={() => handlePlatform('instagram')}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className='mt-5'>
+                <h2 className='bold_text'>Select Chatbot Expertise</h2>
+
+                <div
+               
+                className='flex items-center justify-between px-5 hover:bg-[#F7FEF8] hover:border-l-4 border-l-primary transition-all duration-100'>
+                  <div
+                    onClick={() => changeChatBotTab(3)}
+                    className='flex items-center gap-2 cursor-pointer'
+                  >
+                    <p> FAQ</p>
+                  </div>
+                  <div className=''>
+                    <CustomSwitch
+                    onClick={() => changeChatBotTab(3)} 
+                    />
+                  </div>
+                </div>
+
+                <div className='expertise_box display_flex'>
+                  <div
+                    onClick={() => changeChatBotTab(4)}
+                    className='flex items-center gap-2 ml-5 cursor-pointer'
+                  >
+                    <p> Business small talk</p>
+                  </div>
+                  <div className='chatbot_toggle_button2'>
+                    <CustomSwitch onClick={() => changeChatBotTab(4)} />
+                  </div>
+                </div>
+
+                <div className='expertise_box display_flex'>
+                  <div
+                    onClick={() => changeChatBotTab(5)}
+                    className='flex items-center gap-2 ml-5 cursor-pointer'
+                  >
+                    <p>Business Goal</p>
+                  </div>
+                  <div className='chatbot_toggle_button3'>
+                    <CustomSwitch onClick={() => changeChatBotTab(5)} />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className='bg-white w-[100vw] mt-10'>
+
+          {chatbotTab === 2 && <Chatbot_tab_2_new changeChatBotTab={changeChatBotTab} user={userData} />}
+          {chatbotTab === 3 && <Chatbot_faq_details changeChatBotTab={changeChatBotTab} user={userData} />}
+          {chatbotTab === 4 && <Chatbot_business_talk changeChatBotTab={changeChatBotTab} user={userData} />}
+          {chatbotTab === 5 && <Chatbot_business_goal changeChatBotTab={changeChatBotTab} user={userData} />}
+          {chatbotTab === 7 && <Chatbotfinish changeChatBotTab={changeChatBotTab} user={userData} />}
+          {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
+        </div> */}
+          </div>
+          <div className='bg-white w-[100vw]  ml-[300px] mt-10'>
+            {chatbotTab === 2 && (
+              <Chatbot_tab_2_new
+                changeChatBotTab={changeChatBotTab}
+                user={userData}
+              />
+            )}
+            {chatbotTab === 3 && (
+              <Chatbot_faq_details
+                changeChatBotTab={changeChatBotTab}
+                user={userData}
+              />
+            )}
+            {chatbotTab === 4 && (
+              <Chatbot_business_talk
+                changeChatBotTab={changeChatBotTab}
+                user={userData}
+              />
+            )}
+            {chatbotTab === 5 && (
+              <Chatbot_business_goal
+                changeChatBotTab={changeChatBotTab}
+                user={userData}
+              />
+            )}
+            {chatbotTab === 7 && (
+              <Chatbotfinish
+                changeChatBotTab={changeChatBotTab}
+                user={userData}
+              />
+            )}
+            {chatbotTab === 8 && (
+              <CreateChatbotLast
+                changeChatBotTab={changeChatBotTab}
+                user={userData}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>

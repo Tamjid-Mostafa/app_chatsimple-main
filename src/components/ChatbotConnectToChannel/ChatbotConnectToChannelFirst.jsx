@@ -26,7 +26,7 @@ export default function ChatbotConnectToChannelFirst({ changeChatBotTab }) {
         }, 10000);
     }
     return (
-        <React.StrictMode>
+        <>
             <main className='chat__box__connect__to__channel__main'>
                 <div className="chat__box__connect__to__channel__container">
                     <h1>
@@ -93,6 +93,6 @@ export default function ChatbotConnectToChannelFirst({ changeChatBotTab }) {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }

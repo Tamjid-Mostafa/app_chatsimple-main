@@ -2,7 +2,7 @@
     --background-color-1: #141218;
     --page-background-color: #fff;
     --background-color-2: #FFFFFF;
-    --primary-color: #66B467;
+    --primary: #66B467;
     --heading-color: #1D1B20;
     --text-color-gray: #CAC4D0;
     --text-color-gray-2: #697077;
@@ -298,7 +298,7 @@
 }
 
 .chat__conversation__card__btns_group svg:hover {
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 .chat__conversation__action {
@@ -316,8 +316,8 @@
 
 .chat__conversation__action__btns button:nth-child(1) {
     background-color: #fff;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    color: var(--primary);
+    border: 1px solid var(--primary);
 }
 
 .chat__conversation__action__btns button {
@@ -330,7 +330,7 @@
     cursor: pointer;
     margin: 10px 0px;
     padding: 0px 20px;
-    background-color: var(--primary-color);
+    background-color: var(--primary);
     color: #fff;
 }
 
@@ -530,7 +530,7 @@
 }
 
 .bot__page__link p {
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 .bot__page__link svg {
@@ -610,7 +610,7 @@
     color: white;
     border-radius: 20px;
     padding: 10px 20px;
-    background: var(--primary-color);
+    background: var(--primary);
     border-radius: 100px;
     cursor: pointer;
 }

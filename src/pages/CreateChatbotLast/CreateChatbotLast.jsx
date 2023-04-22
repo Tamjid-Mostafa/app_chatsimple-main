@@ -5,7 +5,7 @@ import MessageIcon from "../../assets/images/svg/Messages.svg";
 import OutlineInput from '../../components/OutlineInput/OutlineInput';
 export default function CreateChatbotLast() {
     return (
-        <React.StrictMode>
+        <>
             <main className='create__chat__bot_last'>
                 <div className='create__chat_bot_container'>
                     <h1>
@@ -46,6 +46,6 @@ export default function CreateChatbotLast() {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }

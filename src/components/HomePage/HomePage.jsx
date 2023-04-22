@@ -12,7 +12,7 @@ import ChartMapIcon from "../../assets/images/svg/ChartMap.png";
 import 'react-circular-progressbar/dist/styles.css';
 export default function HomePage({changeDashboardTab}) {
     return (
-        <React.StrictMode>
+        <>
             <main className='chat__simple__main'>
                 <div className='chat__simple__container'>
                     <h1>
@@ -194,6 +194,6 @@ export default function HomePage({changeDashboardTab}) {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }
