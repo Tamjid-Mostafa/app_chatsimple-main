@@ -18,7 +18,7 @@ const Sidebar = ({changeDashboardTab, setIsExpand, isExpand}) => {
     <div className={cn(s.root, 'flex flex-col justify-between h-full p-5')}>
        {/* Sidebar Header */}
       <div className='space-y-5'>
-        <div className='h-48 w-48'>
+        <div className='h-28 w-36'>
           <img
           className={`${!isExpand ? 'scale-75' : 'scale-100'}`}
           src={Logo} alt="logo" />
