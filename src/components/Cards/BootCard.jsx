@@ -6,10 +6,10 @@ import displayimg from '../../assets/chatbotcardpic.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { allChatBots, deleteChatBot } from '../../redux/reducers/chatbotSlice';
 
-const BootCard = ({ bot }) => {
+const BootCard = ({ changeChatBotTab, bot, setChatbotTitle, setChatBotID }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-
+  
   const handleDelete = () => {
     dispatch(deleteChatBot(bot));
     const data = {
@@ -18,6 +18,11 @@ const BootCard = ({ bot }) => {
     dispatch(allChatBots(data));
   };
 
+  const edit = () => {
+    changeChatBotTab(2)
+    setChatbotTitle(bot?.chatbot_title)
+    setChatBotID(bot?.chatbot_id)
+  }
 
   const types = [];
   const expertiseTypes = [
@@ -42,46 +47,46 @@ const BootCard = ({ bot }) => {
 
   return (
     <>
-      <div className='cards' style={{ width: '360px', height:'480px', marginRight: '20px', marginBottom: '20px' }}>
-        <div className='header'>
-          <div className='flex  gap-3'>
-            <img src={MessengerImage} alt='' />
-            <h4>Messenger Chatbot</h4>
-          </div>
-          <div>
-            <img src={barIcon} className='cursor-pointer' alt='' />
-          </div>
-
-          <div className='get_chatbot_toggle_button'>
-            <Switch />
-          </div>
-        </div>
-        <div className='chatbot_card_img'>
-          <img src={displayimg} alt='My Image' />
-        </div>
+      <div className='border rounded-xl w-[350px] h-[480px] flex flex-col justify-between'>
         <div>
-          <h3>{bot.chatbot_title}</h3>
-          <p>
-            {types?.map(
-              (item, i) => `${item}${i === types?.length - 1 ? '' : ', '}`
-            )}
-          </p>
-        </div>
-        <div className='displayflex margintop'>
-          <div className='marginleft'>
-            <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'>
-              Edit
-            </button>
-          </div>
+          <div className='flex justify-between p-4'>
+            <div className='flex items-center  gap-3'>
+              <img src={MessengerImage} alt='' />
+              <div>
+                <h4>{bot?.chatbot_title}</h4>
+                <p className='text-sm'>Messenger</p>
+              </div>
+            </div>
+            {/* <div>
+            <img src={barIcon} className='cursor-pointer' alt='' />
+          </div> */}
 
-          <div className='marginleft'>
-            <button
-              onClick={handleDelete}
-              className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'
-            >
-              Delete
-            </button>
+            <div className=''>
+              <Switch />
+            </div>
           </div>
+          <div className='my-5 '>
+            <img src={displayimg} alt='My Image' />
+          </div>
+          <div className='mx-5'>
+            <p>
+              {bot?.expertises?.length} expertise enabled
+            </p>
+          </div>
+        </div>
+        <div className='flex justify-end items-end my-5 mx-5 gap-5'>
+          <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'
+          onClick={edit}
+          >
+            Edit
+          </button>
+
+          <button
+            onClick={handleDelete}
+            className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full'
+          >
+            Delete
+          </button>
         </div>
       </div>
     </>

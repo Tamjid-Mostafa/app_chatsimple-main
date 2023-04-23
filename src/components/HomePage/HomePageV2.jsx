@@ -35,20 +35,27 @@ export default function HomePageV2({ changeDashboardTab, user }) {
   // const { fbUserID } = useSelector((state) => state.fb);
   // const { user } = useSelector((state) => state.user);
   const { channels, loading } = useSelector((state) => state.channel);
-console.log(channels)
 
   const [showAlert, setShowAlert] = useState(false);
 
+  console.log(channels)
 
   useEffect(() => {
+    const data = {
+      userID: user?.user_id,
+      pageToken: {
+        page_token: { last_time: new Date().toISOString().split('T')[0] },
+      },
+    };
     dispatch(userDetails(user?.user_id));
+    dispatch(allChannels(data));
   }, [user?.user_id]);
   // useEffect(() => {
   //   dispatch(userDetails(fbUserID));
   // }, [fbUserID]);
 
   const [isOpen, setIsOpen] = useState()
- 
+
 
   const channelHandler = (name) => {
     // for channel creation
@@ -74,71 +81,74 @@ console.log(channels)
         page_token: { last_time: new Date().toISOString().split('T')[0] },
       },
     };
-    if(loading) {
+    if (loading) {
       dispatch(allChannels(data));
     }
-  }, []);
+  }, [loading]);
+
+  if (loading) {
+    return (
+      <div className='flex items-center justify-center min-h-screen w-[70vh]'>
+        <CircularProgress />
+      </div>
+    )
+  }
 
   return (
     <>
-      {
-        loading ? <div className='flex items-center justify-center min-h-screen w-[70vh]'>
-          <CircularProgress />
-        </div>
-          :
-          <main className="chat__simple__main2 p-5">
-            <div className="chat__simple__container">
-              <h1>{user?.first_name 
-              ?
-               `${user?.first_name}!`
-              :
-              'Anonymous'
-              }</h1>
-              <div className="small__two__connextios__row">
-                <span>{channels?.length || '0'} connected channels</span>
-                {/* <span>838 contacts</span> */}
-              </div>
-              <div className="active__channel__row mb-8">
-                <h4>Active Channels</h4>
-              </div>
 
-              <div className="grid lg:grid-cols-4 grid-cols-3 gap-10">
-                
-                {
-                  channels?.user_platforms?.map((item, i) => {
-                    return (
-                      <ChannelCard item={item} key={i} />
-                    )
-                  })
-                }
+      <main className="chat__simple__main2 p-5">
+        <div className="chat__simple__container">
+          <h1>{user?.first_name
+            ?
+            `${user?.first_name}!`
+            :
+            'Anonymous'
+          }</h1>
+          <div className="small__two__connextios__row">
+            <span>{channels?.length || '0'} connected channels</span>
+            {/* <span>838 contacts</span> */}
+          </div>
+          <div className="active__channel__row mb-8">
+            <h4>Active Channels</h4>
+          </div>
 
-                <div style={{ width: '262px', height: '229px' }}
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="cards_three cursor-pointer border-2 border-dashed rounded-lg p-5 flex justify-center items-center">
-                  <h5>+ Add channel</h5>
-                </div>
-                <PopUp
-                  isOpen={isOpen}
-                  setIsOpen={setIsOpen}
-                >
-                  <AddChannel
-                    channelHandler={channelHandler}
-                    setIsOpen={setIsOpen}
-                    user={user}
-                    setShowAlert={setShowAlert}
-                  />
-                </PopUp>
-              </div>
-              <Reports />
-              <div className="grid lg:grid-cols-3 md:grid-col-2 grid-cols-1 gap-x-5 gap-y-5">
-                <BotTask />
-                <MostActive />
-                <ActiveCountries />
-              </div>
+          <div className="grid  xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10">
+
+            {
+              channels?.user_platforms?.map((item, i) => {
+                return (
+                  <ChannelCard item={item} key={i} />
+                )
+              })
+            }
+
+            <div style={{ width: '262px', height: '229px' }}
+              onClick={() => setIsOpen(!isOpen)}
+              className="cards_three cursor-pointer border-2 border-dashed rounded-lg p-5 flex justify-center items-center">
+              <h5>+ Add channel</h5>
             </div>
-            {showAlert && <ActionAlert severity="success" message={"Channel Created"}></ActionAlert>}
-          </main>
-      }
+            <PopUp
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+            >
+              <AddChannel
+                channelHandler={channelHandler}
+                setIsOpen={setIsOpen}
+                user={user}
+                setShowAlert={setShowAlert}
+              />
+            </PopUp>
+          </div>
+          <Reports />
+          <div className="grid lg:grid-cols-3 md:grid-col-2 grid-cols-1 gap-x-5 gap-y-5">
+            <BotTask />
+            <MostActive />
+            <ActiveCountries />
+          </div>
+        </div>
+        {showAlert && <ActionAlert severity="success" message={"Channel Created"}></ActionAlert>}
+      </main>
     </ >
   );
 }

@@ -60,7 +60,7 @@ const FAQ = ({ changeChatBotTab, chatbotTitle }) => {
         if (faqs) {
             const combinedData = Object.keys(faqs?.question).map((key, index) => {
                 return {
-                    id: `${Date.now()}-${index}`,
+                    id: index+1,
                     question: faqs.question[key],
                     answer: faqs.answer[key] || '',
                 };
@@ -171,7 +171,14 @@ const FAQ = ({ changeChatBotTab, chatbotTitle }) => {
             editable: 'cell',
             flex: 1,
             sortable: false,
-
+            renderCell: (params) => (
+                <CustomTextField
+                    id={params.id}
+                    field={params.field}
+                    value={params.value}
+                    onChange={handleCellChange}
+                />
+            )
             // valueGetter:handleCellEditCommit
         },
     ];
@@ -219,7 +226,7 @@ const FAQ = ({ changeChatBotTab, chatbotTitle }) => {
                             }}
                             rows={rows}
                             columns={columns}
-                            getRowId={(row, index) => `${row.question}-${row.answer}-${index}`} // Generate a unique id using the question, answer, and index
+                           
 
                             initialState={{
                                 pagination: {

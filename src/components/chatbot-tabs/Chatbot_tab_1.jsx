@@ -9,11 +9,10 @@ import { CircularProgress } from '@mui/material';
 
 // this file
 
-const Chatbot_tab_1 = ({ changeChatBotTab }) => {
+const Chatbot_tab_1 = ({ changeChatBotTab, setChatbotTitle, setChatBotID }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { chatBots, loading } = useSelector((state) => state.chatbot); // this has all the chat-bots list for a user that is logged in
-
 
   useEffect(() => {
     const data = {
@@ -47,10 +46,15 @@ const Chatbot_tab_1 = ({ changeChatBotTab }) => {
         </div>
         {chatBots ? (
           <div className='chat__simple__main2 pt-10 mt-10'>
-            <div className='chat__simple__container'>
-              <div style={{ width: '90%' }} className='two__box__messenger__row flex flex-wrap'>
+            <div className=''>
+              <div className='grid xl:grid-cols-4 grid-cols-1 gap-10'>
                 {chatBots?.chatbot?.map((bot, i) => (
-                  <BootCard key={i++} bot={bot} />
+                  <BootCard
+                  key={i++} 
+                  bot={bot}
+                  setChatbotTitle={setChatbotTitle} changeChatBotTab={changeChatBotTab} 
+                  setChatBotID={setChatBotID}
+                  />
                 ))}
               </div>
             </div>
