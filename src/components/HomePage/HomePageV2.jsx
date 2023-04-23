@@ -29,24 +29,28 @@ import Reports from "../Reports/Reports";
 import ChannelCard from "../ChannelCard/ChannelCard";
 // this file
 
-export default function HomePageV2({ changeDashboardTab, userToSend }) {
+export default function HomePageV2({ changeDashboardTab, user }) {
 
   const dispatch = useDispatch();
-  const { fbUserID } = useSelector((state) => state.fb);
-  const { user } = useSelector((state) => state.user);
+  // const { fbUserID } = useSelector((state) => state.fb);
+  // const { user } = useSelector((state) => state.user);
   const { channels, loading } = useSelector((state) => state.channel);
+console.log(channels)
+
   const [showAlert, setShowAlert] = useState(false);
 
 
   useEffect(() => {
-    dispatch(userDetails(fbUserID));
-  }, [fbUserID]);
+    dispatch(userDetails(user?.user_id));
+  }, [user?.user_id]);
+  // useEffect(() => {
+  //   dispatch(userDetails(fbUserID));
+  // }, [fbUserID]);
 
   const [isOpen, setIsOpen] = useState()
-
+ 
 
   const channelHandler = (name) => {
-
     // for channel creation
     const data = {
       userID: user?.user_id,
@@ -70,8 +74,10 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
         page_token: { last_time: new Date().toISOString().split('T')[0] },
       },
     };
-    dispatch(allChannels(data));
-  }, [user]);
+    if(loading) {
+      dispatch(allChannels(data));
+    }
+  }, []);
 
   return (
     <>
@@ -94,7 +100,6 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
               </div>
               <div className="active__channel__row mb-8">
                 <h4>Active Channels</h4>
-                {/* <AddChannelButton changeDashboardTab={changeDashboardTab} dashboardTab={1} /> */}
               </div>
 
               <div className="grid lg:grid-cols-4 grid-cols-3 gap-10">
@@ -119,6 +124,8 @@ export default function HomePageV2({ changeDashboardTab, userToSend }) {
                   <AddChannel
                     channelHandler={channelHandler}
                     setIsOpen={setIsOpen}
+                    user={user}
+                    setShowAlert={setShowAlert}
                   />
                 </PopUp>
               </div>

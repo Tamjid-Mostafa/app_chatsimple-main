@@ -17,6 +17,7 @@ import Topbar from './Topbar/Topbar';
 import CustomSwitch from './ui/IOSSwitch/IOSSwitch';
 import ListItem from './ui/ListItem';
 import LogoListItem from './ui/LogoListItem/LogoListItem';
+import FAQ from './FAQ/FAQ.';
 
 const Chatbot = () => {
   const [chatbotTab, setChatbotTab] = React.useState(1);
@@ -213,8 +214,9 @@ const Chatbot = () => {
               <>
                 <h2 className='bold_text'>Display to connect channel(s)</h2>
                 {
-                  listItemsData?.channels?.map((ch) =>
+                  listItemsData?.channels?.map((ch, i) =>
                     <LogoListItem
+                      key={i}
                       checked={platforms?.includes(ch.slug)}
                       handleClick={() => handlePlatform(ch.slug)}
                     >
@@ -255,7 +257,7 @@ const Chatbot = () => {
           {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
         </div> */}
           </div>
-          <div className='bg-white w-[100vw]  ml-[300px] mt-10'>
+          <div className='bg-white w-fit ml-[300px] mt-10'>
             {chatbotTab === 2 && (
               <Chatbot_tab_2_new
                 changeChatBotTab={changeChatBotTab}
@@ -263,7 +265,7 @@ const Chatbot = () => {
               />
             )}
             {chatbotTab === 3 && (
-              <Chatbot_faq_details
+              <FAQ
                 changeChatBotTab={changeChatBotTab}
                 user={userData}
               />

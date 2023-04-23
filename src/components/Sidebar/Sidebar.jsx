@@ -25,11 +25,11 @@ const Sidebar = ({changeDashboardTab, setIsExpand, isExpand}) => {
         </div>
         <hr className='border-accent-7' />
         <div className='space-y-5'>
-          <div className='flex gap-5' onClick={()=>changeDashboardTab(1)}>
+          <div className='flex gap-5  cursor-pointer' onClick={()=>changeDashboardTab(1)}>
             <img src={WaveArrow} alt="dashboard" />
             <p className={`text-accent-0 transition-all duration-500 text-md ${!isExpand ? 'scale-0' : 'scale-100'}`}>Dashboard</p>
           </div>
-          <div className='flex gap-5' onClick={()=>changeDashboardTab(2)}>
+          <div className='flex gap-5  cursor-pointer' onClick={()=>changeDashboardTab(2)}>
             <img src={chatbotImg} alt="dashboard" />
             <p className={`text-accent-0 transition-all duration-500 text-md ${!isExpand ? 'scale-0' : 'scale-100'}`}>Chatbot</p>
           </div>
@@ -38,13 +38,17 @@ const Sidebar = ({changeDashboardTab, setIsExpand, isExpand}) => {
             <p className={`text-accent-0 transition-all duration-500 text-md ${!isExpand ? 'scale-0' : 'scale-100'}`}>Conversation</p>
           </div>
           <div
-          onClick={()=> setIsExpand(!isExpand)}
-          className='flex gap-5 cursor-pointer'>
+          
+          className='flex gap-5'>
             {
               !isExpand ? 
-              <ArrowBackIosIcon className={`text-white`}/>
+              <ArrowBackIosIcon
+              onClick={()=> setIsExpand(!isExpand)}
+              className={`text-white  cursor-pointer`}/>
               :
-              <ArrowForwardIosIcon className={`text-white`}/>
+              <ArrowForwardIosIcon 
+              onClick={()=> setIsExpand(!isExpand)}
+              className={`text-white  cursor-pointer`}/>
             }
             
             

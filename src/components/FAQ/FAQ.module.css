@@ -1,0 +1,5 @@
+.wrapText {
+  @apply w-full;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

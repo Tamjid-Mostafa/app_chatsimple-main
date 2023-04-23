@@ -221,7 +221,7 @@ const Chatbot_faq_details = ({ changeChatBotTab }) => {
                         <tr
                           key={i++}
                           className='border-b border-gray-300'
-                          colspan='2'
+                          colSpan='2'
                         >
                           <td className='whitespace-nowrap border-r px-6 py-4 font-medium border-gray-300'>
                             {++i}
