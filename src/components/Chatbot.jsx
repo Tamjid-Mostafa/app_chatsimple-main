@@ -17,6 +17,8 @@ import Topbar from './Topbar/Topbar';
 import CustomSwitch from './ui/IOSSwitch/IOSSwitch';
 import ListItem from './ui/ListItem';
 import LogoListItem from './ui/LogoListItem/LogoListItem';
+import FAQ from './FAQ/FAQ.';
+import MySnackbar from './ui/MySnackbar/MySnackbar';
 
 const Chatbot = () => {
   const [chatbotTab, setChatbotTab] = React.useState(1);
@@ -35,6 +37,7 @@ const Chatbot = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { chatBots } = useSelector((state) => state.chatbot); // this has all the chat-bots list for a user that is logged in
+
   const [isTyping, setIsTyping] = useState(false);
   const [chatbotTitle, setChatbotTitle] = useState('');
   const [prevTitle, setPrevTitle] = useState('');
@@ -44,7 +47,22 @@ const Chatbot = () => {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const [message, setMessage] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setError(false);
+    setSuccess(false);
+  };
+
+
+  // const [chatbot, setChatbot] = useState({})
+
+  // useEffect(() => {
+  //   setPrevTitle(chatbotTitle);
+  // }, [chatbotTitle])
 
 
   const listItemsData =
@@ -78,40 +96,74 @@ const Chatbot = () => {
 
   }
 
-  useEffect(() => {
-    if (!prevTitle) {
-      // create new
-      if (!isTyping && !!chatbotTitle) {
-        setPrevTitle(chatbotTitle);
 
-        const data = {
-          userID: user?.user_id,
-          chatbotDetail: {
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            platforms: null,
-            chatbot_title: chatbotTitle,
-          },
-          chatbotID: uuidv4(),
-        };
-        setChatBotID(data.chatbotID);
-        dispatch(createChatBot(data));
-        setSuccess(true);
-        setMessage('Chatbot name created')
-      }
-    } else if (prevTitle !== chatbotTitle && !isTyping) {
-      setPrevTitle(chatbotTitle);
-      // update here
-      const data = {
-        userID: user?.user_id,
-        update: { chatbot_title: chatbotTitle },
-        chatbotID: chatBotID,
-        update_mask: 'chatbot_title',
-      };
-      dispatch(updateChatBot(data));
-      setSuccess(true);
-      setMessage('Chatbot name updated')
+  const createChatbot = () => {
+    console.log("createChatbot")
+    const data = {
+      userID: user?.user_id,
+      chatbotDetail: {
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        platforms: null,
+        chatbot_title: chatbotTitle,
+      },
+      chatbotID: uuidv4(),
+    };
+    setChatBotID(data.chatbotID);
+    dispatch(createChatBot(data));
+    // console.log(data)
+    setSnackbarMessage('Created Successfully')
+  }
+
+  const updateChatbot = () => {
+    // console.log("update chatbot")
+    setPrevTitle(chatbotTitle);
+    // update here
+    const data = {
+      userID: user?.user_id,
+      update: { chatbot_title: chatbotTitle },
+      chatbotID: chatBotID,
+      update_mask: 'chatbot_title',
+    };
+    dispatch(updateChatBot(data));
+    setSnackbarMessage('Updated Successfully')
+  }
+
+  useEffect(() => {
+    if (snackbarMessage !== '') {
+      return setSuccess(true)
     }
-  }, [isTyping, chatbotTitle]);
+  }, [snackbarMessage])
+  // useEffect(() => {
+  //   if (!prevTitle) {
+  //     // create new
+  //     if (!isTyping && !chatbotTitle) {
+  //       const data = {
+  //         userID: user?.user_id,
+  //         chatbotDetail: {
+  //           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  //           platforms: null,
+  //           chatbot_title: chatbotTitle,
+  //         },
+  //         chatbotID: uuidv4(),
+  //       };
+  //       setChatBotID(data.chatbotID);
+  //       dispatch(createChatBot(data));
+  //       // setSuccess(true);
+  //     }
+  //   } else if (prevTitle !== chatbotTitle && !isTyping) {
+  //     setPrevTitle(chatbotTitle);
+  //     // update here
+  //     const data = {
+  //       userID: user?.user_id,
+  //       update: { chatbot_title: chatbotTitle },
+  //       chatbotID: chatBotID,
+  //       update_mask: 'chatbot_title',
+  //     };
+  //     dispatch(updateChatBot(data));
+  //     // setSuccess(true);
+
+  //   }
+  // }, [isTyping, chatbotTitle]);
 
 
   const handlePlatform = (value) => {
@@ -119,7 +171,7 @@ const Chatbot = () => {
 
     if (!chatBotID) {
       setError(true)
-      setMessage('Create chatbot name')
+      setSnackbarMessage('Create chatbot name')
       return;
     }
 
@@ -149,7 +201,7 @@ const Chatbot = () => {
         platforms:
           copyPlatform?.length === 0
             ? null
-            : { first: copyPlatform[0], scond: copyPlatform[1] },
+            : {first: copyPlatform[0], second: copyPlatform[1]} ,
       },
       chatbotID: chatBotID,
       update_mask: 'platforms',
@@ -161,7 +213,10 @@ const Chatbot = () => {
 
 
   const handleBlur = () => {
-    setIsTyping(false);
+    if (chatBotID !== '') {
+      return updateChatbot()
+    }
+    return createChatbot()
   };
 
   const handleFocus = () => {
@@ -170,26 +225,16 @@ const Chatbot = () => {
 
   return (
     <>
-      {success && (
-        <ActionAlert
-          variant='filled'
-          severity='success'
-          message={message}
-          setData={setMessage}
-        />)
-      }
-      {error && (
-        <ActionAlert
-          variant='filled'
-          severity='error'
-          message={message}
-          setData={setMessage}
-        />)
-      }
 
       <div className='w-full relative'>
         {chatbotTab === 1 && (
-          <Chatbot_tab_1 changeChatBotTab={changeChatBotTab} user={userData} />
+          <Chatbot_tab_1
+            changeChatBotTab={changeChatBotTab}
+            user={userData}
+            setChatbotTitle={setChatbotTitle}
+            chatbotTitle={chatbotTitle}
+            setChatBotID={setChatBotID}
+          />
         )}
         <div className={`w-full sticky top-0 z-10 ${chatbotTab !== 1 ? '' : 'hidden'}`}>
           <Topbar />
@@ -213,8 +258,9 @@ const Chatbot = () => {
               <>
                 <h2 className='bold_text'>Display to connect channel(s)</h2>
                 {
-                  listItemsData?.channels?.map((ch) =>
+                  listItemsData?.channels?.map((ch, i) =>
                     <LogoListItem
+                      key={i}
                       checked={platforms?.includes(ch.slug)}
                       handleClick={() => handlePlatform(ch.slug)}
                     >
@@ -255,7 +301,7 @@ const Chatbot = () => {
           {chatbotTab === 8 && <CreateChatbotLast changeChatBotTab={changeChatBotTab} user={userData} />}
         </div> */}
           </div>
-          <div className='bg-white w-[100vw]  ml-[300px] mt-10'>
+          <div className='bg-white w-fit ml-[300px] mt-10'>
             {chatbotTab === 2 && (
               <Chatbot_tab_2_new
                 changeChatBotTab={changeChatBotTab}
@@ -263,9 +309,10 @@ const Chatbot = () => {
               />
             )}
             {chatbotTab === 3 && (
-              <Chatbot_faq_details
+              <FAQ
                 changeChatBotTab={changeChatBotTab}
                 user={userData}
+                chatbotTitle={chatbotTitle || chatbot?.chatbot_title}
               />
             )}
             {chatbotTab === 4 && (
@@ -295,6 +342,18 @@ const Chatbot = () => {
           </div>
         </div>
       </div>
+      <MySnackbar
+        open={success}
+        handleClose={handleClose}
+        message={snackbarMessage}
+        variant='success'
+      />
+      <MySnackbar
+        open={error}
+        handleClose={handleClose}
+        message={snackbarMessage}
+        variant='error'
+      />
     </>
   );
 };

@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react'
-import DB_Tab_1 from './dashboard-tabs/DB_Tab_1'
-import HomePage from './HomePage/HomePage'
 import HomePageV2 from './HomePage/HomePageV2'
 import { useSelector } from 'react-redux'
 
-const DashboardC = () => {
+const DashboardC = ({user:userData}) => {
   const [dashboardTab, setDashboardTab] = React.useState(2)
-  const { loading, user: userData} = useSelector((state)=> {
-    return state.auth
-  })
-  useEffect(()=> {
-    if(!loading && !userData) {
-      // window.alert("Please login to continue")
-    } else{
-    }
-  }, [userData, loading])
+  // const { loading, user: userData} = useSelector((state)=> {
+  //   return state.auth
+  // })
+  // useEffect(()=> {
+  //   if(!loading && !userData) {
+  //     // window.alert("Please login to continue")
+  //   } else{
+  //   }
+  // }, [userData, loading])
   const changeDashboardTab = (tab) => {
     setDashboardTab(tab)
   }

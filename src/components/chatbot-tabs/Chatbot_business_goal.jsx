@@ -8,18 +8,27 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ConversationCard from './ConversationCard';
 import ActionAlert from '../Alert/ActionAlert';
+import MySnackbar from '../ui/MySnackbar/MySnackbar';
 const Chatbot_business_goal = ({ changeChatBotTab }) => {
 
     const [isChecked, setIsChecked] = useState(false);
     const [name, setName] = useState("")
-    const [data, setData] = useState("")
-    const [dirty, setDirty] = useState("")
     const [position, setPosition] = useState("")
-    const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const handleClose = () => {
-        setOpen(false);
+
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setError(false);
+        setSuccess(false);
     };
+
+
     const { user } = useSelector((state) => state.user);
 
     const handleCreate = async () => {
@@ -48,15 +57,15 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
                 data,
                 { headers }
             );
-            setOpen(true);
+            setSuccess(true);
             setLoading(false);
-            setData(response.data.message)
+            setSnackbarMessage(response.data.message)
             //window.alert(response.data.message);
 
         }
         catch (e) {
-            setOpen(true);
-            setDirty(e.message)
+            setError(true);
+            setSnackbarMessage(e.message)
             // window.alert(e.message)
         }
     }
@@ -68,26 +77,6 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
 
     return (
         <>
-            {data &&
-                < >
-                    <ActionAlert
-                        variant="filled"
-                        severity="success"
-                        message={data}
-                        setData={setData}
-                    />
-                </>
-            }
-            {dirty &&
-                < >
-                    <ActionAlert
-                        variant="filled"
-                        severity="error"
-                        message={dirty}
-                        setData={setData}
-                    />
-                </>
-            }
             <div className='display_flex'>
 
 
@@ -126,16 +115,28 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
 
                         <div className=''>
                             <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200'
-                            disabled={loading}
-                            onClick={handleCreate}>
-                               {loading ? <CircularProgress
-                               size={16}
-                               /> : "Create"}
+                                disabled={loading}
+                                onClick={handleCreate}>
+                                {loading ? <CircularProgress
+                                    size={16}
+                                /> : "Create"}
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+            <MySnackbar
+                open={success}
+                handleClose={handleClose}
+                message={snackbarMessage}
+                variant='success'
+            />
+            <MySnackbar
+                open={error}
+                handleClose={handleClose}
+                message={snackbarMessage}
+                variant='error'
+            />
         </>
     )
 }
