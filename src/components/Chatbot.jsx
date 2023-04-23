@@ -268,6 +268,7 @@ const Chatbot = () => {
               <FAQ
                 changeChatBotTab={changeChatBotTab}
                 user={userData}
+                chatbotTitle={chatbotTitle}
               />
             )}
             {chatbotTab === 4 && (

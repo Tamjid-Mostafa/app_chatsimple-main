@@ -21,7 +21,7 @@ const CustomTextField = ({ id, field, value, onChange }) => {
     };
     return <TextField  value={value} onChange={handleChange} onKeyDown={handleKeyDown} />;
 };
-const FAQ = ({ changeChatBotTab }) => {
+const FAQ = ({ changeChatBotTab, chatbotTitle }) => {
     const { user } = useSelector((state) => state.user);
     const [isTrue, setIsTrue] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -192,11 +192,12 @@ const FAQ = ({ changeChatBotTab }) => {
                             onChange={(event) => setUrl(event.target.value)}
                             label='Enter Url'
                             variant='outlined'
+                            disabled={chatbotTitle===''&& true}
                         />
                     </div>
                     <div className=''>
                         <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200'
-                            disabled={loading}
+                            disabled={loading || chatbotTitle === ''}
                             onClick={generateFaq}>
                             {loading ? <CircularProgress
                                 size={16}
@@ -233,7 +234,7 @@ const FAQ = ({ changeChatBotTab }) => {
                     </Box>
                 </div>
                 <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200'
-                    disabled={loading}
+                    disabled={loading || rows.length === 0}
                     onClick={buildFaq}>
                     {loading ? <CircularProgress
                         size={16}
