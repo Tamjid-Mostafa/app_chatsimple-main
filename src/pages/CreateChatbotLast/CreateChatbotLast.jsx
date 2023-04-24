@@ -5,15 +5,15 @@ import MessageIcon from "../../assets/images/svg/Messages.svg";
 import OutlineInput from '../../components/OutlineInput/OutlineInput';
 export default function CreateChatbotLast() {
     return (
-        <React.StrictMode>
+        <>
             <main className='create__chat__bot_last'>
                 <div className='create__chat_bot_container'>
                     <h1>
                         Chatbot
                     </h1>
-                    <h6>
+                    {/* <h6>
                         0 custom chatbots
-                    </h6>
+                    </h6> */}
 
                     <div className='chat__create__Last__box'>
                         <header className='flex justify-between items-center'>
@@ -46,6 +46,6 @@ export default function CreateChatbotLast() {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }

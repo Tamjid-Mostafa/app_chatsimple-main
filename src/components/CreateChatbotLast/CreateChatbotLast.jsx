@@ -18,15 +18,15 @@ export default function CreateChatbotLast({ changeChatBotTab }) {
         // }, 5000);
     }
     return (
-        <React.StrictMode>
+        <>
             <main className='create__chat__bot_last'>
                 <div className='create__chat_bot_container'>
                     <h1>
                         Chatbot
                     </h1>
-                    <h6>
+                    {/* <h6>
                         0 custom chatbots
-                    </h6>
+                    </h6> */}
 
                     <div className='chat__create__Last__box'>
                         {/* <header className='flex justify-between items-center'>
@@ -123,7 +123,7 @@ export default function CreateChatbotLast({ changeChatBotTab }) {
                                                     </td>
 
                                                 </tr>
-                                                <tr className="border-b border-gray-300" colspan="2">
+                                                <tr className="border-b border-gray-300" colSpan="2">
                                                     <td
                                                         className="whitespace-nowrap border-r px-6 py-4 font-medium border-gray-300">
                                                         2
@@ -159,6 +159,6 @@ export default function CreateChatbotLast({ changeChatBotTab }) {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }

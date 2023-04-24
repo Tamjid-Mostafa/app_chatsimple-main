@@ -16,27 +16,25 @@ export default function ChatbotConnectToChannelFirst({ changeChatBotTab }) {
     }
 
     const deployBot = () => {
-        console.log("deploying")
         setDeploying(true)
         setTimeout(() => {
             setDeploying(false)
             setDeployed(true)
-            console.log("deployed")
         }, 3000);
         setTimeout(() => {
             setDeployed(false)
         }, 10000);
     }
     return (
-        <React.StrictMode>
+        <>
             <main className='chat__box__connect__to__channel__main'>
                 <div className="chat__box__connect__to__channel__container">
                     <h1>
                         Chatbot
                     </h1>
-                    <p>
+                    {/* <p>
                         0 custom chatbots
-                    </p>
+                    </p> */}
 
                     <div className="chat_bot_first_channel__box mt-4">
                         <div className='flex justify-between items-center'>
@@ -65,13 +63,13 @@ export default function ChatbotConnectToChannelFirst({ changeChatBotTab }) {
                             <img src={ArrowDown} alt="" onClick={()=>setfirst(!first)} />
                             {first ?
                                 <div className='absolute left-0 cursor-default top-8 w-32 bg-[#F7FEF8] h-20'>
-                                    <div class="flex items-center justify-between mb-0 p-2">
-                                        <label for="messenger" class="ml-2 text-sm font-medium text-gray-900">Messenger</label>
-                                        <input id="messenger" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                    <div className="flex items-center justify-between mb-0 p-2">
+                                        <label for="messenger" className="ml-2 text-sm font-medium text-gray-900">Messenger</label>
+                                        <input id="messenger" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                     </div>
-                                    <div class="flex items-center justify-between mb-4 p-2">
-                                        <label for="insta" class="ml-2 text-sm font-medium text-gray-900">Instagram</label>
-                                        <input id="insta" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                    <div className="flex items-center justify-between mb-4 p-2">
+                                        <label for="insta" className="ml-2 text-sm font-medium text-gray-900">Instagram</label>
+                                        <input id="insta" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                     </div>
                                 </div> : null
                             } */}
@@ -95,6 +93,6 @@ export default function ChatbotConnectToChannelFirst({ changeChatBotTab }) {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }

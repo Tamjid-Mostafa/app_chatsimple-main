@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import { useEffect } from "react";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./Routes/Private/PrivateRoute";
 
 function App() {
   const action = useNavigationType();
@@ -48,9 +49,16 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+        path="/dashboard"
+        element={
+          <>
+            <Dashboard />
+          </>
+        }
+      />
     </Routes>
   );
 }
+
 export default App;

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 .chat__simple__main2{
-    @apply bg-gray-50 min-h-screen p-4;
+    @apply  min-h-screen p-4;
 }
 
 .chat__simple__container{

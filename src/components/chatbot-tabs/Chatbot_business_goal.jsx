@@ -1,4 +1,4 @@
-import { TextField, Switch } from '@mui/material';
+import { TextField, Switch, Alert, CircularProgress } from '@mui/material';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useState } from 'react';
 import axios from "axios";
@@ -7,23 +7,35 @@ import Snackbar from '@mui/material/Snackbar';
 import { useDispatch, useSelector } from "react-redux";
 
 import ConversationCard from './ConversationCard';
+import ActionAlert from '../Alert/ActionAlert';
+import MySnackbar from '../ui/MySnackbar/MySnackbar';
 const Chatbot_business_goal = ({ changeChatBotTab }) => {
 
     const [isChecked, setIsChecked] = useState(false);
     const [name, setName] = useState("")
-    const [data, setData] = useState("")
     const [position, setPosition] = useState("")
-    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const handleClose = () => {
-      setOpen(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setError(false);
+        setSuccess(false);
     };
+
+
     const { user } = useSelector((state) => state.user);
 
     const handleCreate = async () => {
+        setLoading(true);
         let data = {
             expertise_title: "Business Goal",
-            expertise_type: "FAQ",
+            expertise_type: "FREE_FORM",
             form_information: {
                 business_small_talk: [
                     {
@@ -45,14 +57,16 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
                 data,
                 { headers }
             );
-            setOpen(true);
-            setData(response.data.message)
+            setSuccess(true);
+            setLoading(false);
+            setSnackbarMessage(response.data.message)
             //window.alert(response.data.message);
+
         }
-        catch(e) {
-            setOpen(true);
-            setData(e.message)
-           // window.alert(e.message)
+        catch (e) {
+            setError(true);
+            setSnackbarMessage(e.message)
+            // window.alert(e.message)
         }
     }
 
@@ -60,104 +74,70 @@ const Chatbot_business_goal = ({ changeChatBotTab }) => {
     const handleToggle = () => {
         setIsChecked(!isChecked);
     };
+
     return (
-        <div className='display_flex'>
-            <div>
-                <div className='chatbot_header_top'>
-                    <h2 className='bold_text'>Name your Chatboat</h2>
-                    <TextField
-                        label="Name"
-                        variant="outlined"
-                        value={''}
-                    />
-                </div>
+        <>
+            <div className='display_flex'>
 
-                <div>
-                    <h2 className='bold_text'>Select Chatbot Expertise</h2>
 
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p>FAQ</p>
+                <div className='chatbot_dsplay_column'>
+                    <div className='chatbot_display_text'>
+                        <h1 className='bold_text font_32 margintop'>Business Goal</h1>
+                        <p >
+                            Design a chatbot that knows your goal and acts like a brand ambassador! depending on the position <br /> you assigns, the bot will model itself after the corporate
+                            identity in appearance, demanour and values. <br /> <br />
+                            Name Your chatbot and tell us what position you wish your bot to taken on.
+                        </p>
+
+                        <div className='display_flex margintop'>
+                            <div>
+                                <TextField
+                                    label="Name"
+                                    className='muitextfield'
+                                    variant="outlined"
+                                    value={name}
+                                    onChange={(event) => setName(event.target.value)}
+                                />
+                            </div>
                         </div>
-                        <div className='chatbot_toggle_button'>
-                            <Switch />
+
+                        <div className='display_flex margintop'>
+                            <div>
+                                <TextField
+                                    label="Position"
+                                    className='muitextfield_position'
+                                    variant="outlined"
+                                    value={position}
+                                    onChange={(event) => setPosition(event.target.value)}
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p> Business small talk</p>
+                        <div className=''>
+                            <button className='text-sm text-white px-5 w-32 h-10 bg-[#66B467] py-2 rounded-full disabled:bg-gray-200'
+                                disabled={loading}
+                                onClick={handleCreate}>
+                                {loading ? <CircularProgress
+                                    size={16}
+                                /> : "Create"}
+                            </button>
                         </div>
-                        <div className='chatbot_toggle_button2'>
-                            <Switch
-                             />
-                        </div>
-                    </div>
-
-                    <div className='expertise_box display_flex'>
-                        <div className='faq_text'>
-                            <p>Business Goal</p>
-                        </div>
-                        <div className='chatbot_toggle_button3'>
-                            <Switch
-                             checked={true}
-                             onClick={() => changeChatBotTab(2)}
-                            />
-                        </div>
-                    </div>
-
-                </div>
-
-            </div >
-
-            <div className='chatbot_dsplay_column'>
-                <div className='chatbot_display_text'>
-                    <h1 className='bold_text font_32 margintop'>Business Goal</h1>
-                    <p >
-                        Design a chatbot that knows your goal and acts like a brand ambassador! depending on the position <br /> you assigns, the bot will model itself after the corporate
-                        identity in appearance, demanour and values. <br /> <br /> 
-                        Name Your chatbot and tell us what position you wish your bot to taken on.
-                    </p>
-
-                    <div className='display_flex margintop'>
-                        <div>
-                            <TextField
-                                label="Name"
-                                className='muitextfield'
-                                variant="outlined"
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
-                            />
-                        </div>
-                    </div>
-
-                    <div className='display_flex margintop'>
-                        <div>
-                            <TextField
-                                label="Position"
-                                className='muitextfield_position'
-                                variant="outlined"
-                                value={position}
-                                onChange={(event) => setPosition(event.target.value)}
-                            />
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <button className='text-sm text-white px-5 bg-[#66B467] py-2 rounded-full' onClick={handleCreate}>
-                            Create
-                        </button>
                     </div>
                 </div>
             </div>
-            <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            message={data}
-            onClose={handleClose}
-            className="muiclass"
-          />
-        </div>
+            <MySnackbar
+                open={success}
+                handleClose={handleClose}
+                message={snackbarMessage}
+                variant='success'
+            />
+            <MySnackbar
+                open={error}
+                handleClose={handleClose}
+                message={snackbarMessage}
+                variant='error'
+            />
+        </>
     )
 }
 

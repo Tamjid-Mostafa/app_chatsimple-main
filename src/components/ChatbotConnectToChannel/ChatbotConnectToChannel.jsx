@@ -6,15 +6,15 @@ import ThreeAvatarTwo from "../../assets/images/Others/3d_avatar_8.png";
 import ThreeAvatarOne from "../../assets/images/Others/3d_avatar_1.png";
 export default function ChatbotConnectToChannel({changeChatBotTab}) {
     return (
-        <React.StrictMode>
+        <>
             <main className='chat__bot__connect__channel__main'>
                 <div className="chat__bot__connect__channel__container">
                     <h1>
                         Chatbot
                     </h1>
-                    <p>
-                        0 custom chatbots
-                    </p>
+                    {/* <p>
+                    0 custom chatbots
+                    </p> */}
 
                     <div className='chat__bot__contect__message'>
                         <div className='flex flex-row w-full'>
@@ -76,6 +76,6 @@ export default function ChatbotConnectToChannel({changeChatBotTab}) {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }

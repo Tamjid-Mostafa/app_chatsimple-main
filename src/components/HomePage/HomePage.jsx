@@ -12,7 +12,7 @@ import ChartMapIcon from "../../assets/images/svg/ChartMap.png";
 import 'react-circular-progressbar/dist/styles.css';
 export default function HomePage({changeDashboardTab}) {
     return (
-        <React.StrictMode>
+        <>
             <main className='chat__simple__main'>
                 <div className='chat__simple__container'>
                     <h1>
@@ -28,7 +28,7 @@ export default function HomePage({changeDashboardTab}) {
                     </div>
 
                     <div className='two__box__messenger__row'>
-                        <div class="cards">
+                        <div className="cards">
                             <div className='header'>
                                 <div className='flex items-center gap-3'>
                                     <img src={MessengerImage} alt="" />
@@ -43,20 +43,20 @@ export default function HomePage({changeDashboardTab}) {
                                 <span className='text-sm text-green-500'>376/700</span>
                             </div>
 
-                            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                                <div class="bg-green-500 h-2.5 rounded-full" style={{ width: "3%" }}></div>
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                                <div className="bg-green-500 h-2.5 rounded-full" style={{ width: "3%" }}></div>
                             </div>
                             <div className='bars__texts'>
                                 <span className='text-sm font-medium'>Total number of message</span>
                                 <span className='text-sm text-green-500'>1580</span>
                             </div>
 
-                            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                                <div class="bg-green-500 h-2.5 rounded-full" style={{ width: "45%" }}></div>
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                                <div className="bg-green-500 h-2.5 rounded-full" style={{ width: "45%" }}></div>
                             </div>
 
                         </div>
-                        <div class="cards">
+                        <div className="cards">
                             <div className='header'>
                                 <div className='flex items-center gap-3'>
                                     <img src={InstaImage} alt="" className='w-12 h-12' />
@@ -71,16 +71,16 @@ export default function HomePage({changeDashboardTab}) {
                                 <span className='text-sm text-green-500'>376/700</span>
                             </div>
 
-                            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                                <div class="bg-green-500 h-2.5 rounded-full" style={{ width: "45%" }}></div>
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                                <div className="bg-green-500 h-2.5 rounded-full" style={{ width: "45%" }}></div>
                             </div>
                             <div className='bars__texts'>
                                 <span className='text-sm font-medium'>Total number of message</span>
                                 <span className='text-sm text-green-500'>2,109</span>
                             </div>
 
-                            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                                <div class="bg-green-500 h-2.5 rounded-full" style={{ width: "45%" }}></div>
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                                <div className="bg-green-500 h-2.5 rounded-full" style={{ width: "45%" }}></div>
                             </div>
 
                         </div>
@@ -194,6 +194,6 @@ export default function HomePage({changeDashboardTab}) {
                     </div>
                 </div>
             </main>
-        </React.StrictMode>
+        </>
     )
 }
